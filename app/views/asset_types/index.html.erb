@@ -1,0 +1,39 @@
+<h1>List of Assets:</h1>
+
+<% @asset_types.each do |asset_type| %>
+    <p>
+        <h2><%= asset_type.name %></h2>
+        <div class="assetName">
+            <h3>Asset Name</h3>
+        </div>
+        <div class="assetDescription">
+            <h3>Asset Description</h3>
+        </div>
+        <div class="assetOptions">
+            <h3>Options</h3>
+        </div>
+        <br style="clear: both;" /><br />
+        <% asset_type.assets.each do |asset| %>
+            <div class="assetName">
+                <%= asset.name %>
+            </div>
+            <div class="assetDescription">
+                <%= asset.description %>
+            </div>
+            <div class="assetOptions">
+              <%= link_to image_tag("/images/edit.png", :border=>0), :controller => "assets", :action => "edit", :id => asset %>
+              <%= link_to image_tag("/images/delete.png", :border=>0), :controller => "assets", :action => "delete", :id => asset %>
+            </div>
+            <br style="clear:both;" />
+        <% end %>
+    </p>
+<% end %>
+<br /><br />
+<div style="text-align:right; width:1000px;">
+    <%= link_to "New Asset.", :controller => "assets", :action => "new" %>
+</div>
+
+
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
+<% end %>

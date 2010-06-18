@@ -1,0 +1,58 @@
+.label{
+    width:100px;
+    float: left;    
+}
+
+.txtbox{
+    width:100px;
+    float: left;
+}
+
+.txtbox{
+    width:100px;
+    float: left;
+    text-align:right;
+}
+
+.assetName{
+    width:300px;
+    float: left;
+}
+
+.assetDescription{
+    width:600px;
+    float: left;    
+}
+
+.assetOptions{
+    width:100px;
+    float: left;    
+}
+
+.submit {
+    text-align: right;
+    width: 300px;
+}
+
+.submit_new_field {
+    text-align: right;
+    width: 400px;
+}
+
+.existing_fields {
+    float: left;
+    width: 300px;
+}
+
+.existing_fields input{
+    float: right;
+}
+
+.available_fields{
+    width: 400px;
+}
+
+.clonable_fields{
+    width: 300px;
+    height:200px;
+}

@@ -1,0 +1,29 @@
+<h1>New Asset Type:</h1><br />
+<% form_for :asset_type, @asset_type, :url => { :action => "create" } do |f| %>
+    <div class="label">Name:</div>
+    <div class="txtbox">
+        <%= f.text_field :name %>
+    </div>
+    <br style="clear:both" />
+
+
+    <div class="label">Description:</div>
+    <div class="txtbox">
+        <%= f.text_area :description, :size=>"23x10" %>
+    </div>
+    <br style="clear:both" />
+
+    <div class="label"></div>
+    <div class="txtbox">
+
+    </div>
+    <br style="clear:both" />
+
+    <div class="submit">
+        <%= submit_tag 'Create' %>
+    </div>
+<% end %>
+
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
+<% end %>

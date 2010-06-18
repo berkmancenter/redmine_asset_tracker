@@ -1,0 +1,10 @@
+<h2>List of Assets:</h2>
+
+
+<% @assets.each do |asset| %>
+  <p>
+    <%= asset.name %><br />
+    <%= asset.description %>
+    <%= asset.asset_type.name %>
+  </p>
+<% end %>
