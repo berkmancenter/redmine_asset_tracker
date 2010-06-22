@@ -2,6 +2,7 @@ class AssetsController < ApplicationController
   unloadable
   helper :custom_fields
   include CustomFieldsHelper
+  before_filter :require_admin, :except => [:index, :show]
 
   def index
     @assets = Asset.find:all
