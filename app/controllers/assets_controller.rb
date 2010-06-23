@@ -78,4 +78,35 @@ class AssetsController < ApplicationController
     redirect_to :action => "edit", :id => asset
   end
 
+  def add_file
+    @asset = Asset.find_by_id params[:id]
+
+    if request.post?
+      if @asset.attachments.count > 0
+        @asset.attachments[0].destroy
+      end
+      container = @asset
+      attach_files(container, params[:attachments])
+      redirect_to :controller => 'assets', :action => 'edit', :id => @asset
+      return
+    end
+  end
+
+  def show_file
+    @asset = Asset.find_by_id params[:id]
+    @attachment =@asset.attachments[0]
+    send_file @attachment.diskfile, :filename => filename_for_content_disposition(@attachment.filename),
+                                    :type => detect_content_type(@attachment),
+                                    :disposition => (@attachment.image? ? 'inline' : 'attachment')
+  end
+
+  private
+    def detect_content_type(attachment)
+      content_type = attachment.content_type
+      if content_type.blank?
+        content_type = Redmine::MimeType.of(attachment.filename)
+      end
+      content_type.to_s
+    end
+
 end

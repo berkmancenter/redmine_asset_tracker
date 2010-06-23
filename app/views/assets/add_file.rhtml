@@ -1,0 +1,11 @@
+<h2><%=l(:label_attachment_new)%></h2>
+
+<%= error_messages_for 'attachment' %>
+<div class="box">
+<% form_tag({ :action => 'add_file', :id => @asset }, :multipart => true, :class => "tabular") do %>
+
+
+<p><label><%=l(:label_attachment_plural)%></label><%= render :partial => 'file_form' %></p>
+</div>
+<%= submit_tag l(:button_add) %>
+<% end %>

@@ -1,18 +1,32 @@
 <h1>Edit Asset:</h1><br />
 <% form_for :asset, @asset, :url => { :action => "update", :id => @asset } do |f| %>
-    <div class="label">Name:</div>
-    <div class="txtbox">
-        <%= f.text_field :name %>
+    <div style="float:left; width:250px;">
+      <% if @asset.attachments.count > 0 %>
+        <img src="../show_file/<%= @asset.id %>" alt="<%= @asset.name %>" width="200" />
+        <p align="center">
+            <%= link_to "Change Asset Image", :controller => "assets", :action => "add_file", :id => @asset %>
+        </p>
+      <% else %>
+        <p align="center">
+            <%= link_to "Add an Asset Image", :controller => "assets", :action => "add_file", :id => @asset %>
+        </p>
+      <% end %>
+      &nbsp;
     </div>
-    <br style="clear:both" />
+    <div style="float:left;">
+        <div class="label">Name:</div>
+        <div class="txtbox">
+            <%= f.text_field :name %>
+        </div>
+        <br style="clear:both" />
 
 
-    <div class="label">Description:</div>
-    <div class="txtbox">
-        <%= f.text_area :description, :size=>"23x10" %>
+        <div class="label">Description:</div>
+        <div class="txtbox">
+            <%= f.text_area :description, :size=>"23x10" %>
+        </div>
+        <br style="clear:both" />
     </div>
-    <br style="clear:both" />
-
     <br style="clear:both" />
 
     
