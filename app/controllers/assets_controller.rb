@@ -10,8 +10,8 @@ class AssetsController < ApplicationController
 
   def show
     @asset = Asset.find_by_id params[:id]
+    @user = User.find_by_id session[:user_id]
   end
-
 
   def new
     @asset = Asset.new
@@ -33,6 +33,7 @@ class AssetsController < ApplicationController
 
   def edit
     @asset = Asset.find_by_id params[:id]
+    @user = User.find_by_id session[:user_id]
     @custom_field = AssetCustomField.new
     @custom_field.type = "AssetCustomField"
     @available_custom_fields = Array.new
@@ -82,7 +83,7 @@ class AssetsController < ApplicationController
     @asset = Asset.find_by_id params[:id]
 
     if request.post?
-      if @asset.attachments.count > 0
+      if !@asset.attachments.empty?
         @asset.attachments[0].destroy
       end
       container = @asset
@@ -94,10 +95,22 @@ class AssetsController < ApplicationController
 
   def show_file
     @asset = Asset.find_by_id params[:id]
-    @attachment =@asset.attachments[0]
-    send_file @attachment.diskfile, :filename => filename_for_content_disposition(@attachment.filename),
-                                    :type => detect_content_type(@attachment),
-                                    :disposition => (@attachment.image? ? 'inline' : 'attachment')
+    if !@asset.attachments.empty?
+      @attachment = @asset.attachments[0]
+      send_file @attachment.diskfile, :filename => filename_for_content_disposition(@attachment.filename),
+                                      :type => detect_content_type(@attachment),
+                                      :disposition => (@attachment.image? ? 'inline' : 'attachment')
+    else
+      redirect_to "/plugin_assets/redmine_asset_tracker/images/add_photo.gif"      
+    end
+  end
+
+  def remove_file
+    @asset = Asset.find_by_id params[:id]
+    if !@asset.attachments.empty?
+      @asset.attachments[0].destroy
+    end
+    redirect_to :controller => 'assets', :action => 'edit', :id => @asset    
   end
 
   private

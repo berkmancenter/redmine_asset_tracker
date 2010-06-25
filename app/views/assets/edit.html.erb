@@ -1,83 +1,47 @@
-<h1>Edit Asset:</h1><br />
-<% form_for :asset, @asset, :url => { :action => "update", :id => @asset } do |f| %>
-    <div style="float:left; width:250px;">
-      <% if @asset.attachments.count > 0 %>
-        <img src="../show_file/<%= @asset.id %>" alt="<%= @asset.name %>" width="200" />
-        <p align="center">
-            <%= link_to "Change Asset Image", :controller => "assets", :action => "add_file", :id => @asset %>
-        </p>
-      <% else %>
-        <p align="center">
-            <%= link_to "Add an Asset Image", :controller => "assets", :action => "add_file", :id => @asset %>
-        </p>
-      <% end %>
-      &nbsp;
-    </div>
-    <div style="float:left;">
-        <div class="label">Name:</div>
-        <div class="txtbox">
-            <%= f.text_field :name %>
+<div class="center-main-container" align="center">
+    <div class="center-container">
+        <div class="center-main-container-title">
+            <h1>Edit Asset</h1>
         </div>
-        <br style="clear:both" />
+        <div class="inner-container">
+            <% form_for :asset, @asset, :url => { :action => "update", :id => @asset } do |f| %>
+                <%= render :partial => 'edit_asset_image', :locals => { :asset => @asset, :user => @user, :edit_enabled => true } %>
+                <div class="asset-properties">
+                    <table id="rounded-corner" summary="Asset Properties">
+                              <thead>
+                                  <tr>
+                                      <th scope="col" class="rounded-company">Property</th>
+                                      <th scope="col" class="rounded-q1">Value</th>
+                                  </tr>
+                              </thead>
+                                  <tfoot>
+                                  <tr>
+                                      <td class="rounded-foot-left">&nbsp;</td>
+                                      <td class="rounded-foot-right">
+                                        <%= submit_tag 'Save changes' %>
+                                      </td>
+                                  </tr>
+                              </tfoot>
+                              <tbody>
+                                  <tr>
+                                      <td>Name:</td>
+                                      <td><%= f.text_field :name %></td>
 
-
-        <div class="label">Description:</div>
-        <div class="txtbox">
-            <%= f.text_area :description, :size=>"23x10" %>
-        </div>
-        <br style="clear:both" />
-    </div>
-    <br style="clear:both" />
-
-    
-    <% if !@asset.asset_custom_fields.empty? %>
-        <br /><br /><h2>Custom Properties:</h2>
-
-        <div class = "existing_fields">
-            <% @asset.custom_field_values.each do |value| %>
-              <% if @asset.asset_custom_fields.include? value.custom_field %>
-                <p>
-                  <%= link_to image_tag("/images/delete.png", :border=>0), :controller => "assets", :action => "remove_custom_field", :id => @asset, :existing_custom_field => value.custom_field.id %>
-                  <%= custom_field_tag_with_label :asset, value %></p>
-              <% end %>
+                                  </tr>
+                                  <tr>
+                                      <td>Description:</td>
+                                      <td><%= f.text_field :description %></td>
+                                  </tr>
+                                  <%= render :partial => 'list_asset_custom_fields', :locals => { :asset => @asset } %>
+                              </tbody>
+                          </table>
+                </div>
+            <% end %>
+            <br class="clear-both" />
+            <%= render :partial => 'add_asset_custom_fields', :locals => { :asset => @asset, :custom_field => @custom_field, :available_custom_fields => @available_custom_fields } %>
+            <% content_for :header_tags do %>
+                <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
             <% end %>
         </div>
-    <%end%>
-
-     <br style="clear:both;" />
-    <div class="submit">
-        <%= submit_tag 'Update' %>
     </div>
-    <br /><br />
-<% end %>
-
-<h2>Add a new custom property:</h2>
-
-<div style="width:400px; float:left;">
-    <h3>Add a new property:</h3>
-    <% labelled_tabular_form_for :custom_field, @custom_field, :url => { :action => "create_custom_field", :id => @asset } do |f| %>
-    <%= render :partial => 'form', :locals => { :f => f } %>
-        <%= hidden_field_tag 'custom_field[type]', @custom_field.type %>
-        <div class="submit_new_field">
-            <%= submit_tag l(:button_save) %>
-        </div>
-    <% end %>
 </div>
-<div style="width:50px; float:left;">&nbsp;</div>
-
-<div style="width:400px; float:left;">
-    <h3>Or add an existing property:</h3>
-    <% form_tag :action => "create_custom_field", :id => @asset do %>
-        <%= select_tag :existing_custom_field, options_from_collection_for_select(@available_custom_fields, :id, :name), :size => 18, :multiple => true, :class => "available_fields" %>
-        <div class="submit_new_field">
-            <%= submit_tag 'Add' %>
-        </div>
-    <% end %>
-</div>
-
-   
-
-
-<% content_for :header_tags do %>
-    <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
-<% end %>

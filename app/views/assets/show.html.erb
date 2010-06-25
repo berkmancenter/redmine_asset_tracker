@@ -1,1 +1,60 @@
-<h1><%=  @asset.name %></h1>
+<div class="center-main-container" align="center">
+    <div class="center-container">
+        <div class="center-main-container-title">
+            <h1><%=  @asset.name %></h1>
+        </div>
+        <div class="inner-container">
+        <div class="inner-image-container">
+            <%= render :partial => 'edit_asset_image', :locals => { :asset => @asset, :user => @user, :edit_enabled => false } %>
+            <br class="clear-both" />
+        </div>
+            <div class="asset-properties">
+              <table id="rounded-corner" summary="Asset Properties">
+                  <thead>
+                      <tr>
+                          <th scope="col" class="rounded-company">Property</th>
+                          <th scope="col" class="rounded-q1">Value</th>
+                      </tr>
+                  </thead>
+                  <tfoot>
+                      <tr>
+                          <td class="rounded-foot-left">&nbsp;</td>
+                          <td class="rounded-foot-right">
+                            <% if @user.admin %>
+                                <%= image_tag "/images/edit.png" %>
+                                <%= link_to "edit asset", :controller => "assets", :action => "edit", :id => @asset %>
+                            <% end %>
+                          </td>
+                      </tr>
+                  </tfoot>
+                  <tbody>
+                      <tr>
+                          <td>Name:</td>
+                          <td><%= @asset.name %></td>
+                      </tr>
+                      <tr>
+                          <td>Description:</td>
+                          <td><%= @asset.description %></td>
+
+                      </tr>
+                      <% @asset.custom_values.each do |v| %>
+                          <% if @asset.asset_custom_fields.include? v.custom_field %>
+                              <tr>
+                                  <td><%= v.custom_field.name %>:</td>
+                                  <td><%= v.value %></td>
+                              </tr>
+                          <% end %>
+                      <% end %>
+                  </tbody>
+              </table>
+                
+            </div>
+          <br class="clear-both" />
+        </div>
+    </div>
+  <br />
+  <%= link_to "Back to the list of assets", :controller => "asset_types", :action => "index" %>  
+</div>
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
+<% end %>

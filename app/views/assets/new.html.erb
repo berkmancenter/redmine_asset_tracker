@@ -1,48 +1,77 @@
-<h1>New Asset:</h1><br />
-<div style="float:left;">
-    <h2>Create a new asset from scratch:</h2>
-    <% form_for :asset, @asset, :url => { :action => "create" } do |f| %>
-        <div class="label">Name:</div>
-        <div class="txtbox">
-            <%= f.text_field :name %>
+<div class="center-main-container" align="center">
+    <div class="center-container">
+        <div class="center-main-container-title">
+            <h1>New asset</h1>
         </div>
-        <br style="clear:both" />
+            <br />
+            <div style="float:left;">
+              <% form_for :asset, @asset, :url => { :action => "create" } do |f| %>
+                  <table id="rounded-corner" summary="Asset Properties">
+                      <thead>
+                          <tr>
+                              <th scope="col" class="rounded-company" colspan="2">Create from scratch</th>
+                          </tr>
+                      </thead>
+                      <tfoot>
+                          <tr>
+                              <td class="rounded-foot-left">&nbsp;</td>
+                              <td class="rounded-foot-right">
+                                  <%= submit_tag 'Create' %>
+                              </td>
+                          </tr>
+                      </tfoot>
+                      <tbody>
+                          <tr>
+                              <td>Name:</td>
+                              <td><%= f.text_field :name %></td>
+                          </tr>
+                          <tr>
+                              <td>Description:</td>
+                              <td><%= f.text_area :description, :size=>"23x10" %></td>
+                          </tr>
+                          <tr>
+                              <td>Asset type:</td>
+                              <td><%= f.collection_select :asset_type_id, AssetType.all, :id, :name %> or <%=  link_to "Add a new one.", :controller => "asset_types", :action => "new" %></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              <% end %>
+            </div>
+            <div class="left;">
+              <% form_tag :action => "clone" do %>
 
-
-        <div class="label">Description:</div>
-        <div class="txtbox">
-            <%= f.text_area :description, :size=>"23x10" %>
+                 <table id="rounded-corner" summary="Asset Properties">
+                      <thead>
+                          <tr>
+                              <th scope="col" class="rounded-company" colspan="2">Or Clone an existing one:</th>
+                          </tr>
+                      </thead>
+                      <tfoot>
+                          <tr>
+                              <td class="rounded-foot-left">&nbsp;</td>
+                              <td class="rounded-foot-right">
+                                  <%= submit_tag 'Clone it' %>
+                              </td>
+                          </tr>
+                      </tfoot>
+                      <tbody>
+                          <tr>
+                              <td colspan="2" align="center">
+                                  <%= select_tag :existing_custom_field, option_groups_from_collection_for_select(AssetType.all, :assets, :name, :id, :name, nil), :size => 18, :class => "clonable-fields" %>  
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>Name:</td>
+                              <td><%= text_field_tag :name %></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              <% end %>
+            </div>
+            <br class="clear-both" />
+            <% content_for :header_tags do %>
+                <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
+            <% end %>
         </div>
-        <br style="clear:both" />
-
-        <div class="label">Asset Type:</div>
-        <div class="txtbox">
-            <%= f.collection_select :asset_type_id, AssetType.all, :id, :name %> or <%=  link_to "Add a new one.", :controller => "asset_types", :action => "new" %>
-        </div>
-        <br style="clear:both" />
-
-        <div class="submit">
-            <%= submit_tag 'Create' %>
-        </div>
-    <% end %>
+    </div>
 </div>
-<div style="width:50px; float:left;">&nbsp;</div>
-<div style="float:left;">
-  <h2>Or Clone an existing one:</h2>
-  <% form_tag :action => "clone" do %>
-  <%= select_tag :existing_custom_field, option_groups_from_collection_for_select(AssetType.all, :assets, :name, :id, :name, nil), :size => 18, :class => "clonable_fields" %>
-  <br /><br />
-  <div class="label">Name:</div>
-  <div class="txtbox">
-    <%= text_field_tag :name %>
-  </div>
-  <br /><br />
-  <div class="submit">
-    <%= submit_tag 'Clone it' %>
-  </div>
-  <% end %>
-</div>
-
-<% content_for :header_tags do %>
-    <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
-<% end %>

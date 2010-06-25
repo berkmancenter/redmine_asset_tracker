@@ -1,60 +1,224 @@
+.left{
+    float: left;
+}
+.asset-properties{
+    float: left;
+    padding-left:50px;
+}
 .label{
     width:100px;
     float: left;    
 }
-
-.txtbox{
-    width:100px;
-    float: left;
-}
-
-.txtbox{
+.text-box{
     width:100px;
     float: left;
     text-align:right;
 }
+.clear-both{
+    clear:both;
+}
 
-.assetName{
+.asset-name{
     width:300px;
     float: left;
 }
 
-.assetDescription{
+.asset-description{
     width:600px;
     min-width:600px;
     max-width:600px;
     float: left;    
 }
 
-.assetOptions{
+.asset-options{
     width:100px;
     float: left;    
 }
 
 .submit {
     text-align: right;
-    width: 300px;
+    width: 310px;
 }
 
-.submit_new_field {
+.submit-new-field {
     text-align: right;
     width: 400px;
 }
 
-.existing_fields {
+.existing-fields {
     float: left;
-    width: 300px;
+    width: 310px;
 }
 
-.existing_fields input{
+.asset-properties input{
     float: right;
+    width:205px;
 }
 
-.available_fields{
+.available-fields{
     width: 400px;
 }
 
-.clonable_fields{
+.clonable-fields{
     width: 300px;
     height:200px;
+}
+
+.new-custom-property{
+    width:400px;
+    float:left;    
+}
+
+.add-existing-custom-property{
+    width:400px;
+    float:left;
+}
+
+.spacer{
+    width:50px;
+    float:left;
+}
+
+.edit-asset-image{
+    border:1px dashed #BBBBBB;
+    float:left;
+    padding:20px;
+    text-align:center;
+    width:250px;
+    margin:20px;
+    margin-top:10px;
+}
+
+.asset-image-options{
+    width:225px;
+}
+
+#rounded-corner
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin-left: 45px;
+    margin-bottom: 45px;
+    margin-right: 45px;
+	width: 400px;
+	text-align: left;
+	border-collapse: collapse;
+}
+#rounded-corner thead th.rounded-company
+{
+	background: #507AAA url('/plugin_assets/redmine_asset_tracker/images/table-images/left.png') left -1px no-repeat;
+}
+#rounded-corner thead th.rounded-q1
+{
+	background: #507AAA url('/plugin_assets/redmine_asset_tracker/images/table-images/right.png') right -1px no-repeat;
+}
+#rounded-corner th
+{
+	padding: 8px;
+	font-weight: normal;
+	font-size: 13px;
+	color: #FFFFFF;
+	background: #507AAA;
+}
+#rounded-corner td
+{
+	padding: 8px;
+	background: #e8edff;
+	border-top: 1px solid #fff;
+	color: #669;
+    width: 100px;
+}
+#rounded-corner tfoot td.rounded-foot-left
+{
+	background: #e8edff url('/plugin_assets/redmine_asset_tracker/images/table-images/botleft.png') left bottom no-repeat;
+}
+#rounded-corner tfoot td.rounded-foot-right
+{
+	background: #e8edff url('/plugin_assets/redmine_asset_tracker/images/table-images/botright.png') right bottom no-repeat;
+    text-align:right;
+}
+#rounded-corner tbody tr:hover td
+{
+	background: #d0dafd;
+}
+
+#rounded-corner-index
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin-left: 45px;
+    margin-bottom: 45px;
+    margin-right: 45px;
+	width: 800px;
+	text-align: left;
+	border-collapse: collapse;
+}
+#rounded-corner-index thead th.rounded-company
+{
+	background: #507AAA url('/plugin_assets/redmine_asset_tracker/images/table-images/left.png') left -1px no-repeat;
+}
+#rounded-corner-index thead th.rounded-q1
+{
+	background: #507AAA url('/plugin_assets/redmine_asset_tracker/images/table-images/right.png') right -1px no-repeat;
+}
+#rounded-corner-index th
+{
+	padding: 8px;
+	font-weight: normal;
+	font-size: 13px;
+	color: #FFFFFF;
+	background: #507AAA;
+}
+#rounded-corner-index td
+{
+	padding: 8px;
+	background: #e8edff;
+	border-top: 1px solid #fff;
+	color: #669;
+    width: 260px;
+}
+#rounded-corner-index tfoot td.rounded-foot-left
+{
+	background: #e8edff url('/plugin_assets/redmine_asset_tracker/images/table-images/botleft.png') left bottom no-repeat;
+}
+#rounded-corner-index tfoot td.rounded-foot-right
+{
+	background: #e8edff url('/plugin_assets/redmine_asset_tracker/images/table-images/botright.png') right bottom no-repeat;
+    text-align:right;
+}
+#rounded-corner-index tbody tr:hover td
+{
+	background: #d0dafd;
+}
+
+.center-main-container{
+    width:100%;
+}
+.center-container{
+    width:900px;
+    border-style:solid;
+    border-color:#CCCCCC;
+    border-width:1px;
+}
+.center-main-container-title{
+    width:100%;
+    text-align:center;
+    background-color:#507AAA;
+    color:#ffffff;
+}
+.inner-container{
+    width:100%;
+    text-align:left;
+    padding:10px;
+}
+.inner-image-container{
+    width:300px;
+    float:left;
+}
+.inner-data-container{
+    float:left;
+    width:500px;
+}
+.asset-type-title{
+    font-size:24px;
 }
