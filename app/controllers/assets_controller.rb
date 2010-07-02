@@ -79,38 +79,75 @@ class AssetsController < ApplicationController
     redirect_to :action => "edit", :id => asset
   end
 
-  def add_file
+  def edit_attachments
     @asset = Asset.find_by_id params[:id]
-
     if request.post?
-      if !@asset.attachments.empty?
-        @asset.attachments[0].destroy
-      end
-      container = @asset
-      attach_files(container, params[:attachments])
-      redirect_to :controller => 'assets', :action => 'edit', :id => @asset
-      return
+      attachment = Attachment.find_by_id params[:attachment][:id]
+      attachment.description = params[:attachment][:description]
+      attachment.save
+      flash.now[:notice] = 'Your changes were saved.'
     end
   end
 
-  def show_file
-    @asset = Asset.find_by_id params[:id]
-    if !@asset.attachments.empty?
-      @attachment = @asset.attachments[0]
+  def remove_attachment
+    attachment = Attachment.find_by_id params[:attachment_id]
+    attachment.destroy
+    @asset = Asset.find_by_id params[:asset_id]
+    flash[:notice] = "Attachment successfully destroyed."
+    redirect_to :controller => 'assets', :action => 'edit_attachments', :id => @asset
+  end
+
+  def change_attachment_privacy
+    attachment = Attachment.find_by_id params[:attachment_id]
+    if attachment.is_private
+      attachment.is_private =false
+    else
+      attachment.is_private = true
+    end
+    attachment.save
+    @asset = Asset.find_by_id params[:asset_id]
+    flash[:notice] = "Privacy settings updated."
+    redirect_to :controller => 'assets', :action => 'edit_attachments', :id => @asset
+  end
+
+  def show_attachment
+    @attachment = Attachment.find_by_id params[:id]
+    if @attachment != nil
       send_file @attachment.diskfile, :filename => filename_for_content_disposition(@attachment.filename),
                                       :type => detect_content_type(@attachment),
                                       :disposition => (@attachment.image? ? 'inline' : 'attachment')
     else
-      redirect_to "/plugin_assets/redmine_asset_tracker/images/add_photo.gif"      
+      render_404
     end
   end
 
-  def remove_file
-    @asset = Asset.find_by_id params[:id]
-    if !@asset.attachments.empty?
-      @asset.attachments[0].destroy
+  def show_image
+    asset = Asset.find_by_id params[:id]
+    if asset != nil
+      has_image=false;
+      asset.attachments.each do |a|
+        if a != nil && a.image? && !a.is_private
+          send_file a.diskfile, :filename => filename_for_content_disposition(a.filename),
+                                          :type => detect_content_type(a),
+                                          :disposition => (a.image? ? 'inline' : 'attachment')
+          has_image = true
+          return
+        end
+      end
+      if !has_image
+          redirect_to "/plugin_assets/redmine_asset_tracker/images/add_photo.gif"
+      end
     end
-    redirect_to :controller => 'assets', :action => 'edit', :id => @asset    
+  end
+
+  def add_attachment
+    @asset = Asset.find_by_id params[:id]
+
+    if request.post?
+      attachments = @asset.attach_files(params[:attachments])
+      redirect_to :controller => 'assets', :action => 'edit_attachments', :id => @asset
+      return
+    end
   end
 
   private
@@ -121,5 +158,4 @@ class AssetsController < ApplicationController
       end
       content_type.to_s
     end
-
-end
+    end

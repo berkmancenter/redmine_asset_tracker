@@ -1,18 +1,5 @@
 <div class="edit-asset-image">
-    <% if !asset.attachments.empty? && user.admin  %>
-        <a href="../show_file/ <%= asset.id.to_s %>">
-            <img src="../show_file/<%= asset.id %>" alt="<%= asset.name %>" width="200" border="0" />
-        </a>
-    <% elsif edit_enabled %>
-        <%= link_to image_tag("/assets/show_file/" + asset.id.to_s, :border=>0), :controller => "assets", :action => "add_file", :id => asset %>
-    <% else %>
-        <img src="../show_file/<%= asset.id %>" alt="<%= asset.name %>" width="200" border="0" />
-    <% end %>
-  
-    <% if !asset.attachments.empty? && user.admin && edit_enabled %>
-        <p align="right" class="asset-image-options">
-            <%= link_to image_tag("/images/edit.png", :border=>0), :controller => "assets", :action => "add_file", :id => asset %>
-            <%= link_to image_tag("/images/delete.png", :border=>0), :controller => "assets", :action => "remove_file", :id => asset %>
-        </p>
-    <% end %>
+  <a href="../show_image/ <%= asset.id.to_s %>">
+    <img src="../show_image/<%= asset.id %>" alt="<%= asset.name %>" width="200" border="0" />
+  </a>
 </div>

@@ -126,7 +126,8 @@
 	background: #e8edff;
 	border-top: 1px solid #fff;
 	color: #669;
-    width: 100px;
+    width: 130px;
+    min-width: 130px;
 }
 #rounded-corner tfoot td.rounded-foot-left
 {
@@ -221,4 +222,9 @@
 }
 .asset-type-title{
     font-size:24px;
+}
+
+.save-button{
+    width: 16px !important;
+    height: 16px;
 }
