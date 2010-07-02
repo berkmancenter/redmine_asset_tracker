@@ -1,23 +1,40 @@
-<h1>Edit Asset Type:</h1><br />
-<% form_for :asset_type, @asset_type, :url => { :action => "update" } do |f| %>
-    <div class="label">Name:</div>
-    <div class="txtbox">
-        <%= f.text_field :name %>
+<div class="center-main-container" align="center">
+    <div class="center-container">
+        <div class="center-main-container-title">
+            <h1>Edit Asset Category:</h1>
+        </div>
+        <div class="inner-container">
+            <% form_for :asset_type, @asset_type, :url => { :action => "update", :id => @asset_type.id } do |f| %>
+                <table id="rounded-corner-index" summary="Asset Properties">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="rounded-company">&nbsp;</th>
+                            <th scope="col" class="rounded-q1">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <td class="rounded-foot-left">&nbsp;</td>
+                            <td class="rounded-foot-right" align="left">
+                                <%= submit_tag 'Update' %>
+                            </td>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <td>Name:</td>
+                            <td><%= f.text_field :name %></td>
+                        </tr>
+                        <tr>
+                            <td>Description:</td>
+                            <td><%= f.text_area :description, :size=>"23x10" %></td>
+                        </tr>
+                    </tbody>
+                </table>
+            <% end %>
+          </div>
     </div>
-    <br style="clear:both" />
-
-
-    <div class="label">Description:</div>
-    <div class="txtbox">
-        <%= f.text_area :description, :size=>"23x10" %>
-    </div>
-    <br style="clear:both" />
-
-
-    <div class="submit">
-        <%= submit_tag 'Update' %>
-    </div>
-<% end %>
+</div>
    
 
 

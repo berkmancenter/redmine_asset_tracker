@@ -33,10 +33,26 @@
                                       <td><%= f.text_field :description %></td>
                                   </tr>
                                   <tr>
-                                      <td>Attachments:</td>
-                                      <td align='right'>
-                                        <%= image_tag "/images/edit.png" %>
-                                        <%= link_to 'manage', :controller => "assets", :action => "edit_attachments", :id => @asset %>
+                                      <td>
+                                        <%= link_to image_tag("/images/changeset.png", :border=>0, :alt=>"manage"), :controller => "asset_types", :action => "index" %>
+                                        Asset type:
+                                      </td>
+                                      <td><%= f.collection_select :asset_type_id, AssetType.all, :id, :name %> or <%=  link_to "Add new.", :controller => "asset_types", :action => "new", :asset_id => @asset %></td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                        <%= link_to image_tag("/images/changeset.png", :border=>0, :alt=>"manage"), :controller => "asset_groups", :action => "index" %>
+                                        Asset group:
+                                      </td>
+                                      <td><%= f.collection_select :asset_group_id, AssetGroup.all, :id, :name, {:include_blank => 'NONE'} %> or <%=  link_to "Add new.", :controller => "asset_groups", :action => "new", :asset_id => @asset %></td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                        <%= link_to image_tag("/images/changeset.png", :border=>0, :alt=>"manage"), :controller => "assets", :action => "edit_attachments", :id => @asset %>
+                                        Attachments:
+                                      </td>
+                                      <td align='left'>
+                                        &nbsp;
                                       </td>
                                   </tr>
                                   <%= render :partial => 'list_asset_custom_fields', :locals => { :asset => @asset } %>

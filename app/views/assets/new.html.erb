@@ -31,7 +31,11 @@
                           </tr>
                           <tr>
                               <td>Asset type:</td>
-                              <td><%= f.collection_select :asset_type_id, AssetType.all, :id, :name %> or <%=  link_to "Add a new one.", :controller => "asset_types", :action => "new" %></td>
+                              <td><%= f.collection_select :asset_type_id, AssetType.all, :id, :name %> or <%=  link_to "Add new.", :controller => "asset_types", :action => "new" %></td>
+                          </tr>
+                          <tr>
+                              <td>Asset group:</td>
+                              <td><%= f.collection_select :asset_group_id, AssetGroup.all, :id, :name, {:include_blank => 'NONE'} %> or <%=  link_to "Add new.", :controller => "asset_groups", :action => "new" %></td>
                           </tr>
                       </tbody>
                   </table>

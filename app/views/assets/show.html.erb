@@ -45,6 +45,22 @@
                               </tr>
                           <% end %>
                       <% end %>
+                      <% if !@asset.attachments.empty? %>
+                          <tr>
+                            <td colspan="2" align="center"><strong>Attachments:</strong></td>
+                          </tr>
+                          <% @asset.attachments.each do |a| %>
+                              <% if !a.is_private %>
+                                  <tr>
+                                      <td colspan="2">
+                                          <a href="../show_image/ <%= a.id.to_s %>">
+                                            <%= image_tag '/images/save.png' %><%= a.filename %>
+                                          </a>
+                                      </td>
+                                  </tr>
+                              <% end %>
+                          <% end %>
+                      <% end %>
                   </tbody>
               </table>
                 

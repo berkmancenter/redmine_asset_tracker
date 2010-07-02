@@ -6,7 +6,11 @@
         <div class="inner-container">
 
             <% @asset_types.each do |asset_type| %>
-                <p class="asset-type-title"><%= asset_type.name %></p>
+                <p class="asset-type-title">
+                  <%= asset_type.name %>
+                  <%= link_to image_tag("/images/edit.png", :border=>0, :alt=>"edit"), :controller => "asset_types", :action => "edit", :id => asset_type %>
+                  <%= link_to image_tag("/images/delete.png", :border=>0, :alt=>"delete"), :controller => "asset_types", :action => "delete", :id => asset_type %>
+                </p>
 
                 <table id="rounded-corner-index" summary="Asset Properties">
                     <thead>
@@ -28,23 +32,42 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <% asset_type.assets.each do |asset| %>
+                        <% asset_type.asset_groups.each do |asset_group| %>
                             <tr>
-                                <td><%= asset.name %></td>
-                                <td><%= asset.description %></td>
+                                <td><%= image_tag '/images/folder.png' %> &nbsp; <%= asset_group.name %></td>
+                                <td><%= asset_group.description %></td>
                                 <td>
-                                    <%= link_to image_tag("/plugin_assets/redmine_asset_tracker/images/show.png", :border=>0, :alt=>"show"), :controller => "assets", :action => "show", :id => asset %>
-                                    <%= link_to image_tag("/images/time_add.png", :border=>0, :alt=>"reserve"), :controller => "assets", :action => "reserve", :id => asset %>
+                                    <%= link_to image_tag("/plugin_assets/redmine_asset_tracker/images/show.png", :border=>0, :alt=>"show"), :controller => "asset_groups", :action => "show", :id => asset_group %>
+                                    <%= link_to image_tag("/images/time_add.png", :border=>0, :alt=>"reserve"), :controller => "asset_groups", :action => "reserve", :id => asset_group %>
                                     <% if @user.admin %>
-                                        <%= link_to image_tag("/images/edit.png", :border=>0, :alt=>"edit"), :controller => "assets", :action => "edit", :id => asset %>
-                                        <%= link_to image_tag("/images/delete.png", :border=>0, :alt=>"delete"), :controller => "assets", :action => "delete", :id => asset %>
+                                        <%= link_to image_tag("/images/edit.png", :border=>0, :alt=>"edit"), :controller => "asset_groups", :action => "edit", :id => asset_group %>
+                                        <%= link_to image_tag("/images/delete.png", :border=>0, :alt=>"delete"), :controller => "asset_groups", :action => "delete", :id => asset_group %>
                                     <% end %>
                                 </td>
-                            </tr>
+                            </tr>                            
+                        <% end %>
+                        <% asset_type.assets.each do |asset| %>
+                            <% if asset.asset_group_id == nil %>
+                                <tr>
+                                    <td><%= asset.name %></td>
+                                    <td><%= asset.description %></td>
+                                    <td>
+                                        <%= link_to image_tag("/plugin_assets/redmine_asset_tracker/images/show.png", :border=>0, :alt=>"show"), :controller => "assets", :action => "show", :id => asset %>
+                                        <%= link_to image_tag("/images/time_add.png", :border=>0, :alt=>"reserve"), :controller => "assets", :action => "reserve", :id => asset %>
+                                        <% if @user.admin %>
+                                            <%= link_to image_tag("/images/edit.png", :border=>0, :alt=>"edit"), :controller => "assets", :action => "edit", :id => asset %>
+                                            <%= link_to image_tag("/images/delete.png", :border=>0, :alt=>"delete"), :controller => "assets", :action => "delete", :id => asset %>
+                                        <% end %>
+                                    </td>
+                                </tr>
+                            <% end %>
                         <% end %>
                     </tbody>
                   </table>
             <% end %>
+            <p class="asset-type-title">
+                <%= link_to 'Add new Category...', :controller => :asset_types, :action => :new  %>
+            </p>
             <br /><br />             
             <% content_for :header_tags do %>
                 <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>

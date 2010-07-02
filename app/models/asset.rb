@@ -1,5 +1,6 @@
 class Asset < ActiveRecord::Base
   belongs_to :asset_type
+  belongs_to :asset_group
   has_and_belongs_to_many :asset_custom_fields,
                           :class_name => 'AssetCustomField',
                           :order => "#{CustomField.table_name}.position",

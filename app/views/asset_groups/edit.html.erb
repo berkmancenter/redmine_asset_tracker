@@ -1,10 +1,11 @@
 <div class="center-main-container" align="center">
     <div class="center-container">
         <div class="center-main-container-title">
-            <h1>New Asset Category:</h1>
+            <h1>Edit Asset Group:</h1>
         </div>
         <div class="inner-container">
-            <% form_for :asset_type, @asset_type, :url => { :action => "create" } do |f| %>
+            <% form_for :asset_group, @asset_group, :url => { :action => "update", :id => @asset_group.id, :asset_id => @asset_id } do |f| %>
+
                 <table id="rounded-corner-index" summary="Asset Properties">
                     <thead>
                         <tr>
@@ -16,7 +17,7 @@
                         <tr>
                             <td class="rounded-foot-left">&nbsp;</td>
                             <td class="rounded-foot-right" align="left">
-                                <%= submit_tag 'Create' %>
+                                <%= submit_tag 'Update' %>    
                             </td>
                         </tr>
                     </tfoot>
@@ -26,16 +27,23 @@
                             <td><%= f.text_field :name %></td>
                         </tr>
                         <tr>
+                            <td>
+                                <%= link_to image_tag("/images/changeset.png", :border=>0, :alt=>"manage"), :controller => "asset_types", :action => "index" %>
+                                Asset type:
+                            </td>
+                            <td><%= f.collection_select :asset_type_id, AssetType.all, :id, :name %> or <%=  link_to "Add new.", :controller => "asset_types", :action => "new", :asset_id => @asset_id %></td>
+                        </tr>
+                        <tr>
                             <td>Description:</td>
                             <td><%= f.text_area :description, :size=>"23x10" %></td>
                         </tr>
                     </tbody>
-                </table>
+                </table>              
             <% end %>
-          </div>
+        </div>
     </div>
 </div>
-
+   
 
 
 <% content_for :header_tags do %>

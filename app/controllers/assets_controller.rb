@@ -47,7 +47,9 @@ class AssetsController < ApplicationController
   def update
     @asset = Asset.find params[:id]
     @asset.update_attributes params[:asset]
+    flash[:notice] = 'Your changes have been saved.'
     redirect_to :action => "edit", :id => @asset
+
   end
 
   def delete

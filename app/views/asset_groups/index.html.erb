@@ -1,0 +1,43 @@
+<div class="center-main-container" align="center">
+    <div class="center-container">
+        <div class="center-main-container-title">
+            <h1>List of Asset Groups</h1>
+        </div>
+        <div class="inner-container">
+            <table id="rounded-corner-index" summary="Asset Properties">
+                <thead>
+                    <tr>
+                        <th scope="col" class="rounded-company">Name</th>
+                        <th scope="col" class="rounded-q2">Description</th>
+                        <th scope="col" class="rounded-q1">Options</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td class="rounded-foot-left">&nbsp;</td>
+                        <td class="rounded-foot-right">
+                            <%= image_tag "/images/add.png", :alt => "Add a new group" %>
+                            <%= link_to "Add New Group.", :controller => "asset_groups", :action => "new" %>
+                        </td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <% @asset_groups.each do |asset_group| %>
+                        <tr>
+                            <td><%= asset_group.name %></td>
+                            <td><%= asset_group.description %></td>
+                            <td>
+                                <%= link_to image_tag("/images/edit.png", :border=>0, :alt=>"edit"), :controller => "asset_groups", :action => "edit", :id => asset_group %>
+                                <%= link_to image_tag("/images/delete.png", :border=>0, :alt=>"delete"), :controller => "asset_groups", :action => "delete", :id => asset_group %>
+                            </td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            <br /><br />
+            <% content_for :header_tags do %>
+                <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
+            <% end %>
+        </div>
+    </div>
+</div>
