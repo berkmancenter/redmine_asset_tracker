@@ -2,7 +2,7 @@ class AssetsController < ApplicationController
   unloadable
   helper :custom_fields
   include CustomFieldsHelper
-  before_filter :require_admin, :except => [:index, :show]
+  before_filter :require_admin, :except => [:index, :show, :show_attachment, :show_image]
 
   def index
     @assets = Asset.find:all
@@ -114,7 +114,7 @@ class AssetsController < ApplicationController
 
   def show_attachment
     @attachment = Attachment.find_by_id params[:id]
-    if @attachment != nil
+    if @attachment != nil && (!@attachment.is_private || (@attachment.is_private && User.current.admin))
       send_file @attachment.diskfile, :filename => filename_for_content_disposition(@attachment.filename),
                                       :type => detect_content_type(@attachment),
                                       :disposition => (@attachment.image? ? 'inline' : 'attachment')

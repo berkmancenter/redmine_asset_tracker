@@ -1,51 +1,61 @@
 <div class="center-main-container" align="center">
     <div class="center-container">
         <div class="center-main-container-title">
-            <h1>Edit Asset Group:</h1>
+            <h1>Edit Asset Group</h1>
         </div>
         <div class="inner-container">
-            <% form_for :asset_group, @asset_group, :url => { :action => "update", :id => @asset_group.id, :asset_id => @asset_id } do |f| %>
+            <% form_for :asset, @asset_group, :url => { :action => "update", :id => @asset_group } do |f| %>
+                <%= render :partial => 'edit_asset_group_image', :locals => { :asset_group => @asset_group, :user => @user, :edit_enabled => true } %>
+                <div class="asset-properties">
+                    <table id="rounded-corner" summary="Asset Properties">
+                              <thead>
+                                  <tr>
+                                      <th scope="col" class="rounded-company">Property</th>
+                                      <th scope="col" class="rounded-q1">Value</th>
+                                  </tr>
+                              </thead>
+                                  <tfoot>
+                                  <tr>
+                                      <td class="rounded-foot-left">&nbsp;</td>
+                                      <td class="rounded-foot-right">
+                                        <%= submit_tag 'Save changes' %>
+                                      </td>
+                                  </tr>
+                              </tfoot>
+                              <tbody>
+                                  <tr>
+                                      <td>Name:</td>
+                                      <td><%= f.text_field :name %></td>
 
-                <table id="rounded-corner-index" summary="Asset Properties">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="rounded-company">&nbsp;</th>
-                            <th scope="col" class="rounded-q1">&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <td class="rounded-foot-left">&nbsp;</td>
-                            <td class="rounded-foot-right" align="left">
-                                <%= submit_tag 'Update' %>    
-                            </td>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        <tr>
-                            <td>Name:</td>
-                            <td><%= f.text_field :name %></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <%= link_to image_tag("/images/changeset.png", :border=>0, :alt=>"manage"), :controller => "asset_types", :action => "index" %>
-                                Asset type:
-                            </td>
-                            <td><%= f.collection_select :asset_type_id, AssetType.all, :id, :name %> or <%=  link_to "Add new.", :controller => "asset_types", :action => "new", :asset_id => @asset_id %></td>
-                        </tr>
-                        <tr>
-                            <td>Description:</td>
-                            <td><%= f.text_area :description, :size=>"23x10" %></td>
-                        </tr>
-                    </tbody>
-                </table>              
+                                  </tr>
+                                  <tr>
+                                      <td>Description:</td>
+                                      <td><%= f.text_field :description %></td>
+                                  </tr>
+                                  <tr>
+                                      <td>
+                                        <%= link_to image_tag("/images/changeset.png", :border=>0, :alt=>"manage"), :controller => "asset_types", :action => "index" %>
+                                        Asset type:
+                                      </td>
+                                      <td><%= f.collection_select :asset_type_id, AssetType.all, :id, :name %> or <%=  link_to "Add new.", :controller => "asset_types", :action => "new", :asset_id => @asset_group %></td>
+                                  </tr>                                 
+                                  <tr>
+                                      <td>
+                                        <%= link_to image_tag("/images/changeset.png", :border=>0, :alt=>"manage"), :controller => "asset_groups", :action => "edit_attachments", :id => @asset_group %>
+                                        Attachments:
+                                      </td>
+                                      <td align='left'>
+                                        &nbsp;
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                </div>
+            <% end %>
+            <br class="clear-both" />
+            <% content_for :header_tags do %>
+                <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
             <% end %>
         </div>
     </div>
 </div>
-   
-
-
-<% content_for :header_tags do %>
-    <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
-<% end %>
