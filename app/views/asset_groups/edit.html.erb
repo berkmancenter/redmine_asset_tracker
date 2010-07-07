@@ -48,6 +48,16 @@
                                         &nbsp;
                                       </td>
                                   </tr>
+                                  <tr>
+                                    <td>
+                                      Assets in this group:
+                                    </td>
+                                    <td>
+                                      <% @asset_group.assets.each do |g| %>
+                                        <%= link_to g.name, :controller=> 'assets', :action=>'edit', :id=>g %> <br />
+                                      <% end %>
+                                    </td>
+                                  </tr>
                               </tbody>
                           </table>
                 </div>
