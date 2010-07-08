@@ -228,3 +228,7 @@
     width: 16px !important;
     height: 16px;
 }
+
+.droppable{
+    background-color: #ffffcc;
+}

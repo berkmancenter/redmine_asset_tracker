@@ -7,6 +7,7 @@ class AssetGroupsController < ApplicationController
   def new
     @asset_group = AssetGroup.new
     @asset_id =  params[:asset_id]
+    @referer = "new_asset_group"
     render 'new', :layout=>false        
   end
 
@@ -33,8 +34,7 @@ class AssetGroupsController < ApplicationController
       a.save
     end
     asset_group.delete
-    flash[:notice] = 'The group has been deleted. All the assets that belonged to it are now group-less.'
-    redirect_to :controller => 'asset_groups', :action => 'index'
+    render :partial => 'asset_types/assets_list', :layout => false, :locals => { :asset_types => AssetType.all, :user => User.current }
   end
 
   def edit
@@ -51,6 +51,13 @@ class AssetGroupsController < ApplicationController
     @asset_group.update_attributes params[:asset_group]
     flash[:notice] = 'The group has been updated.'
     redirect_to :action => "index", :id => @asset_group
+  end
+
+  def add_asset
+    asset_group = AssetGroup.find params[:asset_group_id]
+    asset = Asset.find params[:asset_id]
+    asset.asset_group = asset_group
+    asset.save
   end
 
   def show_attachment

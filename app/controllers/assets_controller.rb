@@ -55,7 +55,7 @@ class AssetsController < ApplicationController
   def delete
     asset = Asset.find params[:id]
     asset.delete
-    redirect_to :controller => 'asset_types', :action => 'index'
+    render :partial => 'asset_types/assets_list', :layout => false, :locals => { :asset_types => AssetType.all, :user => User.current }
   end
 
   def create_custom_field

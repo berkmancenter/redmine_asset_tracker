@@ -12,17 +12,23 @@ class AssetTypesController < ApplicationController
   def new
     @asset_type = AssetType.new
     @asset_id =  params[:asset_id]
+    @referer = params[:referer]
+    render 'new', :layout=>false
   end
 
   def create
     @asset_type = AssetType.create params[:asset_type]
-    if params[:asset_id] == nil
-      redirect_to :controller => 'assets', :action => 'new'
-    else
+    @referer = params[:referer]
+    if params[:asset_id] && !params[:asset_id].empty?
       @asset = Asset.find_by_id params[:asset_id]
       @asset.asset_type = @asset_type
       @asset.save
-      redirect_to :controller => 'assets', :action => 'edit', :id => @asset
+    else
+      @asset = Asset.new
+    end
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

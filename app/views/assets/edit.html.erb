@@ -34,14 +34,16 @@
                                   </tr>
                                   <tr>
                                       <td>
-                                        <%= link_to image_tag("/images/changeset.png", :border=>0, :alt=>"manage"), :controller => "asset_types", :action => "index" %>
+                                        <%= image_tag "/images/sticky.png", :border=>0, :alt=>"manage" %>
                                         Asset type:
                                       </td>
-                                      <td><%= f.collection_select :asset_type_id, AssetType.all, :id, :name %> or <%=  link_to "Add new.", :controller => "asset_types", :action => "new", :asset_id => @asset %></td>
+                                      <td id='asset_types_td'>
+                                        <%= render :partial => 'asset_types/asset_types_dropdown', :locals => { :asset => @asset } %>
+                                      </td>
                                   </tr>
                                   <tr>
                                       <td>
-                                        <%= link_to image_tag("/images/changeset.png", :border=>0, :alt=>"manage"), :controller => "asset_groups", :action => "index" %>
+                                        <%= image_tag "/images/folder.png", :border=>0, :alt=>"manage" %>
                                         Asset group:
                                       </td>
                                       <td id='asset_groups_td'>
@@ -50,11 +52,11 @@
                                   </tr>
                                   <tr>
                                       <td>
-                                        <%= link_to image_tag("/images/changeset.png", :border=>0, :alt=>"manage"), :controller => "assets", :action => "edit_attachments", :id => @asset %>
+                                        <%= image_tag "/images/attachment.png", :border=>0, :alt=>"manage" %>
                                         Attachments:
                                       </td>
                                       <td align='left'>
-                                        &nbsp;
+                                        <%= link_to 'view', :controller => "assets", :action => "edit_attachments", :id => @asset %>
                                       </td>
                                   </tr>
                                   <%= render :partial => 'list_asset_custom_fields', :locals => { :asset => @asset } %>
@@ -66,7 +68,8 @@
             <%= render :partial => 'add_asset_custom_fields', :locals => { :asset => @asset, :custom_field => @custom_field, :available_custom_fields => @available_custom_fields } %>
             <% content_for :header_tags do %>
                 <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
-                <%= stylesheet_link_tag 'facebox', :plugin => 'redmine_asset_tracker' %>                
+                <%= stylesheet_link_tag 'facebox', :plugin => 'redmine_asset_tracker' %>
+                <%= javascript_include_tag 'facebox', :plugin => 'redmine_asset_tracker' %>
             <% end %>
         </div>
     </div>

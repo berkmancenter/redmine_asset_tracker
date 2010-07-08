@@ -88,6 +88,8 @@ var Facebox = Class.create({
 	watchClickEvents	: function(e){
 		var f = this;
 		$$('a[rel=facebox]').each(function(elem,i){
+            //Added by Emmanuel to avoid double calls.
+            Event.stopObserving(elem);
 			Event.observe(elem, 'click', function(e){
 				Event.stop(e);
 				f.click_handler(elem, e);

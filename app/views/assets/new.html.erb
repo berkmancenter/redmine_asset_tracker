@@ -31,7 +31,9 @@
                           </tr>
                           <tr>
                               <td>Asset type:</td>
-                              <td><%= f.collection_select :asset_type_id, AssetType.all, :id, :name %> or <%=  link_to "Add new.", :controller => "asset_types", :action => "new" %></td>
+                              <td id='asset_types_td'>
+                                <%= render :partial => 'asset_types/asset_types_dropdown', :locals => { :asset => @asset } %>
+                              </td>
                           </tr>
                           <tr>
                               <td>Asset group:</td>

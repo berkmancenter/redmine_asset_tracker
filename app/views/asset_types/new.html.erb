@@ -1,43 +1,29 @@
-<div class="center-main-container" align="center">
-    <div class="center-container">
-        <div class="center-main-container-title">
-            <h1>New Asset Category:</h1>
-        </div>
-        <div class="inner-container">
-            <% form_for :asset_type, @asset_type, :url => { :action => "create" } do |f| %>
-                <table id="rounded-corner-index" summary="Asset Properties">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="rounded-company">&nbsp;</th>
-                            <th scope="col" class="rounded-q1">&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <td class="rounded-foot-left">&nbsp;</td>
-                            <td class="rounded-foot-right" align="left">
-                                <%= submit_tag 'Create' %>
-                            </td>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        <tr>
-                            <td>Name:</td>
-                            <td><%= f.text_field :name %></td>
-                        </tr>
-                        <tr>
-                            <td>Description:</td>
-                            <td><%= f.text_area :description, :size=>"23x10" %></td>
-                        </tr>
-                    </tbody>
-                </table>
-            <% end %>
-          </div>
-    </div>
-</div>
+<h1 style="color:#507AAA">
+  New Asset Type:
+</h1>
 
-
-
-<% content_for :header_tags do %>
-    <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
+<% form_remote_for :asset_type, @asset_type, :loading => 'facebox.loading()' , :url => { :action => "create", :id => @asset_type.id, :asset_id => @asset_id, :referer => @referer } do |f| %>
+    <table>
+      <tr>
+        <td>
+          Name:
+        </td>
+        <td>
+          <%= f.text_field :name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Description:
+        </td>
+        <td>
+          <%= f.text_area :description, :size=>"23x10" %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan='2' align='right'>
+          <%= f.submit 'Create' %>
+        </td>
+      </tr>
+    </table>
 <% end %>

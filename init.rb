@@ -4,7 +4,7 @@ Redmine::Plugin.register :redmine_asset_tracker do
   author 'Emmanuel Pastor'
   description 'This is a plugin for Redmine'
   version '0.0.1'
-  menu :application_menu, :asset_types, { :controller => 'asset_types', :action => 'index' }, :caption => 'Assets'
+  menu :application_menu, :asset_types, { :controller => 'asset_types', :action => 'index' }, :caption => 'Assets List'
   #permission :view_assets, :assets => :index
   #permission :create_assets, :assets => :new
   #permission :edit_assets, :assets => :edit
