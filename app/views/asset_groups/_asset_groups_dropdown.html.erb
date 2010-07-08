@@ -1,0 +1,7 @@
+<% fields_for :asset do |f| %>
+     <%= f.collection_select :asset_group_id, AssetGroup.all, :id, :name, {:include_blank => 'NONE'}, {:id => 'asset_groups_dropdown_box'} %>  or <%= link_to "Add new.", {:controller => "asset_groups", :action => "new", :asset_id => @asset}, :rel => 'facebox' %>
+<% end %>
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'facebox', :plugin => 'redmine_asset_tracker' %>
+    <%= javascript_include_tag 'facebox', :plugin => 'redmine_asset_tracker' %>
+<% end %>

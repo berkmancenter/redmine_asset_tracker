@@ -35,7 +35,9 @@
                           </tr>
                           <tr>
                               <td>Asset group:</td>
-                              <td><%= f.collection_select :asset_group_id, AssetGroup.all, :id, :name, {:include_blank => 'NONE'} %> or <%=  link_to "Add new.", :controller => "asset_groups", :action => "new" %></td>
+                              <td id='asset_groups_td'>
+                                <%= render :partial => 'asset_groups/asset_groups_dropdown', :locals => { :asset => @asset } %>
+                              </td>
                           </tr>
                       </tbody>
                   </table>
@@ -75,6 +77,8 @@
             <br class="clear-both" />
             <% content_for :header_tags do %>
                 <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
+                <%= stylesheet_link_tag 'facebox', :plugin => 'redmine_asset_tracker' %>
+                <%= javascript_include_tag 'facebox', :plugin => 'redmine_asset_tracker' %>
             <% end %>
         </div>
     </div>

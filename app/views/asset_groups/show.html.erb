@@ -1,0 +1,62 @@
+<div class="center-main-container" align="center">
+    <div class="center-container">
+        <div class="center-main-container-title">
+            <h1><%=  @asset_group.name %></h1>
+        </div>
+        <div class="inner-container">
+        <div class="inner-image-container">
+            <%= render :partial => 'edit_asset_group_image', :locals => { :asset_group => @asset_group, :user => @user, :edit_enabled => false } %>
+            <br class="clear-both" />
+        </div>
+            <div class="asset-properties">
+              <table id="rounded-corner" summary="Asset Properties">
+                  <thead>
+                      <tr>
+                          <th scope="col" class="rounded-company">Property</th>
+                          <th scope="col" class="rounded-q1">Value</th>
+                      </tr>
+                  </thead>
+                  <tfoot>
+                      <tr>
+                          <td class="rounded-foot-left">&nbsp;</td>
+                          <td class="rounded-foot-right">
+                            <% if @user.admin %>
+                                <%= image_tag "/images/edit.png" %>
+                                <%= link_to "edit asset group", :controller => "assets", :action => "edit", :id => @asset_group %>
+                            <% end %>
+                          </td>
+                      </tr>
+                  </tfoot>
+                  <tbody>
+                      <tr>
+                          <td>Name:</td>
+                          <td><%= @asset_group.name %></td>
+                      </tr>
+                      <tr>
+                          <td>Description:</td>
+                          <td><%= @asset_group.description %></td>
+
+                      </tr>
+                      <tr>
+                        <td>
+                            Assets in this group:
+                        </td>
+                        <td>
+                            <% @asset_group.assets.each do |g| %>
+                                <%= link_to g.name, :controller=> 'assets', :action=>'show', :id=>g %> <br />
+                            <% end %>
+                        </td>
+                      </tr>                      
+                  </tbody>
+              </table>
+                
+            </div>
+          <br class="clear-both" />
+        </div>
+    </div>
+  <br />
+  <%= link_to "Back to the list of assets", :controller => "asset_types", :action => "index" %>  
+</div>
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
+<% end %>

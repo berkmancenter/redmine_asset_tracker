@@ -1,51 +1,42 @@
-<div class="center-main-container" align="center">
-    <div class="center-container">
-        <div class="center-main-container-title">
-            <h1>Create Asset Group:</h1>
-        </div>
-        <div class="inner-container">
-            <% form_for :asset_group, @asset_group, :url => { :action => "create", :id => @asset_group.id, :asset_id => @asset_id } do |f| %>
+<h1 style="color:#507AAA">
+  New Asset Group:
+</h1>
 
-                <table id="rounded-corner-index" summary="Asset Properties">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="rounded-company">&nbsp;</th>
-                            <th scope="col" class="rounded-q1">&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <td class="rounded-foot-left">&nbsp;</td>
-                            <td class="rounded-foot-right" align="left">
-                                <%= submit_tag 'Create' %>
-                            </td>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        <tr>
-                            <td>Name:</td>
-                            <td><%= f.text_field :name %></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <%= link_to image_tag("/images/changeset.png", :border=>0, :alt=>"manage"), :controller => "asset_types", :action => "index" %>
-                                Asset type:
-                            </td>
-                            <td><%= f.collection_select :asset_type_id, AssetType.all, :id, :name %> or <%=  link_to "Add new.", :controller => "asset_types", :action => "new", :asset_id => @asset_id %></td>
-                        </tr>
-                        <tr>
-                            <td>Description:</td>
-                            <td><%= f.text_area :description, :size=>"23x10" %></td>
-                        </tr>
-                    </tbody>
-                </table>
-            <% end %>
-        </div>
-    </div>
-</div>
+<% form_remote_for :asset_group, @asset_group, :loading => 'facebox.loading()' , :url => { :action => "create", :id => @asset_group.id, :asset_id => @asset_id } do |f| %>
+    <table>
+      <tr>
+        <td>
+          Name:
+        </td>
+        <td>
+          <%= f.text_field :name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+            <%= link_to image_tag("/images/changeset.png", :border=>0, :alt=>"manage"), :controller => "asset_types", :action => "index" %>
+            Asset type:
+        </td>
+        <td>
+          <%= f.collection_select :asset_type_id, AssetType.all, :id, :name %> or <%=  link_to "Add new.", :controller => "asset_types", :action => "new", :asset_id => @asset_id %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Description:
+        </td>
+        <td>
+          <%= f.text_area :description, :size=>"23x10" %>
+        </td>
+      </tr>
+      <tr>
+        <td colspan='2' align='right'>
+          <%= f.submit 'Create' %>
+        </td>
+      </tr>
+    </table>
 
-
-
+<% end %>
 <% content_for :header_tags do %>
     <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
 <% end %>

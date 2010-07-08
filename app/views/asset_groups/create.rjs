@@ -1,0 +1,4 @@
+page.replace_html 'asset_groups_td', :partial => 'asset_groups_dropdown', :asset => @asset
+page.call "facebox.initialize"
+page.call "facebox.close"
+page << "document.getElementById('asset_groups_dropdown_box').selectedIndex = document.getElementById('asset_groups_dropdown_box').length - 1"

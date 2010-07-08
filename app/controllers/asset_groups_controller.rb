@@ -1,24 +1,28 @@
 class AssetGroupsController < ApplicationController
   unloadable
-  before_filter :require_admin
+  before_filter :require_admin, :except => [:index, :show, :show_attachment, :show_image]
   def index
     @asset_groups = AssetGroup.all
   end
   def new
     @asset_group = AssetGroup.new
     @asset_id =  params[:asset_id]
+    render 'new', :layout=>false        
   end
 
   def create
-    @asset_group = AssetGroup.create params[:asset_group]
-    if params[:asset_id] == nil
-      redirect_to :controller => 'assets', :action => 'new'
-    else
+    asset_group = AssetGroup.create params[:asset_group]
+    if params[:asset_id] != nil && params[:asset_id] != ''
       @asset = Asset.find_by_id params[:asset_id]
-      @asset.asset_group = @asset_group
+      @asset.asset_group = asset_group
       @asset.save
-      redirect_to :controller => 'assets', :action => 'edit', :id => @asset
+    else
+      @asset = Asset.new
     end
+    respond_to do |format|
+      format.html  
+      format.js
+    end    
   end
 
   def delete
@@ -37,11 +41,27 @@ class AssetGroupsController < ApplicationController
     @asset_group = AssetGroup.find_by_id params[:id]
   end
 
+   def show
+    @asset_group = AssetGroup.find_by_id params[:id]
+    @user = User.find_by_id session[:user_id]
+  end
+
   def update
     @asset_group = AssetGroup.find params[:id]
     @asset_group.update_attributes params[:asset_group]
     flash[:notice] = 'The group has been updated.'
     redirect_to :action => "index", :id => @asset_group
+  end
+
+  def show_attachment
+    @attachment = Attachment.find_by_id params[:id]
+    if @attachment != nil && (!@attachment.is_private || (@attachment.is_private && User.current.admin))
+      send_file @attachment.diskfile, :filename => filename_for_content_disposition(@attachment.filename),
+                                      :type => detect_content_type(@attachment),
+                                      :disposition => (@attachment.image? ? 'inline' : 'attachment')
+    else
+      render_404
+    end
   end
 
    def edit_attachments
@@ -103,4 +123,14 @@ class AssetGroupsController < ApplicationController
       end
     end
   end
+
+
+  private
+    def detect_content_type(attachment)
+      content_type = attachment.content_type
+      if content_type.blank?
+        content_type = Redmine::MimeType.of(attachment.filename)
+      end
+      content_type.to_s
+    end
 end

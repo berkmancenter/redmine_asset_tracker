@@ -44,7 +44,9 @@
                                         <%= link_to image_tag("/images/changeset.png", :border=>0, :alt=>"manage"), :controller => "asset_groups", :action => "index" %>
                                         Asset group:
                                       </td>
-                                      <td><%= f.collection_select :asset_group_id, AssetGroup.all, :id, :name, {:include_blank => 'NONE'} %> or <%=  link_to "Add new.", :controller => "asset_groups", :action => "new", :asset_id => @asset %></td>
+                                      <td id='asset_groups_td'>
+                                        <%= render :partial => 'asset_groups/asset_groups_dropdown', :locals => { :asset => @asset } %>
+                                      </td>
                                   </tr>
                                   <tr>
                                       <td>
@@ -64,6 +66,7 @@
             <%= render :partial => 'add_asset_custom_fields', :locals => { :asset => @asset, :custom_field => @custom_field, :available_custom_fields => @available_custom_fields } %>
             <% content_for :header_tags do %>
                 <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
+                <%= stylesheet_link_tag 'facebox', :plugin => 'redmine_asset_tracker' %>                
             <% end %>
         </div>
     </div>
