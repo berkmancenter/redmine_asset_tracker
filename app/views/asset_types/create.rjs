@@ -1,0 +1,14 @@
+if  request.env['HTTP_REFERER'].include? ('asset_types')
+    #request comes from the main asset list.
+    page.replace_html 'inner_container', :partial => 'asset_types/assets_list', :layout => false, :locals => { :asset_types => AssetType.all, :user => User.current }
+elsif  request.env['HTTP_REFERER'].include? ('assets')
+    #request comes from the edit asset or new asset pages
+    page.replace_html 'asset_types_td', :partial => 'asset_types_dropdown', :asset => @asset
+    page << "document.getElementById('asset_types_dropdown_box').selectedIndex = document.getElementById('asset_types_dropdown_box').length - 1;"
+    #if @referer != nil && @referer.include? ('new_asset_group')
+      #page.call "document.getElementById('new_group_link').onclick"
+    #end
+end
+
+    page.call "facebox.initialize"
+    page.call "facebox.close"
