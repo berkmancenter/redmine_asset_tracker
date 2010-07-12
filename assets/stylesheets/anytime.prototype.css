@@ -1,0 +1,1957 @@
+/*****************************************************************************
+ *  FILE:  anytime.prototype.css - The Any+Time(TM) JavaScript Library (stylesheet)
+ *
+ *  VERSION: 2.991
+ *
+ *  Copyright 2008-2010 Andrew M. Andrews III (www.AMA3.com). Some Rights 
+ *  Reserved. This work licensed under the Creative Commons Attribution-
+ *  Noncommercial-Share Alike 3.0 Unported License except in jurisdicitons
+ *  for which the license has been ported by Creative Commons International,
+ *  where the work is licensed under the applicable ported license instead.
+ *  For a copy of the unported license, visit
+ *  http://creativecommons.org/licenses/by-nc-sa/3.0/
+ *  or send a letter to Creative Commons, 171 Second Street, Suite 300,
+ *  San Francisco, California, 94105, USA.  For ported versions of the
+ *  license, visit http://creativecommons.org/international/
+ *
+ *  Alternative licensing arrangements may be made by contacting the
+ *  author at http://www.AMA3.com/contact/
+ *
+ *  This file provides default styling for the Any+Time JavaScript Library's
+ *  ATWidget calendar widget.  The styles within can be overridden to
+ *  customize the widget's appearance for a particular platform.
+ *
+ *  In the comments below, PARENT refers to the page element(s) that may
+ *  contain a matching node as a child.  CONTENT describes the text or child
+ *  nodes that may be children of the matching node.  PRECEDES lists any
+ *  classes that might follow the documented selector (intending to override
+ *  its styles).  FOLLOWS lists any classes that might precede the
+ *  documented selector (thereby having styles that might be overridden).
+ *
+ *  These styles have been tested (but not extensively) on Windows Vista in
+ *  Internet Explorer 8.0, Firefox 3.0, Opera 9.22 and Safari 4.0.  Minor
+ *  variations in IE are to be expected, due to its broken box model.
+ *  Please report any other problems to the author (URL above).
+ *
+ *  Any+Time is a trademark of Andrew M. Andrews III.
+ ****************************************************************************/
+
+/***************************************************************************
+ *  SELECTOR: div.AtwWindow
+ *  PARENT:   [page containing the corresponding input (text field)]
+ *  CONTENT:  [all date/time labels and buttons for the window.]
+ *  PRECEDES: div.AtwWidget, div.AtwYrSelector
+ *  
+ *  Simulates a "window" that might be a popup or inline.  Styles should
+ *  include "background-color" and "border", and probably zero for all
+ *  margin and padding values.  A window should be sized according to its
+ *  contents; therefore, "width" or "height" should not be specified.
+ */
+
+div.AtwWindow
+{
+  background-color:#F9F9F9;
+  border:2px outset #999;
+  margin:0px;
+  padding:0px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwWidget
+ *  PARENT:   [page containing the corresponding input (text field)]
+ *  CONTENT:  [all date/time labels and buttons for the widget.]
+ *  FOLLOWS:  div.AtwWindow
+ *  Date/Time Widget, inserted into the page immediately after the input
+ *  (text field) to which it corresponds.  The widget attempts to size
+ *  itself automatically based on which format fields are provided;
+ *  therefore, it is best not to set "width" or "height".  Usually empty,
+ *  so styles set in div.AtwWindow provide consistent window appearance.
+ */
+
+div.AtwWidget
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwCloak
+ *  PARENT:   div.AtwWidget
+ *  CONTENT:  [none]
+ *  Block that covers an AtwWidget whenever an AtwYrSelector is placed
+ *  over it.  The widget cannot be accessed until the AtwYrSelector has
+ *  been dismissed (possibly by clicking the AtwCloak).
+ *  The style usually includes an opacity (and filter for MSIE opacity).
+ */
+
+div.AtwCloak
+{
+  background-color:#CCC;
+  opacity:0.7;
+  filter: alpha(opacity=70);
+}
+
+/***************************************************************************
+ *  SELECTOR: h5.AtwTitle
+ *  PARENT:   div.AtwWidget -OR- div.AtwYrSelector
+ *  CONTENT:  options.labelTitle [default determined by format]
+ *  PRECEDES: .AtwTitleYrSelector [in year-selection popups]
+ *  The title bar usually appears at the top of a "window." In addition to
+ *  the title label, the title bar for popup (non-inline) widgets also
+ *  contains div.AtwDismissBx.
+ */
+
+h5.AtwTitle
+{
+  background-color:#999;
+  border-bottom:1px outset #666;
+  color:white;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:9pt;
+  font-weight:600;
+  height:16px;
+  margin:0px;
+  padding:1px 2px 0px 2px;
+  text-align:center;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwDismissBx
+ *  PARENT:   h5.AtwTitle [popup widgets only]
+ *  CONTENT:  a.AtwDismissLnk
+ *  PRECEDES: .AtwFocusBx [when child anchor has focus]
+ *  The dismiss box is a psuedo-button that, when clicked, causes the entire
+ *  widget to disappear (the widget also disappears if the user clicks almost
+ *  anywhere off of it, or presses ESC).  This is designed to have a "border"
+ *  and "float:right".
+ */
+
+div.AtwDismissBx
+{
+  background-color:#CF6060;
+  border:1px solid white;
+  cursor:default;
+  float:right;
+  font-size:7pt;
+  font-family:Arial,Helvetica,sans-serif;
+  font-weight:900;
+  margin:1px 0px 0px 0px;
+  text-align:center;
+  width:12px;
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwDismissLnk
+ *  PARENT:   div.AtwDismissBx
+ *  CONTENT:  labelDismiss [default "X"]
+ *  See parent selector for more information.
+ */
+
+a.AtwDismissLnk
+{
+  color:white;
+  text-decoration:none;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwBtnBx
+ *  PARENT:   div.AtwYrs -OR- div.AtwMons -OR-
+ *            div.AtwDoMCell -OR- div.AtwHrsAm -OR-
+ *            div.AtwHrsPm -OR- div.AtwMinsTens -OR-
+ *            div.AtwMinsOnes -OR- div.AtwSecsTens -OR-
+ *            div.AtwSecsOnes
+ *  CONTENT:  a.AtwLnk
+ *  PRECEDES: .Atw*Bx [where * is one of many keywords] -AND/OR-
+ *            .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected value for the corresponding format field]
+ *  A psuedo-button for selection of a format field value.  Each psuedo-button
+ *  consists of an anchor (link) within a div (box).  Styles may be applied to
+ *  either the box or the link, or both.  "float:left" and "height" should be
+ *  specified. See also a.AtwLnk
+ */
+
+div.AtwBtnBx
+{
+  background-color:white;
+  border:1px outset #999;
+  cursor:default;
+  float:left;
+  font-size:8pt;
+  font-family:Arial,Helvetica,sans-serif;
+  height:14px;
+  padding:0px;
+  margin:0px;
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwBtnLnk
+ *  PARENT:   div.AtwBx
+ *  CONTENT:  [determined by possible format field values]
+ *  PRECEDES: .Atw*Lnk [where * is one of many keywords] -AND/OR-
+ *            .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected value for the corresponding format field]
+ *  See parent selector for more information.
+ */
+
+a.AtwBtnLnk
+{
+  color:black;
+  text-decoration:none;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwBody
+ *  PARENT:   div.AtwWidget
+ *  CONTENT:  div.AtwDate -AND/OR- div.AtwTime
+ *  The body contains everything in thee widget except the title bar. Because
+ *  the widget attempts to size itself automatically based on which format
+ *  fields are provided, it is best not to set "width" or "height".
+ */
+
+div.AtwBody
+{
+  padding:0px 0px 0px 4px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwDate
+ *  PARENT:   div.AtwBody
+ *  CONTENT:  ( div.AtwLblYr -AND- div.AtwYrs ) -AND/OR-
+ *            ( div.AtwLblMon -AND- div.AtwMons ) -AND/OR-
+ *            ( div.AtwLblDoM -AND- div.AtwDoMTable )
+ *  The date contains all content (labels and psuedo-buttons) for selecting
+ *  a date (or part thereof).  It is designed to be "float:left" and should
+ *  have a "width" (but no "height").
+ */
+
+div.AtwDate
+{
+  float:left;
+  width:194px;
+}
+
+/***************************************************************************
+ *  SELECTOR: h6.AtwLbl
+ *  PARENT:   [see PRECEDES selectors]
+ *  CONTENT:  [see PRECEDES selectors]
+ *  PRECEDES: .AtwLblYr -OR- .AtwLblMon -OR-
+ *            .AtwLblDoM -OR- .AtwLblHr -OR-
+ *            .AtwLblMin -OR- .AtwLblSec
+ *  A label appears before each group of psuedo-buttons for a particular
+ *  format field. This class provides consistent styling for all labels.
+ *  To style a specific label differently, see the PRECEDES selectors.
+ *  "clear:left" and a "height" should be specified.
+ */
+
+h6.AtwLbl
+{
+  clear:left;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:8pt;
+  font-weight:600;
+  font-style:normal;
+  height:14px;
+  margin:0px;
+  padding:0px;
+  text-align:center;
+}
+
+/***************************************************************************
+ *  SELECTOR: h6.AtwLblYr
+ *  PARENT:   div.AtwDate
+ *  CONTENT:  options.labelYear [default: "Year"]
+ *  FOLLOWS:  .AtwLbl
+ *  Label before the group of psuedo-buttons to select a year. Usually empty,
+ *  with styling handled by div.AtwLbl instead.
+ */
+
+h6.AtwLblYr
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwYrs
+ *  PARENT:   div.AtwDate
+ *  CONTENT:  div.AtwYrsPastBx -AND- div.AtwYrPriorBx -AND-
+ *            div.AtwYrCurrentBx -AND- div.AtwYrNextBx -AND-
+ *            div.AtwYrsAheadBx
+ *  Contains the year-selection psuedo-buttons. "height" should be specified.
+ */
+
+div.AtwYrs
+{
+  height:20px;
+  text-align:center;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwYrsPastBx
+ *  PARENT:   div.AtwYrs
+ *  CONTENT:  div.AtwYrsPastLnk
+ *  FOLLOWS:  .AtwBx
+ *  Psuedo-button to select a year before those shown.
+ *  Usually shares styles with div.AtwYrsAheadBx selector.
+ *  "width" should be specified.
+ */
+
+div.AtwYrsPastBx
+{
+  width:21px;
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwYrsPastLnk
+ *  PARENT:   div.AtwYrsPastBx
+ *  CONTENT:  "<"
+ *  FOLLOWS:  .AtwLnk
+ *  Usually empty. See parent selector for more information.
+ */
+
+a.AtwYrsPastLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwYrPriorBx
+ *  PARENT:   div.AtwYrs
+ *  CONTENT:  div.AtwYrPriorLnk
+ *  FOLLOWS:  .AtwBx
+ *  Psuedo-button to select the year before the currently-selected year.
+ *  Usually shares styles with div.AtwYrCurrentBx and
+ *  div.AtwYrNextBx.  "width" should be specified.
+ */
+
+div.AtwYrPriorBx
+{
+  width:44px;
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwYrPriorLnk
+ *  PARENT:   div.AtwYrPriorBx
+ *  CONTENT:  [determined by currently-selected year]
+ *  FOLLOWS:  .AtwLnk
+ *  Usually empty. See parent selector for more information.
+ */
+
+a.AtwYrPriorLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwYrCurrentBx
+ *  PARENT:   div.AtwYrs
+ *  CONTENT:  div.AtwYrCurrentLnk
+ *  FOLLOWS:  .AtwBx
+ *            .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected year]
+ *  Psuedo-button to reflect the currently-selected year. Usually shares
+ *  styles with div.AtwYrPriorBx and div.AtwYrNextBx.
+ *  "width" should be specified.
+ */
+
+div.AtwYrCurrentBx
+{
+  width:44px;
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwYrCurrentLnk
+ *  PARENT:   div.AtwYrCurrentBx
+ *  CONTENT:  [determined by currently-selected year]
+ *  FOLLOWS:  .AtwLnk
+ *  Usually empty. See parent selector for more information.
+ */
+
+a.AtwYrCurrentLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwYrNextBx
+ *  PARENT:   div.AtwYrs
+ *  CONTENT:  div.AtwYrNextLnk
+ *  FOLLOWS:  .AtwBx
+ *  Psuedo-button to select the year after the currently-selected year.
+ *  Usually shares styles with div.AtwYrPriorBx and
+ *  div.AtwYrCurrentBx.  "width" should be specified.
+ */
+
+div.AtwYrNextBx
+{
+  width:44px;
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwYrNextLnk
+ *  PARENT:   div.AtwYrNextBx
+ *  CONTENT:  [determined by currently-selected year]
+ *  FOLLOWS:  .AtwLnk
+ *  Usually empty. See parent selector for more information.
+ */
+
+a.AtwYrNextLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwYrsAheadBx
+ *  PARENT:   div.AtwYrs
+ *  CONTENT:  div.AtwYrsAheadLnk
+ *  FOLLOWS:  .AtwBx
+ *  Contains the psuedo-button to select a year after those shown.
+ *  Usually shares styles with div.AtwYrsPastBx selector.
+ *  "width" should be specified.
+ */
+
+div.AtwYrsAheadBx
+{
+  width:21px;
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwYrsAheadLnk
+ *  PARENT:   div.AtwYrsAheadBx
+ *  CONTENT:  ">"
+ *  FOLLOWS:  .AtwLnk
+ *  Usually empty. See parent selector for more information.
+ */
+
+a.AtwYrsAheadLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: h6.AtwLblMon
+ *  PARENT:   div.AtwDate
+ *  CONTENT:  options.labelMonth [default: "Month"]
+ *  FOLLOWS:  .AtwLbl
+ *  Label before the group of psuedo-buttons to select a year. Usually empty,
+ *  with styling handled by div.AtwLbl instead.
+ */
+
+h6.AtwLblMon
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwMons
+ *  PARENT:   div.AtwDate
+ *  CONTENT:  div.AtwMon*Bx [where * is "" or "1" through "12"]
+ *  Contains the month-selection psuedo-buttons.
+ *  "height" should be specified.
+ */
+
+div.AtwMons
+{
+  height:36px;
+  text-align:center;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwMonBx
+ *  PARENT:   div.AtwMons
+ *  CONTENT:  a.AtwMonLnk
+ *  FOLLOWS:  .AtwBx
+ *  PRECEDES: .AtwMon*Bx [where * is "1" through "12"] -AND-
+ *            .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected month]
+ *  Psuedo-button to select a month. "width" should be specified.
+ */
+
+div.AtwMonBx
+{
+  width:28px;
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwMonLnk
+ *  PARENT:   div.AtwMonBx
+ *  CONTENT:  [options.monthAbbreviations[*] (default "Jan" through "Dec")]
+ *  FOLLOWS:  .AtwLnk
+ *  PRECEDES: .AtwMon*Lnk [where * is "1" through "12"]
+ *            .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected month]
+ *  Usually empty. See parent selector for more information.
+ */
+
+a.AtwMonLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwMon*Bx [where * is "1" through "12"]
+ *  PARENT:   div.AtwMons
+ *  CONTENT:  a.AtwMon*Lnk
+ *  FOLLOWS:  .AtwBx -AND- .AtwMonBx
+ *  PRECEDES: .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected month]
+ *  Psuedo-button for a specific month.  Usually empty because styles
+ *  from div.AtwMonBx are shared by all month boxes.
+ */
+
+div.AtwMon1Bx,
+div.AtwMon2Bx,
+div.AtwMon3Bx,
+div.AtwMon4Bx,
+div.AtwMon5Bx,
+div.AtwMon6Bx,
+div.AtwMon7Bx,
+div.AtwMon8Bx,
+div.AtwMon9Bx,
+div.AtwMon10Bx,
+div.AtwMon11Bx,
+div.AtwMon12Bx
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwMon*Lnk [where * is "1" through "12"]
+ *  PARENT:   div.AtwMon*Bx
+ *  CONTENT:  [see a.AtwMonLnk]
+ *  FOLLOWS:  .AtwLnk .AtwMonLnk
+ *  PRECEDES: .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected month]
+ *  Usually empty because styles from a.AtwMonLnk are shared by all
+ *  month links. See parent selector for more information.
+ */
+
+a.AtwMon1Lnk,
+a.AtwMon2Lnk,
+a.AtwMon3Lnk,
+a.AtwMon4Lnk,
+a.AtwMon5Lnk,
+a.AtwMon6Lnk,
+a.AtwMon7Lnk,
+a.AtwMon8Lnk,
+a.AtwMon9Lnk,
+a.AtwMon10Lnk,
+a.AtwMon11Lnk,
+a.AtwMon12Lnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: h6.AtwLblDoM
+ *  PARENT:   div.AtwDate
+ *  CONTENT:  options.labelDayOfMonth [default: "Day of Month"]
+ *  FOLLOWS: .AtwLbl
+ *  Label before the group of psuedo-buttons to select a year. Usually empty,
+ *  with styling handled by div.AtwLbl instead.
+ */
+
+h6.AtwLblDoM
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: table.AtwDoMTable
+ *  PARENT:   div.AtwDate
+ *  CONTENT:  tbody.AtwDoMHead -AND- thead.AtwDoMBody
+ *  Contains the table of days-of-the-month psuedo-buttons, arranged in
+ *  calendar format (rows of days of the week).  "border-collapse" should
+ *  be specified to overcome Internet Explorer's box model problems.
+ */
+
+table.AtwDoMTable
+{
+  background-color:#F0F0F0;
+  border:1px solid #CCC;
+  border-collapse: collapse;
+  margin:0px;
+  padding:0px;
+}
+
+/***************************************************************************
+ *  SELECTOR: thead.AtwDoMHead
+ *  PARENT:   table.AtwDoMTable
+ *  CONTENT:  tr.AtwDaysOfWk
+ *  Contains the day-of-the-month table headers.  Usually empty.
+ */
+
+thead.AtwDoMHead
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: tr.AtwDoW
+ *  PARENT:   thead.AtwDoMHead
+ *  CONTENT:  th.AtwDoW* [where * is "" or "1" through "7"]
+ *  The row containing days-of-the-week table headers.  Usually empty.
+ */
+
+tr.AtwDoW
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: th.AtwDoW
+ *  PARENT:   tr.AtwDoW
+ *  CONTENT:  [options.dayAbbreviations[*] (default "Sun" through "Sat")]
+ *  PRECEDES: .AtwDayOfWk* [where * is "1" through "7"]
+ *  A day-of-the-week table header.  "width" should be specified.
+ */
+
+th.AtwDoW
+{
+  background-color:#CCC;
+  color:black;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:7pt;
+  font-weight:400;
+  font-style:normal;
+  margin:0px;
+  padding:0px;
+  width:22px;
+}
+
+/***************************************************************************
+ *  SELECTOR: th.AtwDoW* [where * is "1" through "7"]
+ *  PARENT:   th.AtwDaysOfWk
+ *  CONTENT:  [see th.AtwDoW]
+ *  FOLLOWS:  .AtwDoW
+ *  Table header for a specific day-of-week. Usually empty because styles
+ *  from th.AtwDoW are shared by all day-of-week table headers.
+ */
+
+th.AtwDoW1,
+th.AtwDoW2,
+th.AtwDoW3,
+th.AtwDoW4,
+th.AtwDoW5,
+th.AtwDoW6,
+th.AtwDoW7
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: tbody.AtwDoMBody
+ *  PARENT:   table.AtwDoMTable
+ *  CONTENT:  tr.Atw*Wk [where * is "" or "1" through "6"]
+ *  Contains the rows of days-of-the-month psuedo-buttons, arranged in
+ *  calendar format (rows of days of the week).  Usually empty.
+ */
+
+tbody.AtwDoMBody
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: tr.AtwWk
+ *  PARENT:   thead.AtwDoMBody
+ *  CONTENT:  td.AtwDoMCell
+ *  PRECEDES: .AtwWk* [where * is "1" through "6"]
+ *  The row containing a week's worth of days-of-the-month.  Usually empty.
+ */
+
+tr.AtwWk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: tr.AtwWk* [where * is "1" through "6"]
+ *  PARENT:   thead.AtwDoMBody
+ *  CONTENT:  td.AtwDoMCell
+ *  FOLLOWS:  .AtwWk
+ *  The row containing a specific week's days.  Usually empty.
+ */
+
+tr.AtwWk1,
+tr.AtwWk2,
+tr.AtwWk3,
+tr.AtwWk4,
+tr.AtwWk5,
+tr.AtwWk6
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: td.AtwDoMCell
+ *  PARENT:   tr.AtwWk* [where * is "" or "1" through "6"]
+ *  CONTENT:  div.AtwDoMBx
+ *  Table cell containing a specific day-of-the-month psuedo-button.
+ *  "margin" and "padding" should each be "0px" to overcome Internet
+ *  Explorer's box model problems.
+ */
+
+td.AtwDoMCell
+{
+  margin:0px;
+  padding:0px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwDoMBx
+ *  PARENT:   th.AtwDoMCell
+ *  CONTENT:  div.AtwDoMLnk
+ *  FOLLOWS:  .AtwBx
+ *  PRECEDES: .AtwDoMBxEmpty [for psuedo-buttons that precede
+ *            the first day in the first week of the currently-selected month
+ *            or follow the last day of the currently-selected month] -AND/OR-
+ *            .AtwDoMBxFilled [for psuedo-buttons that contain
+ *            a day-of-the-currently-selected-month] -AND/OR-
+ *            .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected day-of-the-month]
+ *  Psuedo-button to select a day-of-the-month. "width" should be specified,
+ *  as should "text-align:right".
+ */
+
+div.AtwDoMBx
+{
+  text-align:right;
+  margin:0px;
+  padding:0px 2px 0px 0px;
+  width:22px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwDoMBxEmpty
+ *  PARENT:   th.AtwDoMCell
+ *  CONTENT:  div.AtwDoMLnk
+ *  FOLLOWS:  .AtwBx -AND- .AtwDoMBx
+ *  Empty psuedo-button placeholder for a day-of-the-month.  This is set for
+ *  psuedo-buttons that precede the first day in the first week of the
+ *  currently-selected month or follow the last day of the currently-selected
+ *  month.  Properties here should hide the button, or at least make it look
+ *  like it can't be selected.
+ */
+
+div.AtwDoMBxEmpty
+{
+  display:none;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwDoMBxFilled
+ *  PARENT:   th.AtwDoMCell
+ *  CONTENT:  div.AtwDoMLnk
+ *  FOLLOWS:  .AtwBx -AND- .AtwDoMBx
+ *  PRECEDES: .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected day-of-the-month]
+ *  Psuedo-button for a day-of-the-currently-selected-month. Usually empty.
+ *  See div.AtwDoMBx for more information.
+ */
+
+div.AtwDoMBxFilled
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwDoMLnk
+ *  PARENT:   div.AtwDoMBx
+ *  CONTENT:  ["" or "1" to "31" (determined by currently-selected month)]
+ *  FOLLOWS:  .AtwLnk
+ *  PRECEDES: .AtwDoMLnkEmpty [for psuedo-buttons that precede
+ *            the first day in the first week of the currently-selected month
+ *            or follow the last day of the currently-selected month] -AND/OR-
+ *            .AtwDoMLnkFilled [for psuedo-buttons that contain
+ *            a day-of-the-currently-selected-month] -AND/OR-
+ *            .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected day-of-the-month]
+ *  Usually empty. See parent selector for more information.
+ */
+
+div.AtwDoMLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwDoMLnkEmpty
+ *  PARENT:   div.AtwDoMBx.AtwDoMBxEmpty
+ *  CONTENT:  [empty]
+ *  FOLLOWS:  .AtwLnk -AND- .AtwDoMLnk
+ *  Usually empty. See div.AtwDoMBxEmpty for more information.
+ */
+
+div.AtwDoMLnkEmpty
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwDoMLnkFilled
+ *  PARENT:   div.AtwDoMBx.AtwDoMBxFilled
+ *  CONTENT:  ["1" to "31" (determined by currently-selected month)]
+ *  FOLLOWS:  .AtwLnk -AND- .AtwDoMLnk
+ *  PRECEDES: .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected day-of-the-month]
+ *  Usually empty. See div.AtwDoMBxFilled for more information.
+ */
+
+div.AtwDoMLnkFilled
+{
+}
+
+
+/***************************************************************************
+ *  SELECTOR: div.AtwTime
+ *  PARENT:   div.AtwBody
+ *  CONTENT:  div.AtwHrs -AND/OR- div.AtwMins -AND/OR- div.AtwSecs
+ *  The time contains all content (labels and psuedo-buttons) for selecting
+ *  a time (or part thereof).  It is designed to be "float:left".
+ */
+
+div.AtwTime
+{
+  float:left;
+  text-align:center;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwHrs
+ *  PARENT:   div.AtwTime
+ *  CONTENT:  div.AtwHrLbl -AND- div.AtwHrsAm -AND- div.AtwHrsPm
+ *  Contains all content (label and psuedo-button groups) for selecting an
+ *  hour.  It is designed to be "float:left", have a "width" and probably
+ *  a "padding-left" to separate it from any date fields.
+ */
+
+div.AtwHrs
+{
+  float:left;
+  padding-left:5px;
+  text-align:center;
+  width:72px;
+}
+
+/***************************************************************************
+ *  SELECTOR: h6.AtwLblHr
+ *  PARENT:   div.AtwTime
+ *  CONTENT:  options.labelHour [default: "Hour"]
+ *  FOLLOWS: .AtwLbl
+ *  Label before the group of psuedo-buttons to select an hour. Usually empty,
+ *  with styling handled by div.AtwLbl instead.
+ */
+
+h6.AtwLblHr
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwHrsAm
+ *  PARENT:   div.AtwHrs
+ *  CONTENT:  div.AtwHr*Bx [where * is "" or "0" through "11"]
+ *  Contains the hour-selection psuedo-buttons for midnight to 11am.
+ *  "float:left" and "width" should be specified.
+ */
+
+div.AtwHrsAm
+{
+  float:left;
+  width:32px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwHrsPm
+ *  PARENT:   div.AtwHrs
+ *  CONTENT:  div.AtwHr*Bx [where * is "" or "12" through "23"]
+ *  Contains the hour-selection psuedo-buttons for noon to 11pm.
+ *  "float:left" and "width" should be specified.
+ */
+
+div.AtwHrsPm
+{
+  float:left;
+  width:31px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwHrBx
+ *  PARENT:   div.AtwHrsAm -OR- div.AtwHrsPm
+ *  CONTENT:  a.AtwHrLnk
+ *  FOLLOWS:  .AtwBx
+ *  PRECEDES: .AtwHr*Bx [where * is "0" through "23"]
+ *            .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected hour]
+ *  Psuedo-button to select an hour. "width" should be specified.
+ */
+
+div.AtwHrBx
+{
+  width:30px;
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwHrLnk
+ *  PARENT:   div.AtwHrBx
+ *  CONTENT:  ["0" through "23" or "12am" through "11pm" (determined by
+ *            format fields)]
+ *  FOLLOWS:  .AtwLnk
+ *  PRECEDES: .AtwHr*Lnk [where * is "0" through "23"]
+ *            .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected hour]
+ *  Usually empty. See parent selector for more information.
+ */
+
+a.AtwHrLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwHr*Bx
+ *  PARENT:   div.AtwHrsAm -OR- div.AtwHrsPm
+ *  CONTENT:  a.AtwHrs*Lnk
+ *  FOLLOWS:  .AtwBx -AND- .AtwHrBx
+ *  PRECEDES: .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected hour]
+ *  Psuedo-button for a specific hour.  Usually empty because styles
+ *  from div.AtwHrBx are shared by all hour boxes.
+ */
+
+div.AtwHr0Bx,
+div.AtwHr1Bx,
+div.AtwHr2Bx,
+div.AtwHr3Bx,
+div.AtwHr4Bx,
+div.AtwHr5Bx,
+div.AtwHr6Bx,
+div.AtwHr7Bx,
+div.AtwHr8Bx,
+div.AtwHr9Bx,
+div.AtwHr10Bx,
+div.AtwHr11Bx,
+div.AtwHr12Bx,
+div.AtwHr13Bx,
+div.AtwHr14Bx,
+div.AtwHr15Bx,
+div.AtwHr16Bx,
+div.AtwHr17Bx,
+div.AtwHr18Bx,
+div.AtwHr19Bx,
+div.AtwHr20Bx,
+div.AtwHr21Bx,
+div.AtwHr22Bx,
+div.AtwHr23Bx
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwHr*Lnk
+ *  PARENT:   div.AtwHr*Bx
+ *  CONTENT:  [see a.AtwHrLnk]
+ *  FOLLOWS:  .AtwLnk .AtwHrLnk
+ *  PRECEDES: .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected hour]
+ *  Usually empty because styles from a.AtwHrLnk are shared by all
+ *  hour links. See parent selector for more information.
+ */
+
+a.AtwHr0Lnk,
+a.AtwHr1Lnk,
+a.AtwHr2Lnk,
+a.AtwHr3Lnk,
+a.AtwHr4Lnk,
+a.AtwHr5Lnk,
+a.AtwHr6Lnk,
+a.AtwHr7Lnk,
+a.AtwHr8Lnk,
+a.AtwHr9Lnk,
+a.AtwHr10Lnk,
+a.AtwHr11Lnk,
+a.AtwHr12Lnk,
+a.AtwHr13Lnk,
+a.AtwHr14Lnk,
+a.AtwHr15Lnk,
+a.AtwHr16Lnk,
+a.AtwHr17Lnk,
+a.AtwHr18Lnk,
+a.AtwHr19Lnk,
+a.AtwHr20Lnk,
+a.AtwHr21Lnk,
+a.AtwHr22Lnk,
+a.AtwHr23Lnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwMins
+ *  PARENT:   div.AtwTime
+ *  CONTENT:  div.AtwMinLbl -AND- div.AtwMinTens -AND-
+ *            div.AtwMinOnes
+ *  Contains all content (label and psuedo-button groups) for selecting a
+ *  minute.  It is designed to be "float:left", have a "width" and probably
+ *  a "padding-left" to separate it from any date fields.
+ */
+
+div.AtwMins
+{
+  float:left;
+  padding-left:5px;
+  text-align:center;
+  width:44px;
+}
+
+/***************************************************************************
+ *  SELECTOR: h6.AtwLblMin
+ *  PARENT:   div.AtwTime
+ *  CONTENT:  options.labelMinute [default: "Minute"]
+ *  FOLLOWS: .AtwLbl
+ *  Label before the group of psuedo-buttons to select a minute. Usually
+ *  empty, with styling handled by div.AtwLbl instead.
+ */
+
+h6.AtwLblMin
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwMinsTens
+ *  PARENT:   div.AtwMins
+ *  CONTENT:  div.AtwMinTen*0Bx [where * is "" or "0" through "5"]
+ *  Contains the psuedo-buttons for selecting tens of minutes.
+ *  "float:left" and "width" should be specified.
+ */
+
+div.AtwMinsTens
+{
+  float:left;
+  width:20px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwMinTenBx
+ *  PARENT:   div.AtwMinsTens
+ *  CONTENT:  a.AtwMinTenLnk
+ *  FOLLOWS:  .AtwBx
+ *  PRECEDES: .AtwMinTen*0Bx [where * is "0" through "5"]
+ *            .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected tens-of-minutes]
+ *  Psuedo-button to select tens-of-minutes. "width" should be specified.
+ */
+
+div.AtwMinTenBx
+{
+  width:18px;
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwMinTenLnk
+ *  PARENT:   div.AtwMinTenBx
+ *  CONTENT:  ["0" through "5"]
+ *  FOLLOWS:  .AtwLnk
+ *  PRECEDES: .AtwMinTen*0Lnk [where * is "0" through "5"]
+ *            .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected tens-of-minutes]
+ *  Usually empty. See parent selector for more information.
+ */
+
+a.AtwMinTenLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwMin*0Bx
+ *  PARENT:   div.AtwMinTens
+ *  CONTENT:  a.AtwMin*0Lnk
+ *  FOLLOWS:  .AtwBx -AND- .AtwMinTenBx
+ *  PRECEDES: .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected tens-of-minutes]
+ *  Psuedo-button for a specific tens-of-minutes. Usually empty because styles
+ *  from div.AtwMinTenBx are shared by all tens-of-minutes boxes.
+ */
+
+div.AtwMin00Bx,
+div.AtwMin10Bx,
+div.AtwMin20Bx,
+div.AtwMin30Bx,
+div.AtwMin40Bx,
+div.AtwMin50Bx
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwMin*0Lnk
+ *  PARENT:   div.AtwMin*0Bx
+ *  CONTENT:  [see a.AtwMinTenLnk]
+ *  FOLLOWS:  .AtwLnk .AtwMinTenLnk
+ *  PRECEDES: .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected tens-of-minutes]
+ *  Usually empty because styles from a.AtwMinTenLnk are shared by
+ *  all tens-of-minutes links. See parent selector for more information.
+ */
+
+a.AtwMin00Lnk,
+a.AtwMin10Lnk,
+a.AtwMin20Lnk,
+a.AtwMin30Lnk,
+a.AtwMin40Lnk,
+a.AtwMin50Lnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwMinsOnes
+ *  PARENT:   div.AtwMins
+ *  CONTENT:  div.AtwMinOne*Bx [where * is "" or "0" through "9"]
+ *  Contains the psuedo-buttons for selecting ones-of-minutes.
+ *  "float:left" and "width" should be specified.
+ */
+
+div.AtwMinsOnes
+{
+  float:left;
+  width:19px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwMinOneBx
+ *  PARENT:   div.AtwMinsOnes
+ *  CONTENT:  a.AtwMinOneLnk
+ *  FOLLOWS:  .AtwBx
+ *  PRECEDES: .AtwMinOne*Bx [where * is "0" through "9"]
+ *            .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected ones-of-minutes]
+ *  Psuedo-button to select ones-of-minutes. "width" should be specified.
+ */
+
+div.AtwMinOneBx
+{
+  float:left;
+  width:18px;
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwMinOneLnk
+ *  PARENT:   div.AtwMinOneBx
+ *  CONTENT:  ["0" through "9"]
+ *  FOLLOWS:  .AtwLnk
+ *  PRECEDES: .AtwMinOne*Lnk [where * is "0" through "9"]
+ *            .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected ones-of-minutes]
+ *  Usually empty. See parent selector for more information.
+ */
+
+a.AtwMinOneLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwMin*Bx
+ *  PARENT:   div.AtwMinOnes
+ *  CONTENT:  a.AtwMin*Lnk
+ *  FOLLOWS:  .AtwBx -AND- .AtwMinOneBx
+ *  PRECEDES: .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected ones-of-minutes]
+ *  Psuedo-button for a specific ones-of-minutes. Usually empty because styles
+ *  from div.AtwMinOneBx are shared by all ones-of-minutes boxes.
+ */
+
+div.AtwMin0Bx,
+div.AtwMin1Bx,
+div.AtwMin2Bx,
+div.AtwMin3Bx,
+div.AtwMin4Bx,
+div.AtwMin5Bx,
+div.AtwMin6Bx,
+div.AtwMin7Bx,
+div.AtwMin8Bx,
+div.AtwMin9Bx
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwMin*Lnk
+ *  PARENT:   div.AtwMin*Bx
+ *  CONTENT:  [see a.AtwMinOneLnk]
+ *  FOLLOWS:  .AtwLnk .AtwMinOneLnk
+ *  PRECEDES: .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected ones-of-minutes]
+ *  Usually empty because styles from a.AtwMinOneLnk are shared by
+ *  all ones-of-minutes links. See parent selector for more information.
+ */
+
+a.AtwMin0Lnk,
+a.AtwMin1Lnk,
+a.AtwMin2Lnk,
+a.AtwMin3Lnk,
+a.AtwMin4Lnk,
+a.AtwMin5Lnk,
+a.AtwMin6Lnk,
+a.AtwMin7Lnk,
+a.AtwMin8Lnk,
+a.AtwMin9Lnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwSecs
+ *  PARENT:   div.AtwTime
+ *  CONTENT:  div.AtwSecLbl -AND- div.AtwSecTens -AND-
+ *            div.AtwSecOnes
+ *  Contains all content (label and psuedo-button groups) for selecting a
+ *  second.  It is designed to be "float:left", have a "width" and probably
+ *  a "padding-left" to separate it from any date fields.
+ */
+
+div.AtwSecs
+{
+  float:left;
+  padding-left:5px;
+  text-align:center;
+  width:44px;
+}
+
+/***************************************************************************
+ *  SELECTOR: h6.AtwLblSec
+ *  PARENT:   div.AtwTime
+ *  CONTENT:  options.labelSecond [default: "Second"]
+ *  FOLLOWS: .AtwLbl
+ *  Label before the group of psuedo-buttons to select a second. Usually
+ *  empty, with styling handled by div.AtwLbl instead.
+ */
+
+h6.AtwLblSec
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwSecsTens
+ *  PARENT:   div.AtwSecs
+ *  CONTENT:  div.AtwSecTen*0Bx [where * is "" or "0" through "5"]
+ *  Contains the psuedo-buttons for selecting tens-of-seconds.
+ *  "float:left" and "width" should be specified.
+ */
+
+div.AtwSecsTens
+{
+  float:left;
+  width:20px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwSecTenBx
+ *  PARENT:   div.AtwSecsTens
+ *  CONTENT:  a.AtwSecTenLnk
+ *  FOLLOWS:  .AtwBx
+ *  PRECEDES: .AtwSecTen*0Bx [where * is "0" through "5"]
+ *            .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected tens-of-seconds]
+ *  Psuedo-button to select tens-of-seconds. "width" should be specified.
+ */
+
+div.AtwSecTenBx
+{
+  width:18px;
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwSecTenLnk
+ *  PARENT:   div.AtwSecTenBx
+ *  CONTENT:  ["0" through "5"]
+ *  FOLLOWS:  .AtwLnk
+ *  PRECEDES: .AtwSecTen*0Lnk [where * is "0" through "5"]
+ *            .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected tens-of-seconds]
+ *  Usually empty. See parent selector for more information.
+ */
+
+a.AtwSecTenLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwSec*0Bx
+ *  PARENT:   div.AtwSecTens
+ *  CONTENT:  a.AtwSec*0Lnk
+ *  FOLLOWS:  .AtwBx -AND- .AtwSecTenBx
+ *  PRECEDES: .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected tens-of-seconds]
+ *  Psuedo-button for a specific tens-of-seconds. Usually empty because styles
+ *  from div.AtwSecTenBx are shared by all tens-of-seconds boxes.
+ */
+
+div.AtwSec00Bx,
+div.AtwSec10Bx,
+div.AtwSec20Bx,
+div.AtwSec30Bx,
+div.AtwSec40Bx,
+div.AtwSec50Bx
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwSec*0Lnk
+ *  PARENT:   div.AtwSec*0Bx
+ *  CONTENT:  [see a.AtwSecTenLnk]
+ *  FOLLOWS:  .AtwLnk .AtwSecTenLnk
+ *  PRECEDES: .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected tens-of-seconds]
+ *  Usually empty because styles from a.AtwSecTenLnk are shared by
+ *  all tens-of-seconds links. See parent selector for more information.
+ */
+
+a.AtwSec00Lnk,
+a.AtwSec10Lnk,
+a.AtwSec20Lnk,
+a.AtwSec30Lnk,
+a.AtwSec40Lnk,
+a.AtwSec50Lnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwSecsOnes
+ *  PARENT:   div.AtwSecs
+ *  CONTENT:  div.AtwSecOne*Bx [where * is "" or "0" through "9"]
+ *  Contains the psuedo-buttons for selecting ones-of-seconds.
+ *  "float:left" and "width" should be specified.
+ */
+
+div.AtwSecsOnes
+{
+  float:left;
+  width:19px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwSecOneBx
+ *  PARENT:   div.AtwSecsOnes
+ *  CONTENT:  a.AtwSecOneLnk
+ *  FOLLOWS:  .AtwBx
+ *  PRECEDES: .AtwSecOne*Bx [where * is "0" through "9"]
+ *            .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected ones-of-seconds]
+ *  Psuedo-button to select ones-of-seconds. "width" should be specified.
+ */
+
+div.AtwSecOneBx
+{
+  float:left;
+  width:18px;
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwSecOneLnk
+ *  PARENT:   div.AtwSecOneBx
+ *  CONTENT:  ["0" through "9"]
+ *  FOLLOWS:  .AtwLnk
+ *  PRECEDES: .AtwSecOne*Lnk [where * is "0" through "9"]
+ *            .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected ones-of-seconds]
+ *  Usually empty. See parent selector for more information.
+ */
+
+a.AtwSecOneLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwSec*Bx
+ *  PARENT:   div.AtwSecOnes
+ *  CONTENT:  a.AtwSec*Lnk
+ *  FOLLOWS:  .AtwBx -AND- .AtwSecOneBx
+ *  PRECEDES: .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected ones-of-seconds]
+ *  Psuedo-button for a specific ones-of-seconds. Usually empty because styles
+ *  from div.AtwSecOneBx are shared by all ones-of-seconds boxes.
+ */
+
+div.AtwSec0Bx,
+div.AtwSec1Bx,
+div.AtwSec2Bx,
+div.AtwSec3Bx,
+div.AtwSec4Bx,
+div.AtwSec5Bx,
+div.AtwSec6Bx,
+div.AtwSec7Bx,
+div.AtwSec8Bx,
+div.AtwSec9Bx
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwSec*Lnk
+ *  PARENT:   div.AtwSec*Bx
+ *  CONTENT:  [see a.AtwSecOneLnk]
+ *  FOLLOWS:  .AtwLnk .AtwSecOneLnk
+ *  PRECEDES: .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected ones-of-seconds]
+ *  Usually empty because styles from a.AtwSecOneLnk are shared by
+ *  all ones-of-seconds links. See parent selector for more information.
+ */
+
+a.AtwSec0Lnk,
+a.AtwSec1Lnk,
+a.AtwSec2Lnk,
+a.AtwSec3Lnk,
+a.AtwSec4Lnk,
+a.AtwSec5Lnk,
+a.AtwSec6Lnk,
+a.AtwSec7Lnk,
+a.AtwSec8Lnk,
+a.AtwSec9Lnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwYrSelector
+ *  PARENT:   [page containing the corresponding input (text field)]
+ *  CONTENT:  h5.AtwTitleYrSelector -AND- div.AtwBodyYrSelector
+ *  FOLLOWS:  div.AtwWindow
+ *  Year-Selector Popup, overlays an AtwWidget when a specific date is
+ *  to be selected.  The widget attempts to set its width automatically
+ *  based on whether "era" buttons are displayed; therefore, it is best
+ *  not to set "width".  However, "height" should be specified.
+ */
+
+div.AtwYrSelector
+{
+  height:185px;
+}
+
+/***************************************************************************
+ *  SELECTOR: h5.AtwTitleYrSelector
+ *  PARENT:   div.AtwYrSelector
+ *  CONTENT:  options.labelYear [default "Year"]
+ *  FOLLOWS:  h5.AtwTitle
+ *  Appears at the top of the Year-Selector popup "window."   Refer to
+ *  h5.AtwTitle for more information.
+ */
+
+h5.AtwTitleYrSelector
+{
+  margin-bottom:3px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwBodyYrSelector
+ *  PARENT:   div.AtwYrSelector
+ *  CONTENT:  div.AtwYrMil -AND- div.AtwYrCent -AND- div.AtwYrDec -AND-
+ *            div.AtwYrYr
+ *  The body contains everything in the year-selector popup except the title
+ *  bar. Because the popup attempts to size itself automatically based on
+ *  whether era buttons are shown, it is best not to set "width" or "height".
+ */
+
+div.AtwBodyYrSelector
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwYrMil
+ *  PARENT:   div.AtwBodyYrSelector
+ *  CONTENT:  div.AtwMil*Bx [where * is "" or "0" through "9"]
+ *  Contains the psuedo-buttons for selecting a millenium digit.
+ *  "float:left" and "width" should be specified.
+ */
+
+div.AtwYrMil
+{
+  float:left;
+  width:20px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwMilBx
+ *  PARENT:   div.AtwYrMil
+ *  CONTENT:  a.AtwMilLnk
+ *  FOLLOWS:  .AtwBx
+ *  PRECEDES: .AtwMil0Bx [where * is "0" through "9"]
+ *            .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected millenium digit]
+ *  Psuedo-button to select a millenium digit. "width" should be specified.
+ */
+
+div.AtwMilBx
+{
+  text-align:center;
+  width:18px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwMil*Bx
+ *  PARENT:   div.AtwYrMil
+ *  CONTENT:  a.AtwMil*Lnk
+ *  FOLLOWS:  .AtwBx -AND- .AtwMilBx
+ *  PRECEDES: .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected millenium digit]
+ *  Psuedo-button for a specific millenium digit. Usually empty because
+ *  styles from div.AtwMilBx are shared by all millenium boxes.
+ */
+
+div.AtwMil0Bx,
+div.AtwMil1Bx,
+div.AtwMil2Bx,
+div.AtwMil3Bx,
+div.AtwMil4Bx,
+div.AtwMil5Bx,
+div.AtwMil6Bx,
+div.AtwMil7Bx,
+div.AtwMil8Bx,
+div.AtwMil9Bx
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwMilLnk
+ *  PARENT:   div.AtwMilBx
+ *  CONTENT:  ["0" through "9"]
+ *  FOLLOWS:  .AtwLnk
+ *  PRECEDES: .AtwMil*Lnk [where * is "0" through "9"]
+ *            .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected millenium digit]
+ *  Usually empty. See parent selector for more information.
+ */
+
+a.AtwMilLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwMil*Lnk
+ *  PARENT:   div.AtwMil*Bx
+ *  CONTENT:  [see a.AtwMilLnk]
+ *  FOLLOWS:  .AtwLnk .AtwMilLnk
+ *  PRECEDES: .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected millenium digit]
+ *  Usually empty because styles from a.AtwMilLnk are shared by
+ *  all millenium digit links. See parent selector for more information.
+ */
+
+a.AtwMil0Lnk,
+a.AtwMil1Lnk,
+a.AtwMil2Lnk,
+a.AtwMil3Lnk,
+a.AtwMil4Lnk,
+a.AtwMil5Lnk,
+a.AtwMil6Lnk,
+a.AtwMil7Lnk,
+a.AtwMil8Lnk,
+a.AtwMil9Lnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwYrCent
+ *  PARENT:   div.AtwBodyYrSelector
+ *  CONTENT:  div.AtwCent*Bx [where * is "" or "0" through "9"]
+ *  Contains the psuedo-buttons for selecting a century digit.
+ *  "float:left" and "width" should be specified.
+ */
+
+div.AtwYrCent
+{
+  float:left;
+  padding-left:3px;
+  width:20px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwCentBx
+ *  PARENT:   div.AtwYrCent
+ *  CONTENT:  a.AtwCentLnk
+ *  FOLLOWS:  .AtwBx
+ *  PRECEDES: .AtwCent0Bx [where * is "0" through "9"]
+ *            .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected millenium digit]
+ *  Psuedo-button to select a century digit. "width" should be specified.
+ */
+
+div.AtwCentBx
+{
+  text-align:center;
+  width:18px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwCent*Bx
+ *  PARENT:   div.AtwYrCent
+ *  CONTENT:  a.AtwCent*Lnk
+ *  FOLLOWS:  .AtwBx -AND- .AtwCentBx
+ *  PRECEDES: .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected century digit]
+ *  Psuedo-button for a specific century digit. Usually empty because
+ *  styles from div.AtwCentBx are shared by all century boxes.
+ */
+
+div.AtwCent0Bx,
+div.AtwCent1Bx,
+div.AtwCent2Bx,
+div.AtwCent3Bx,
+div.AtwCent4Bx,
+div.AtwCent5Bx,
+div.AtwCent6Bx,
+div.AtwCent7Bx,
+div.AtwCent8Bx,
+div.AtwCent9Bx
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwCentLnk
+ *  PARENT:   div.AtwCentBx
+ *  CONTENT:  ["0" through "9"]
+ *  FOLLOWS:  .AtwLnk
+ *  PRECEDES: .AtwCent*Lnk [where * is "0" through "9"]
+ *            .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected century digit]
+ *  Usually empty. See parent selector for more information.
+ */
+
+a.AtwCentLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwCent*Lnk
+ *  PARENT:   div.AtwCent*Bx
+ *  CONTENT:  [see a.AtwCentLnk]
+ *  FOLLOWS:  .AtwLnk .AtwCentLnk
+ *  PRECEDES: .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected century digit]
+ *  Usually empty because styles from a.AtwCentLnk are shared by
+ *  all century digit links. See parent selector for more information.
+ */
+
+a.AtwCent0Lnk,
+a.AtwCent1Lnk,
+a.AtwCent2Lnk,
+a.AtwCent3Lnk,
+a.AtwCent4Lnk,
+a.AtwCent5Lnk,
+a.AtwCent6Lnk,
+a.AtwCent7Lnk,
+a.AtwCent8Lnk,
+a.AtwCent9Lnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwYrDec
+ *  PARENT:   div.AtwBodyYrSelector
+ *  CONTENT:  div.AtwDec*Bx [where * is "" or "0" through "9"]
+ *  Contains the psuedo-buttons for selecting a decade digit.
+ *  "float:left" and "width" should be specified.
+ */
+
+div.AtwYrDec
+{
+  float:left;
+  padding-left:3px;
+  width:20px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwDecBx
+ *  PARENT:   div.AtwYrDec
+ *  CONTENT:  a.AtwDecLnk
+ *  FOLLOWS:  .AtwBx
+ *  PRECEDES: .AtwDec0Bx [where * is "0" through "9"]
+ *            .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected decade digit]
+ *  Psuedo-button to select a decade digit. "width" should be specified.
+ */
+
+div.AtwDecBx
+{
+  text-align:center;
+  width:18px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwDec*Bx
+ *  PARENT:   div.AtwYrDec
+ *  CONTENT:  a.AtwDec*Lnk
+ *  FOLLOWS:  .AtwBx -AND- .AtwDecBx
+ *  PRECEDES: .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected decade digit]
+ *  Psuedo-button for a specific decade digit. Usually empty because
+ *  styles from div.AtwDecBx are shared by all decade boxes.
+ */
+
+div.AtwDec0Bx,
+div.AtwDec1Bx,
+div.AtwDec2Bx,
+div.AtwDec3Bx,
+div.AtwDec4Bx,
+div.AtwDec5Bx,
+div.AtwDec6Bx,
+div.AtwDec7Bx,
+div.AtwDec8Bx,
+div.AtwDec9Bx
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwDecLnk
+ *  PARENT:   div.AtwDecBx
+ *  CONTENT:  ["0" through "9"]
+ *  FOLLOWS:  .AtwLnk
+ *  PRECEDES: .AtwDec*Lnk [where * is "0" through "9"]
+ *            .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected decade digit]
+ *  Usually empty. See parent selector for more information.
+ */
+
+a.AtwDecLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwDec*Lnk
+ *  PARENT:   div.AtwDec*Bx
+ *  CONTENT:  [see a.AtwDecLnk]
+ *  FOLLOWS:  .AtwLnk .AtwDecLnk
+ *  PRECEDES: .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected decade digit]
+ *  Usually empty because styles from a.AtwDecLnk are shared by
+ *  all decade digit links. See parent selector for more information.
+ */
+
+a.AtwDec0Lnk,
+a.AtwDec1Lnk,
+a.AtwDec2Lnk,
+a.AtwDec3Lnk,
+a.AtwDec4Lnk,
+a.AtwDec5Lnk,
+a.AtwDec6Lnk,
+a.AtwDec7Lnk,
+a.AtwDec8Lnk,
+a.AtwDec9Lnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwYrYr
+ *  PARENT:   div.AtwBodyYrSelector
+ *  CONTENT:  div.AtwYr*Bx [where * is "" or "0" through "9"]
+ *  Contains the psuedo-buttons for selecting a year-of-the-decade digit.
+ *  "float:left" and "width" should be specified.
+ */
+
+div.AtwYrYr
+{
+  float:left;
+  padding-left:3px;
+  width:20px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwYrBx
+ *  PARENT:   div.AtwYrYr
+ *  CONTENT:  a.AtwYrLnk
+ *  FOLLOWS:  .AtwBx
+ *  PRECEDES: .AtwYr0Bx [where * is "0" through "9"]
+ *            .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected year-of-the-decade digit]
+ *  Psuedo-button to select a year-of-the-decade digit.
+ *  "width" should be specified.
+ */
+
+div.AtwYrBx
+{
+  text-align:center;
+  width:18px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwYr*Bx
+ *  PARENT:   div.AtwYrYr
+ *  CONTENT:  a.AtwYr*Lnk
+ *  FOLLOWS:  .AtwBx -AND- .AtwYrBx
+ *  PRECEDES: .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected year-of-the-decade digit]
+ *  Psuedo-button for a specific year-of-the-decade digit. Usually empty
+ *  because styles from div.AtwYrBx are shared by all year-of-decade boxes.
+ */
+
+div.AtwYr0Bx,
+div.AtwYr1Bx,
+div.AtwYr2Bx,
+div.AtwYr3Bx,
+div.AtwYr4Bx,
+div.AtwYr5Bx,
+div.AtwYr6Bx,
+div.AtwYr7Bx,
+div.AtwYr8Bx,
+div.AtwYr9Bx
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwYrLnk
+ *  PARENT:   div.AtwYrBx
+ *  CONTENT:  ["0" through "9"]
+ *  FOLLOWS:  .AtwLnk
+ *  PRECEDES: .AtwYr*Lnk [where * is "0" through "9"]
+ *            .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected year-of-the-decade digit]
+ *  Usually empty. See parent selector for more information.
+ */
+
+a.AtwYrLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwYr*Lnk
+ *  PARENT:   div.AtwYr*Bx
+ *  CONTENT:  [see a.AtwYrLnk]
+ *  FOLLOWS:  .AtwLnk .AtwYrLnk
+ *  PRECEDES: .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected year-of-the-decade digit]
+ *  Usually empty because styles from a.AtwYrLnk are shared by all
+ *  year-of-decade digit links. See parent selector for more information.
+ */
+
+a.AtwYr0Lnk,
+a.AtwYr1Lnk,
+a.AtwYr2Lnk,
+a.AtwYr3Lnk,
+a.AtwYr4Lnk,
+a.AtwYr5Lnk,
+a.AtwYr6Lnk,
+a.AtwYr7Lnk,
+a.AtwYr8Lnk,
+a.AtwYr9Lnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwYrEra
+ *  PARENT:   div.AtwBodyYrSelector
+ *  CONTENT:  div.AtwEra*Bx [where * is "" or "0" through "9"]
+ *  Contains the psuedo-buttons for selecting an era.
+ *  "float:left" and "width" should be specified.
+ */
+
+div.AtwYrEra
+{
+  float:left;
+  padding-left:3px;
+  width:30px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwEraBx
+ *  PARENT:   div.AtwYrEra
+ *  CONTENT:  a.AtwEraLnk
+ *  FOLLOWS:  .AtwBx
+ *  PRECEDES: .Atw*CEBx [where * is "" or "B"]
+ *            .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected era]
+ *  Psuedo-button to select an era. "width" should be specified.
+ */
+
+div.AtwEraBx
+{
+  text-align:center;
+  width:30px;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.Atw*CEBx
+ *  PARENT:   div.AtwEraYr
+ *  CONTENT:  a.Atw*CELnk
+ *  FOLLOWS:  .AtwBx -AND- .AtwEraBx
+ *  PRECEDES: .AtwCurrentBx [when psuedo-button represents the
+ *            currently-selected era]
+ *  Psuedo-button for a specific era. Usually empty because styles from
+ *  div.AtwEraBx are shared by both era boxes.
+ */
+
+div.AtwBCEBx,
+div.AtwCEBx
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwEraLnk
+ *  PARENT:   div.AtwEraBx
+ *  CONTENT:  [options.eraAbbreviations[*] (default "BCE" and "CE")]
+ *  FOLLOWS:  .AtwLnk
+ *  PRECEDES: .Atw*CELnk [where * is "" or "B"]
+ *            .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected era]
+ *  Usually empty. See parent selector for more information.
+ */
+
+div.AtwEraLnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: a.Atw*CELnk
+ *  PARENT:   div.Atw*CEBx
+ *  CONTENT:  [see a.AtwEraLnk]
+ *  FOLLOWS:  .AtwLnk .AtwEraLnk
+ *  PRECEDES: .AtwCurrentLnk [when psuedo-button represents the
+ *            currently-selected era]
+ *  Usually empty because styles from a.AtwEraLnk are shared by
+ *  both era links. See parent selector for more information.
+ */
+
+div.AtwBCELnk,
+div.AtwCELnk
+{
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwCurrentBx
+ *  PARENT:   div.AtwYrs -OR- div.AtwMons -OR-
+ *            div.AtwDoMCell -OR- div.AtwHrsAm -OR-
+ *            div.AtwHrsPm -OR- div.AtwMinsTens -OR-
+ *            div.AtwMinsOnes -OR- div.AtwSecsTens -OR-
+ *            div.AtwSecsOnes
+ *  CONTENT:  a.AtwCurrentLnk
+ *  PRECEDES: .AtwFocusBx [for psuedo-button with focus]
+ *  FOLLOWS:  .Atw*Bx [where * is one of many keywords]
+ *  A currently-selected psuedo-button box.  This is designed to change
+ *  the box style to differentiate it from non-selected buttons. Perhaps the
+ *  best way to do this is to give it a different "background-color" and/or
+ *  "border" value.
+ */
+
+div.AtwCurrentBx
+{
+  background-color:#FF6;
+  border:1px inset #999;
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwCurrentLnk
+ *  PARENT:   div.AtwCurrentBx
+ *  CONTENT:  [determined by possible format field values]
+ *  PRECEDES: .AtwFocusLnk [for psuedo-button with focus]
+ *  FOLLOWS:  .Atw*Lnk [where * is one of many keywords]
+ *  Usually empty.  See parent selector for more information.
+ */
+
+a.AtwCurrentLnk
+{
+  font-weight:bold;
+}
+
+/***************************************************************************
+ *  SELECTOR: div.AtwFocusBx
+ *  PARENT:   div.AtwYrs -OR- div.AtwMons -OR-
+ *            div.AtwDoMCell -OR- div.AtwHrsAm -OR-
+ *            div.AtwHrsPm -OR- div.AtwMinsTens -OR-
+ *            div.AtwMinsOnes -OR- div.AtwSecsTens -OR-
+ *            div.AtwSecsOnes
+ *  CONTENT:  a.AtwFocusLnk
+ *  FOLLOWS:  .Atw*Bx [where * is one of many keywords]
+ *            .AtwCurrentBx [for currently-selcted psuedo-buttons]
+ *  A psuedo-button box that has the focus.  This is designed to change the
+ *  box style to differentiate it from buttons without the focus. Perhaps the
+ *  best way to do this is to give it a different "border".
+ */
+
+div.AtwFocusBx
+{
+  border:1px dotted black;
+}
+
+/***************************************************************************
+ *  SELECTOR: a.AtwFocusLnk
+ *  PARENT:   div.AtwFocusBx
+ *  CONTENT:  [determined by possible format field values]
+ *  FOLLOWS:  .Atw*Lnk [where * is one of many keywords]
+ *            .AtwCurrentLnk [for currently-selcted psuedo-buttons]
+ *  See parent selector for more information.
+ */
+
+a.AtwFocusLnk
+{
+}
+
+/*
+ *  END OF FILE
+ */

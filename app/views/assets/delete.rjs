@@ -1,0 +1,2 @@
+page.replace_html 'inner_container', :partial => 'asset_types/assets_list', :layout => false, :locals => { :asset_types => AssetType.all, :user => User.current }
+page.call "facebox.initialize"

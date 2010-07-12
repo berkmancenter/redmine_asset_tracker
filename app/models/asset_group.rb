@@ -1,6 +1,7 @@
 class AssetGroup < ActiveRecord::Base
   belongs_to :asset_type
   has_many :assets
+  has_many :reservations
   acts_as_attachable :view_permission => :view_files,
                      :delete_permission => :manage_files
 

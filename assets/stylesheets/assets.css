@@ -230,5 +230,7 @@
 }
 
 .droppable{
-    background-color: #ffffcc;
+    border-color: orange;
+    border-style: dashed;
+    border-width: 5px;
 }

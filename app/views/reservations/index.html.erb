@@ -1,0 +1,26 @@
+<table style="width:1000px">
+    <tr>
+      <td>
+        <strong>User</strong>
+      </td>
+      <td>
+        <strong>Check-out date</strong>
+      </td>
+      <td>
+        <strong>Check-in date</strong>
+      </td>
+    </tr>
+    <% @reservations.each do |r| %>
+    <tr>
+      <td style="width:500px;">
+        <%= r.user.firstname + " " + r.user.lastname %>
+      </td>
+      <td style="width:250px;">
+        <%= r.check_out_date %>
+      </td>
+      <td style="width:250px;">
+        <%= r.check_in_date %>
+      </td>
+    </tr>
+    <% end %>
+</table>

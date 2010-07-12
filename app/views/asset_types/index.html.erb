@@ -9,8 +9,17 @@
     </div>
 </div>
 
+
+
+
 <% content_for :header_tags do %>
     <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
     <%= stylesheet_link_tag 'facebox', :plugin => 'redmine_asset_tracker' %>
+    <%= stylesheet_link_tag 'datepicker', :plugin => 'redmine_asset_tracker' %>
     <%= javascript_include_tag 'facebox', :plugin => 'redmine_asset_tracker' %>
+    <%= javascript_include_tag 'prototype-base-extensions', :plugin => 'redmine_asset_tracker' %>
+    <%= javascript_include_tag 'prototype-date-extensions', :plugin => 'redmine_asset_tracker' %>
+    <%= javascript_include_tag 'datepicker', :plugin => 'redmine_asset_tracker' %>
+    <%= javascript_include_tag 'asset_tracker', :plugin => 'redmine_asset_tracker' %>    
+
 <% end %>

@@ -1,0 +1,63 @@
+<h1 style="color:#507AAA">
+  New Reservation:
+</h1>
+
+<%= form_remote_tag(:loading => "facebox.loading()",
+        :url => { :action => :create },
+        :position => "top" ) %>
+
+    <% if !User.current.admin %>
+        <%= hidden_field_tag :user_id, User.current.id %>
+    <% end %>
+    <%= hidden_field_tag :object_type, @object_type %>
+    <%= hidden_field_tag :object_id, @object.id %>
+    <table>
+      <tr>
+        <td>
+          Reserving:
+        </td>
+        <td>
+          <strong><%= @object.name %></strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+            <%= image_tag "/images/calendar.png", :border=>0, :alt=>"manage" %>
+            Check-out date:
+        </td>
+        <td>
+            <input name="checkout" id="checkout" type="text" class="datepicker" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+            <%= image_tag "/images/calendar.png", :border=>0, :alt=>"manage" %>
+            Check-in date:
+        </td>
+        <td>
+            <input name="checkin" id="checkin" type="text" class="datepicker" />
+        </td>
+      </tr>
+      <% if User.current.admin %>
+          <tr>
+            <td>
+                <%= image_tag "/images/user.png", :border=>0, :alt=>"manage" %>
+                Assignee:
+            </td>
+            <td>
+                <%= select_tag(:user_id,
+     options_from_collection_for_select(@users, :id, :name)) %>
+            </td>
+          </tr>
+      <% end %>
+      <tr>
+        <td colspan='2' align='right'>
+          <%= submit_tag 'Reserve' %>
+        </td>
+      </tr>
+    </table>
+
+    <script>
+      facebox.initialize();
+      createPickers();
+    </script>
