@@ -3,13 +3,18 @@ class ReservationsController < ApplicationController
   #before_filter :require_admin, :except => [:index, :show, :show_attachment, :show_image]
 
   def index
-    object_type = params[:object_type]
-    if object_type == "asset"
-      @reservations = Reservation.find_all_by_asset_id params[:object_id]
-    else
-      @reservations = Reservation.find_all_by_asset_group_id params[:object_id]
+    #@bookable = find_bookable
+    #@reservations = @bookable.reservations
+    @reservations = Reservation.all
+    @reservations.each do |r|
+      if Time.now > r.check_out_date
+        r.status = Reservation::STATUS_MISSING_PICKUP_DATE
+      end
+      if Time.now > r.check_in_date
+        r.status = Reservation::STATUS_MISSING_RETURN_DATE
+      end
+      r.save
     end
-    render 'index', :layout=>false
   end
 
   def new
@@ -29,21 +34,28 @@ class ReservationsController < ApplicationController
     object_type = params[:object_type]
     reservation = Reservation.new
     if object_type == 'asset'
-      object = Asset.find_by_id params[:object_id]
-      reservation.asset = object
-      #reservation.reserved_type = 'asset'
+      reservation.bookable_type = 'asset'
     else
-      object = AssetGroup.find_by_id params[:object_id]
-      reservation.asset_group = object
-      #reservation.reserved_type = 'asset_group'
+      reservation.bookable_type = 'asset_group'
     end
+
+    reservation.bookable_id = params[:object_id]
     reservation.user = User.find_by_id params[:user_id]
     reservation.check_in_date = params[:checkin]
     reservation.check_out_date = params[:checkout]
+    reservation.status = Reservation::STATUS_READY
     reservation.save
     respond_to do |format|
       format.html
       format.js
+    end
+  end
+
+  def find_bookable
+    params.each do |name, value|
+      if name =~ /(.+)_id$/
+        return $1.classify.constantize.find(value)
+      end
     end
   end
 

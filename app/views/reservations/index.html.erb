@@ -1,26 +1,81 @@
-<table style="width:1000px">
-    <tr>
-      <td>
-        <strong>User</strong>
-      </td>
-      <td>
-        <strong>Check-out date</strong>
-      </td>
-      <td>
-        <strong>Check-in date</strong>
-      </td>
-    </tr>
-    <% @reservations.each do |r| %>
-    <tr>
-      <td style="width:500px;">
-        <%= r.user.firstname + " " + r.user.lastname %>
-      </td>
-      <td style="width:250px;">
-        <%= r.check_out_date %>
-      </td>
-      <td style="width:250px;">
-        <%= r.check_in_date %>
-      </td>
-    </tr>
-    <% end %>
-</table>
+<div class="center-main-container" align="center">
+    <div class="center-container">
+        <div class="center-main-container-title">
+            <h1>List of Active Reservations</h1>
+        </div>
+        <div class="inner-container" id="inner_container">
+            <table id="rounded-corner-index" summary="Asset Properties">
+        <thead>
+            <tr>
+                <th scope="col" class="rounded-company">Asset(s) Name(s):</th>
+                <th scope="col" class="rounded-q2">User:</th>
+                <th scope="col" class="rounded-q2">Check-out date:</th>
+                <th scope="col" class="rounded-q2">Check-in date:</th>
+                <th scope="col" class="rounded-q2">Status:</th>
+                <th scope="col" class="rounded-q1">Options</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td class="rounded-foot-left">&nbsp;</td>
+                <td class="rounded-foot-right" colspan='4'>
+                    <% if User.current.admin %>
+                        <%= image_tag "/images/add.png", :alt => "Add a new asset" %>
+                        <%= link_to "New Asset.", {:controller => "assets", :action => "new"} %>
+                        &nbsp;&nbsp; | &nbsp;&nbsp;
+                        <%= image_tag "/images/add.png", :alt => "Add a new group" %>
+                        <%= link_to "New Group.", {:controller => "asset_groups", :action => "new"}, :rel => 'facebox' %>
+                    <% end %>
+                </td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <% @reservations.each do |r| %>
+                <tr>
+                    <td>
+                      <%= r.bookable.name %>
+                    </td>
+                    <td>
+                      <%= r.user.firstname + ' ' + r.user.lastname %>
+                    </td>
+                    <td>
+                      <%= r.check_out_date.strftime("%m/%d/%y %H:%M") %>
+                    </td>
+                    <td>
+                      <%= r.check_in_date.strftime("%m/%d/%y %H:%M") %>
+                    </td>
+                    <td>
+                      <%=
+                          if r.status == Reservation::STATUS_MISSING_RETURN_DATE
+                            '<label style="color:red">' + r.status + '</label>'
+                          elsif r.status == Reservation::STATUS_MISSING_PICKUP_DATE
+                            '<label style="color:orange">' + r.status + '</label>'
+                          elsif r.status == Reservation::STATUS_READY
+                            '<label style="color:green">' + r.status + '</label>'
+                          else
+                            r.status
+                          end
+                      %>
+                    </td>
+                    <td>
+                      Options go here
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+
+
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
+    <%= stylesheet_link_tag 'facebox', :plugin => 'redmine_asset_tracker' %>
+    <%= stylesheet_link_tag 'datepicker', :plugin => 'redmine_asset_tracker' %>
+    <%= javascript_include_tag 'facebox', :plugin => 'redmine_asset_tracker' %>
+    <%= javascript_include_tag 'prototype-base-extensions', :plugin => 'redmine_asset_tracker' %>
+    <%= javascript_include_tag 'prototype-date-extensions', :plugin => 'redmine_asset_tracker' %>
+    <%= javascript_include_tag 'datepicker', :plugin => 'redmine_asset_tracker' %>
+    <%= javascript_include_tag 'asset_tracker', :plugin => 'redmine_asset_tracker' %>
+<% end %>
