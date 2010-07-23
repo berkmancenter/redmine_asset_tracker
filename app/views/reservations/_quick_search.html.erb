@@ -1,0 +1,51 @@
+<div style="width:870px;">
+    <% form_tag({ :action => 'search'}, :id=>'quick_search') do %>
+        <h3>Quick Search:</h3><br />
+            <table>
+                <tr>
+                    <td>
+                        Asset Name:
+                    </td>
+                    <td>
+                        <%= text_field_tag :asset_name, '', {:size => 6} %>
+                    </td>
+                    <td>
+                        User First name:
+                    </td>
+                    <td>
+                        <%= text_field_tag :user_firstname, '', {:size => 6} %> 
+                    </td>
+                    <td>
+                        User Last name:
+                    </td>
+                    <td>
+                        <%= text_field_tag :user_lastname, '', {:size => 6} %>
+                    </td>
+                    <td>
+                        User Email:
+                    </td>
+                    <td>
+                        <%= text_field_tag :user_email, '', {:size => 6} %>
+                    </td>
+                    <td>
+                        Within:
+                    </td>
+                    <td>
+                        <%= select_tag :days, "<option>1</option><option>5</option><option>10</option><option selected='true'>15</option><option>30</option><option>60</option><option>90</option>"  %> days.
+                    </td>
+            </tr>
+            <tr>
+              <td colspan="10">
+                <%= check_box_tag 'own' %> Or show only my reservations.
+              </td>
+            </tr>
+        </table>
+    <% end %>
+</div>
+
+
+
+<%= observe_form(:quick_search,
+                 :frequency => 2,
+                 :update => :result,
+                 :url => { :action => :live_search }) %>

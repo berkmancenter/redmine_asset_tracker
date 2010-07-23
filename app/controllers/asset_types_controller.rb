@@ -6,7 +6,7 @@ class AssetTypesController < ApplicationController
 
   def index
     @asset_types = AssetType.find :all
-    @user = User.find_by_id session[:user_id]
+    @user = User.find_by_id session[:user_id]    
   end
 
   def new

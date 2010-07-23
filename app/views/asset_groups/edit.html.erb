@@ -52,10 +52,8 @@
                                     <td>
                                       Assets in this group:
                                     </td>
-                                    <td>
-                                      <% @asset_group.assets.each do |g| %>
-                                        <%= link_to g.name, :controller=> 'assets', :action=>'edit', :id=>g %> <br />
-                                      <% end %>
+                                    <td id='assets_in_group'>
+                                      <%= render :partial => 'assets_in_group', :locals => { :asset_group => @asset_group } %>
                                     </td>
                                   </tr>
                               </tbody>

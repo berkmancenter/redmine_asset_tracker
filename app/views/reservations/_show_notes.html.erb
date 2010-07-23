@@ -1,0 +1,14 @@
+<% form_remote_tag :url => {:controller => "reservations", :action => "update_notes", :id => reservation} do %>
+<table>
+  <tr>
+    <td>
+      <%= text_area_tag 'notes', reservation.notes, :size => "30x10" %>
+    </td>
+  </tr>
+  <tr>
+    <td align="right">
+       <%= submit_tag 'save' %>
+    </td>
+  </tr>
+</table>
+<% end %>

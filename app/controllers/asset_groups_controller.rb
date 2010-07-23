@@ -58,6 +58,7 @@ class AssetGroupsController < ApplicationController
     asset = Asset.find params[:asset_id]
     asset.asset_group = asset_group
     asset.save
+    @open_group = params[:asset_group_id]
   end
 
   def show_attachment
@@ -97,6 +98,15 @@ class AssetGroupsController < ApplicationController
     @asset_group = AssetGroup.find_by_id params[:asset_group_id]
     flash[:notice] = "Attachment successfully destroyed."
     redirect_to :controller => 'asset_groups', :action => 'edit_attachments', :id => @asset_group
+  end
+
+  def remove_asset
+    asset = Asset.find_by_id params[:asset_id]
+    asset.asset_group_id = nil
+    asset.save
+    @open_group = params[:id]
+    @asset_group = AssetGroup.find_by_id params[:id]
+    #render :partial => 'group_contents', :layout => false, :locals => { :asset_group => asset_group }
   end
 
   def change_attachment_privacy

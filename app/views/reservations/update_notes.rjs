@@ -1,0 +1,2 @@
+page.call "facebox.initialize"
+page.call "facebox.close"

@@ -2,15 +2,15 @@
   New Reservation:
 </h1>
 
-<%= form_remote_tag(:loading => "facebox.loading()",
+<%= form_remote_tag(
         :url => { :action => :create },
-        :position => "top" ) %>
+        :position => "top", :html => {:id => 'new_reservation_form'} ) %>
 
     <% if !User.current.admin %>
         <%= hidden_field_tag :user_id, User.current.id %>
     <% end %>
-    <%= hidden_field_tag :object_type, @object_type %>
-    <%= hidden_field_tag :object_id, @object.id %>
+    <%= hidden_field_tag :bookable_type, @object_type %>
+    <%= hidden_field_tag :bookable_id, @object.id %>
     <table>
       <tr>
         <td>
@@ -26,7 +26,7 @@
             Check-out date:
         </td>
         <td>
-            <input name="checkout" id="checkout" type="text" class="datepicker" />
+            <%= text_field_tag 'checkout', nil, {:class => 'datepicker'}  %>
         </td>
       </tr>
       <tr>
@@ -35,7 +35,7 @@
             Check-in date:
         </td>
         <td>
-            <input name="checkin" id="checkin" type="text" class="datepicker" />
+            <%= text_field_tag 'checkin', nil, {:class => 'datepicker'}  %>
         </td>
       </tr>
       <% if User.current.admin %>
@@ -51,13 +51,22 @@
           </tr>
       <% end %>
       <tr>
-        <td colspan='2' align='right'>
-          <%= submit_tag 'Reserve' %>
+        <td>
+          <%= image_tag "/images/wiki_edit.png", :border=>0, :alt=>"notes" %>
+                Notes:
+        </td>
+        <td>
+          <%= text_area_tag 'notes', nil, :size => "18x5" %>          
+        </td>
+      </tr>
+      <tr>
+        <td colspan='2' align='right' id='next_step' style='color:red;'>
+            <%= submit_tag('Reserve') %>    
         </td>
       </tr>
     </table>
-
     <script>
       facebox.initialize();
       createPickers();
     </script>
+

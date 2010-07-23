@@ -31,18 +31,32 @@
             <% asset_type.asset_groups.each do |asset_group| %>
                 <tr id='assetgroup_<%=asset_group.id.to_s %>'>
                     <td>
-                      <%= image_tag '/images/folder.png' %> &nbsp; <label><%= asset_group.name %></label> (<%= asset_group.assets.length %> assets)
+                      <%= link_to_function(image_tag '/images/folder.png', :id => 'assetgroup_' + asset_group.id.to_s + '_folder') do |page|
+                            page.visual_effect(:toggle_blind, 'assetgroup_' + asset_group.id.to_s + '_contents')
+                          end %>
+                      &nbsp; <label><%= asset_group.name %></label> (<%= asset_group.assets.length %> assets)
+
                       <% if user.admin %>
                         <%= drop_receiving_element('assetgroup_' + asset_group.id.to_s, :url =>
                             { :controller => "asset_groups", :action => "add_asset" }, :with => "'asset_group_id=" + asset_group.id.to_s + "&asset_id=' + element.id.split('_')[1]", :hoverclass => 'droppable') %>
                       <% end %>
-                      
+                      <div id='assetgroup_<%=asset_group.id.to_s %>_contents' style='<%= open_group.to_i == asset_group.id ?  'display:block;' : 'display:none;' %> padding-left:50px;'>
+                        <% asset_group.assets.each do |a| %>
+                            <%= link_to_remote image_tag("/images/delete.png", :border=>0, :alt=>"delete"), :url => {:controller => "asset_groups", :action => "remove_asset", :asset_id => a, :id => asset_group}, :confirm => 'Are you sure?' %>
+                            <% if User.current.admin %>
+                                <%= link_to a.name, :controller=> 'assets', :action=>'edit', :id=>a %>
+                            <% else %>
+                                <%= link_to a.name, :controller=> 'assets', :action=>'show', :id=>a %>
+                            <% end %>
+                            <br />
+                        <% end %>
+                      </div>
                     </td>
                     <td><%= asset_group.description %></td>
                     <td>
                         <%= link_to image_tag("/plugin_assets/redmine_asset_tracker/images/show.png", :border=>0, :alt=>"show"), :controller => "asset_groups", :action => "show", :id => asset_group %>
-                        <%= link_to image_tag("/images/time_add.png", :border=>0, :alt=>"reserve"), {:controller => "reservations", :action => "new", :id => asset_group, :object_type => "asset_group"}, :rel => "facebox" %>
-                        <%= link_to image_tag("/images/calendar.png", :border=>0, :alt=>"edit"), {:controller => "reservations", :action => "index", :object_id => asset_group, :object_type => "asset_group"}, :rel => "facebox" %>
+                        <%= link_to image_tag("/images/time_add.png", :border=>0, :alt=>"reserve"), {:controller => "reservations", :action => "new", :id => asset_group, :object_type => "AssetGroup"}, :rel => "facebox" %>
+                        <%= link_to image_tag("/images/calendar.png", :border=>0, :alt=>"reservations"), {:controller => "reservations", :action => "show_by_bookable", :bookable_id => asset_group, :bookable_type => "AssetGroup"}, :rel => "facebox" %>
                         <% if user.admin %>
                           <%= link_to image_tag("/images/edit.png", :border=>0, :alt=>"edit"), :controller => "asset_groups", :action => "edit", :id => asset_group %>
                           <%= link_to_remote image_tag("/images/delete.png", :border=>0, :alt=>"delete"), :url => {:controller => "asset_groups", :action => "delete", :id => asset_group},
@@ -63,8 +77,8 @@
                         <td><%= asset.description %></td>
                         <td>
                             <%= link_to image_tag("/plugin_assets/redmine_asset_tracker/images/show.png", :border=>0, :alt=>"show"), :controller => "assets", :action => "show", :id => asset %>
-                            <%= link_to image_tag("/images/time_add.png", :border=>0, :alt=>"reserve"), {:controller => "reservations", :action => "new", :id => asset, :object_type => "asset"}, :rel => "facebox" %>
-                            <%= link_to image_tag("/images/calendar.png", :border=>0, :alt=>"edit"), {:controller => "reservations", :action => "index", :object_id => asset, :object_type => "asset"}, :rel => "facebox" %>
+                            <%= link_to image_tag("/images/time_add.png", :border=>0, :alt=>"reserve"), {:controller => "reservations", :action => "new", :id => asset, :object_type => "Asset"}, :rel => "facebox" %>
+                            <%= link_to image_tag("/images/calendar.png", :border=>0, :alt=>"edit"), {:controller => "reservations", :action => "show_by_bookable", :bookable_id => asset, :bookable_type => "Asset"}, :rel => "facebox" %>
                             <% if user.admin %>
                               <%= link_to image_tag("/images/edit.png", :border=>0, :alt=>"edit"), :controller => "assets", :action => "edit", :id => asset %>
                               <%= link_to_remote image_tag("/images/delete.png", :border=>0, :alt=>"delete"), :url => {:controller => "assets", :action => "delete", :id => asset},

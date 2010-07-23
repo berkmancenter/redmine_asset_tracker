@@ -1,8 +1,9 @@
 if  request.env['HTTP_REFERER'].include? ('asset_types')
     #request comes from the main asset list.
     page.replace_html 'inner_container', :partial => 'asset_types/assets_list', :layout => false, :locals => { :asset_types => AssetType.all, :user => User.current, :open_group => @open_group }
-elsif  request.env['HTTP_REFERER'].include? ('assets')
+elsif  request.env['HTTP_REFERER'].include? ('asset_groups')
     #request comes from the edit asset or new asset pages
+  page.replace_html 'assets_in_group', :partial => 'assets_in_group', :layout => false, :locals => { :asset_group => @asset_group }
 end
 
     page.call "facebox.initialize"

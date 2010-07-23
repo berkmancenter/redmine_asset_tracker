@@ -4,7 +4,7 @@
             <h1>List of Assets</h1>
         </div>
         <div class="inner-container" id="inner_container">
-            <%= render :partial => 'assets_list', :locals => { :asset_types => @asset_types, :user => User.current } %>
+            <%= render :partial => 'assets_list', :locals => { :asset_types => @asset_types, :user => User.current, :open_group => 0 } %>
         </div>
     </div>
 </div>

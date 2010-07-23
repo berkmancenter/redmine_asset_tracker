@@ -1,2 +1,7 @@
-page.call "facebox.initialize"
-page.call "facebox.close"
+if @error_message
+  page.replace_html 'next_step', @error_message + '<br />' + submit_tag('Reserve')
+else
+    #page.call "facebox.reveal", "Reservation Created!", "null"
+    page.call "facebox.initialize"
+    page.call "facebox.close"
+end

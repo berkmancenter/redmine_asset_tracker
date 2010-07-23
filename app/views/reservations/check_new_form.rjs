@@ -1,0 +1,8 @@
+if @error_message
+  page.replace_html 'next_step', @error_message
+else
+  page.replace_html 'next_step', submit_tag('Reserve')
+end
+
+#page.call "facebox.initialize"
+#page.call "facebox.close"
