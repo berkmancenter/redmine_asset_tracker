@@ -1,0 +1,1644 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: AssetsController</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (A)</a> &raquo; 
+    
+    
+    <span class="title">AssetsController</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: AssetsController
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ApplicationController</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ApplicationController</li>
+          
+            <li class="next">AssetsController</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2">CustomFieldsHelper</dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">app/controllers/assets_controller.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Author:</h3>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Emmanuel Pastor
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+
+  
+  
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_attachment-instance_method" title="#add_attachment (instance method)">- (Object) <strong>add_attachment</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Adds a new Attachment to an Asset.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#change_attachment_privacy-instance_method" title="#change_attachment_privacy (instance method)">- (Object) <strong>change_attachment_privacy</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Changes the privacy settings of an Attachment.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clone-instance_method" title="#clone (instance method)">- (Asset) <strong>clone</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Clones an existing Asset from the DB.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create-instance_method" title="#create (instance method)">- (Object) <strong>create</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Saves an Asset to the DB.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_custom_field-instance_method" title="#create_custom_field (instance method)">- (Object) <strong>create_custom_field</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates an Asset CustomField.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete-instance_method" title="#delete (instance method)">- (Object) <strong>delete</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Deletes an Asset from the DB.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#edit-instance_method" title="#edit (instance method)">- (Asset) <strong>edit</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Gets all the data needed to edit an Asset.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#edit_attachments-instance_method" title="#edit_attachments (instance method)">- (Object) <strong>edit_attachments</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Modifies the collection of attachments of an Asset.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#index-instance_method" title="#index (instance method)">- (Asset) <strong>index</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Lists all the Assets from the DB.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">- (Asset) <strong>new</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new Asset Instance, ready to be saved to the DB.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_attachment-instance_method" title="#remove_attachment (instance method)">- (Object) <strong>remove_attachment</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Removes an Attachment from an Asset.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_custom_field-instance_method" title="#remove_custom_field (instance method)">- (Object) <strong>remove_custom_field</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Removes a CustomField from an Asset.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show-instance_method" title="#show (instance method)">- (Asset) <strong>show</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Displays an Asset from the DB.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_attachment-instance_method" title="#show_attachment (instance method)">- (Attachment) <strong>show_attachment</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Displays an Attachment from the DB.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_image-instance_method" title="#show_image (instance method)">- (Object) <strong>show_image</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Displays an attached asset image.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update-instance_method" title="#update (instance method)">- (Object) <strong>update</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Saves an Asset to the DB.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="add_attachment-instance_method">
+  
+    - (<tt>Object</tt>) <strong>add_attachment</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Adds a new Attachment to an Asset.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Nothing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+194
+195
+196
+197
+198
+199
+200
+201
+202</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/assets_controller.rb', line 194</span>
+
+<span class='def def kw'>def</span> <span class='add_attachment identifier id'>add_attachment</span>
+  <span class='@asset ivar id'>@asset</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+
+  <span class='if if kw'>if</span> <span class='request identifier id'>request</span><span class='dot token'>.</span><span class='post? fid id'>post?</span>
+    <span class='attachments identifier id'>attachments</span> <span class='assign token'>=</span> <span class='@asset ivar id'>@asset</span><span class='dot token'>.</span><span class='attach_files identifier id'>attach_files</span><span class='lparen token'>(</span><span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:attachments</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
+    <span class='redirect_to identifier id'>redirect_to</span> <span class='symbol val'>:controller</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'assets'</span><span class='comma token'>,</span> <span class='symbol val'>:action</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'edit_attachments'</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='@asset ivar id'>@asset</span>
+    <span class='return return kw'>return</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="change_attachment_privacy-instance_method">
+  
+    - (<tt>Object</tt>) <strong>change_attachment_privacy</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Changes the privacy settings of an Attachment.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Nothing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/assets_controller.rb', line 142</span>
+
+<span class='def def kw'>def</span> <span class='change_attachment_privacy identifier id'>change_attachment_privacy</span>
+  <span class='attachment identifier id'>attachment</span> <span class='assign token'>=</span> <span class='Attachment constant id'>Attachment</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:attachment_id</span><span class='rbrack token'>]</span>
+  <span class='if if kw'>if</span> <span class='attachment identifier id'>attachment</span><span class='dot token'>.</span><span class='is_private identifier id'>is_private</span>
+    <span class='attachment identifier id'>attachment</span><span class='dot token'>.</span><span class='is_private identifier id'>is_private</span> <span class='assign token'>=</span><span class='false false kw'>false</span>
+  <span class='else else kw'>else</span>
+    <span class='attachment identifier id'>attachment</span><span class='dot token'>.</span><span class='is_private identifier id'>is_private</span> <span class='assign token'>=</span> <span class='true true kw'>true</span>
+  <span class='end end kw'>end</span>
+  <span class='attachment identifier id'>attachment</span><span class='dot token'>.</span><span class='save identifier id'>save</span>
+  <span class='@asset ivar id'>@asset</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:asset_id</span><span class='rbrack token'>]</span>
+  <span class='flash identifier id'>flash</span><span class='lbrack token'>[</span><span class='symbol val'>:notice</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='string val'>&quot;Privacy settings updated.&quot;</span>
+  <span class='redirect_to identifier id'>redirect_to</span> <span class='symbol val'>:controller</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'assets'</span><span class='comma token'>,</span> <span class='symbol val'>:action</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'edit_attachments'</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='@asset ivar id'>@asset</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="clone-instance_method">
+  
+    - (<tt><a href="Asset.html" title="Asset (class)">Asset</a></tt>) <strong>clone</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Clones an existing Asset from the DB.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Asset.html" title="Asset (class)">Asset</a></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41
+42
+43
+44
+45
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/assets_controller.rb', line 41</span>
+
+<span class='def def kw'>def</span> <span class='clone identifier id'>clone</span>
+  <span class='existing_asset identifier id'>existing_asset</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:existing_custom_field</span><span class='rbrack token'>]</span>
+  <span class='@asset ivar id'>@asset</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='existing_asset identifier id'>existing_asset</span><span class='dot token'>.</span><span class='attributes identifier id'>attributes</span><span class='dot token'>.</span><span class='except identifier id'>except</span><span class='lparen token'>(</span><span class='string val'>&quot;id&quot;</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+  <span class='@asset ivar id'>@asset</span><span class='dot token'>.</span><span class='asset_custom_fields identifier id'>asset_custom_fields</span> <span class='lshft op'>&lt;&lt;</span> <span class='existing_asset identifier id'>existing_asset</span><span class='dot token'>.</span><span class='asset_custom_fields identifier id'>asset_custom_fields</span>
+  <span class='@asset ivar id'>@asset</span><span class='dot token'>.</span><span class='name identifier id'>name</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:name</span><span class='rbrack token'>]</span>
+  <span class='@asset ivar id'>@asset</span><span class='dot token'>.</span><span class='save identifier id'>save</span>   
+  <span class='redirect_to identifier id'>redirect_to</span> <span class='symbol val'>:action</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;edit&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='@asset ivar id'>@asset</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Saves an Asset to the DB.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Nothing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35
+36</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/assets_controller.rb', line 33</span>
+
+<span class='def def kw'>def</span> <span class='create identifier id'>create</span>
+  <span class='@asset ivar id'>@asset</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='create identifier id'>create</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:asset</span><span class='rbrack token'>]</span>
+  <span class='redirect_to identifier id'>redirect_to</span> <span class='symbol val'>:action</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;edit&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='@asset ivar id'>@asset</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create_custom_field-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create_custom_field</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates an Asset CustomField.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Nothing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/assets_controller.rb', line 89</span>
+
+<span class='def def kw'>def</span> <span class='create_custom_field identifier id'>create_custom_field</span>
+  <span class='asset identifier id'>asset</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+  <span class='if if kw'>if</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:existing_custom_field</span><span class='rbrack token'>]</span> <span class='neq op'>!=</span> <span class='nil nil kw'>nil</span>
+    <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:existing_custom_field</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='f identifier id'>f</span><span class='bitor op'>|</span>
+      <span class='custom_field identifier id'>custom_field</span> <span class='assign token'>=</span> <span class='AssetCustomField constant id'>AssetCustomField</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='f identifier id'>f</span>
+      <span class='asset identifier id'>asset</span><span class='dot token'>.</span><span class='asset_custom_fields identifier id'>asset_custom_fields</span> <span class='lshft op'>&lt;&lt;</span> <span class='custom_field identifier id'>custom_field</span>
+    <span class='end end kw'>end</span>
+  <span class='else else kw'>else</span>
+    <span class='custom_field identifier id'>custom_field</span> <span class='assign token'>=</span> <span class='AssetCustomField constant id'>AssetCustomField</span><span class='dot token'>.</span><span class='create! fid id'>create!</span><span class='lparen token'>(</span><span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:custom_field</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
+    <span class='asset identifier id'>asset</span><span class='dot token'>.</span><span class='asset_custom_fields identifier id'>asset_custom_fields</span> <span class='lshft op'>&lt;&lt;</span> <span class='custom_field identifier id'>custom_field</span>
+  <span class='end end kw'>end</span>
+  <span class='asset identifier id'>asset</span><span class='dot token'>.</span><span class='save identifier id'>save</span>
+  <span class='redirect_to identifier id'>redirect_to</span> <span class='symbol val'>:action</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;edit&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='asset identifier id'>asset</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="delete-instance_method">
+  
+    - (<tt>Object</tt>) <strong>delete</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Deletes an Asset from the DB.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Nothing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+80
+81
+82
+83
+84</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/assets_controller.rb', line 80</span>
+
+<span class='def def kw'>def</span> <span class='delete identifier id'>delete</span>
+  <span class='asset identifier id'>asset</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='find identifier id'>find</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+  <span class='asset identifier id'>asset</span><span class='dot token'>.</span><span class='delete identifier id'>delete</span>
+  <span class='comment val'>#render :partial =&gt; 'asset_types/assets_list', :layout =&gt; false, :locals =&gt; { :asset_types =&gt; AssetType.all, :user =&gt; User.current }</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="edit-instance_method">
+  
+    - (<tt><a href="Asset.html" title="Asset (class)">Asset</a></tt>) <strong>edit</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Gets all the data needed to edit an Asset.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Asset.html" title="Asset (class)">Asset</a></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/assets_controller.rb', line 53</span>
+
+<span class='def def kw'>def</span> <span class='edit identifier id'>edit</span>
+  <span class='@asset ivar id'>@asset</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+  <span class='@user ivar id'>@user</span> <span class='assign token'>=</span> <span class='User constant id'>User</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='session identifier id'>session</span><span class='lbrack token'>[</span><span class='symbol val'>:user_id</span><span class='rbrack token'>]</span>
+  <span class='@custom_field ivar id'>@custom_field</span> <span class='assign token'>=</span> <span class='AssetCustomField constant id'>AssetCustomField</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='@custom_field ivar id'>@custom_field</span><span class='dot token'>.</span><span class='type identifier id'>type</span> <span class='assign token'>=</span> <span class='string val'>&quot;AssetCustomField&quot;</span>
+  <span class='@available_custom_fields ivar id'>@available_custom_fields</span> <span class='assign token'>=</span> <span class='Array constant id'>Array</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='@asset ivar id'>@asset</span><span class='dot token'>.</span><span class='custom_field_values identifier id'>custom_field_values</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='v identifier id'>v</span><span class='bitor op'>|</span>
+    <span class='if if kw'>if</span> <span class='notop op'>!</span><span class='@asset ivar id'>@asset</span><span class='dot token'>.</span><span class='asset_custom_fields identifier id'>asset_custom_fields</span><span class='dot token'>.</span><span class='include? fid id'>include?</span> <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='custom_field identifier id'>custom_field</span>
+      <span class='@available_custom_fields ivar id'>@available_custom_fields</span> <span class='lshft op'>&lt;&lt;</span> <span class='v identifier id'>v</span><span class='dot token'>.</span><span class='custom_field identifier id'>custom_field</span>
+    <span class='end end kw'>end</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="edit_attachments-instance_method">
+  
+    - (<tt>Object</tt>) <strong>edit_attachments</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Modifies the collection of attachments of an Asset.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Nothing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+118
+119
+120
+121
+122
+123
+124
+125
+126</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/assets_controller.rb', line 118</span>
+
+<span class='def def kw'>def</span> <span class='edit_attachments identifier id'>edit_attachments</span>
+  <span class='@asset ivar id'>@asset</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+  <span class='if if kw'>if</span> <span class='request identifier id'>request</span><span class='dot token'>.</span><span class='post? fid id'>post?</span>
+    <span class='attachment identifier id'>attachment</span> <span class='assign token'>=</span> <span class='Attachment constant id'>Attachment</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:attachment</span><span class='rbrack token'>]</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+    <span class='attachment identifier id'>attachment</span><span class='dot token'>.</span><span class='description identifier id'>description</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:attachment</span><span class='rbrack token'>]</span><span class='lbrack token'>[</span><span class='symbol val'>:description</span><span class='rbrack token'>]</span>
+    <span class='attachment identifier id'>attachment</span><span class='dot token'>.</span><span class='save identifier id'>save</span>
+    <span class='flash identifier id'>flash</span><span class='dot token'>.</span><span class='now identifier id'>now</span><span class='lbrack token'>[</span><span class='symbol val'>:notice</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='string val'>'Your changes were saved.'</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="index-instance_method">
+  
+    - (<tt><a href="Asset.html" title="Asset (class)">Asset</a></tt>) <strong>index</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Lists all the Assets from the DB.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Asset.html" title="Asset (class)">Asset</a></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+array.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+11
+12
+13</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/assets_controller.rb', line 11</span>
+
+<span class='def def kw'>def</span> <span class='index identifier id'>index</span>
+  <span class='@assets ivar id'>@assets</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='find identifier id'>find</span><span class='symbol val'>:all</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="new-instance_method">
+  
+    - (<tt><a href="Asset.html" title="Asset (class)">Asset</a></tt>) <strong>new</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates a new Asset Instance, ready to be saved to the DB.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Asset.html" title="Asset (class)">Asset</a></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/assets_controller.rb', line 26</span>
+
+<span class='def def kw'>def</span> <span class='new identifier id'>new</span>
+  <span class='@asset ivar id'>@asset</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="remove_attachment-instance_method">
+  
+    - (<tt>Object</tt>) <strong>remove_attachment</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Removes an Attachment from an Asset.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Nothing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+131
+132
+133
+134
+135
+136
+137</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/assets_controller.rb', line 131</span>
+
+<span class='def def kw'>def</span> <span class='remove_attachment identifier id'>remove_attachment</span>
+  <span class='attachment identifier id'>attachment</span> <span class='assign token'>=</span> <span class='Attachment constant id'>Attachment</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:attachment_id</span><span class='rbrack token'>]</span>
+  <span class='attachment identifier id'>attachment</span><span class='dot token'>.</span><span class='destroy identifier id'>destroy</span>
+  <span class='@asset ivar id'>@asset</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:asset_id</span><span class='rbrack token'>]</span>
+  <span class='flash identifier id'>flash</span><span class='lbrack token'>[</span><span class='symbol val'>:notice</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='string val'>&quot;Attachment successfully destroyed.&quot;</span>
+  <span class='redirect_to identifier id'>redirect_to</span> <span class='symbol val'>:controller</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'assets'</span><span class='comma token'>,</span> <span class='symbol val'>:action</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'edit_attachments'</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='@asset ivar id'>@asset</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="remove_custom_field-instance_method">
+  
+    - (<tt>Object</tt>) <strong>remove_custom_field</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Removes a CustomField from an Asset.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Nothing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+107
+108
+109
+110
+111
+112
+113</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/assets_controller.rb', line 107</span>
+
+<span class='def def kw'>def</span> <span class='remove_custom_field identifier id'>remove_custom_field</span>
+  <span class='asset identifier id'>asset</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+  <span class='custom_field identifier id'>custom_field</span> <span class='assign token'>=</span> <span class='AssetCustomField constant id'>AssetCustomField</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:existing_custom_field</span><span class='rbrack token'>]</span>
+  <span class='asset identifier id'>asset</span><span class='dot token'>.</span><span class='asset_custom_fields identifier id'>asset_custom_fields</span><span class='dot token'>.</span><span class='delete identifier id'>delete</span> <span class='custom_field identifier id'>custom_field</span>
+  <span class='asset identifier id'>asset</span><span class='dot token'>.</span><span class='save identifier id'>save</span>
+  <span class='redirect_to identifier id'>redirect_to</span> <span class='symbol val'>:action</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;edit&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='asset identifier id'>asset</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="show-instance_method">
+  
+    - (<tt><a href="Asset.html" title="Asset (class)">Asset</a></tt>) <strong>show</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Displays an Asset from the DB.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Asset.html" title="Asset (class)">Asset</a></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20
+21</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/assets_controller.rb', line 18</span>
+
+<span class='def def kw'>def</span> <span class='show identifier id'>show</span>
+  <span class='@asset ivar id'>@asset</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+  <span class='@user ivar id'>@user</span> <span class='assign token'>=</span> <span class='User constant id'>User</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='session identifier id'>session</span><span class='lbrack token'>[</span><span class='symbol val'>:user_id</span><span class='rbrack token'>]</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="show_attachment-instance_method">
+  
+    - (<tt>Attachment</tt>) <strong>show_attachment</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Displays an Attachment from the DB.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Attachment</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/assets_controller.rb', line 158</span>
+
+<span class='def def kw'>def</span> <span class='show_attachment identifier id'>show_attachment</span>
+  <span class='@attachment ivar id'>@attachment</span> <span class='assign token'>=</span> <span class='Attachment constant id'>Attachment</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+  <span class='if if kw'>if</span> <span class='@attachment ivar id'>@attachment</span> <span class='neq op'>!=</span> <span class='nil nil kw'>nil</span> <span class='andop op'>&amp;&amp;</span> <span class='lparen token'>(</span><span class='notop op'>!</span><span class='@attachment ivar id'>@attachment</span><span class='dot token'>.</span><span class='is_private identifier id'>is_private</span> <span class='orop op'>||</span> <span class='lparen token'>(</span><span class='@attachment ivar id'>@attachment</span><span class='dot token'>.</span><span class='is_private identifier id'>is_private</span> <span class='andop op'>&amp;&amp;</span> <span class='User constant id'>User</span><span class='dot token'>.</span><span class='current identifier id'>current</span><span class='dot token'>.</span><span class='admin identifier id'>admin</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+    <span class='send_file identifier id'>send_file</span> <span class='@attachment ivar id'>@attachment</span><span class='dot token'>.</span><span class='diskfile identifier id'>diskfile</span><span class='comma token'>,</span> <span class='symbol val'>:filename</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='filename_for_content_disposition identifier id'>filename_for_content_disposition</span><span class='lparen token'>(</span><span class='@attachment ivar id'>@attachment</span><span class='dot token'>.</span><span class='filename identifier id'>filename</span><span class='rparen token'>)</span><span class='comma token'>,</span>
+                                    <span class='symbol val'>:type</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='detect_content_type identifier id'>detect_content_type</span><span class='lparen token'>(</span><span class='@attachment ivar id'>@attachment</span><span class='rparen token'>)</span><span class='comma token'>,</span>
+                                    <span class='symbol val'>:disposition</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lparen token'>(</span><span class='@attachment ivar id'>@attachment</span><span class='dot token'>.</span><span class='image? fid id'>image?</span> <span class='integer val'>? </span><span class='string val'>'inline'</span> <span class='colon op'>:</span> <span class='string val'>'attachment'</span><span class='rparen token'>)</span>
+  <span class='else else kw'>else</span>
+    <span class='render_404 identifier id'>render_404</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="show_image-instance_method">
+  
+    - (<tt>Object</tt>) <strong>show_image</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Displays an attached asset image.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+a valid image bitstream.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/assets_controller.rb', line 172</span>
+
+<span class='def def kw'>def</span> <span class='show_image identifier id'>show_image</span>
+  <span class='asset identifier id'>asset</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+  <span class='if if kw'>if</span> <span class='asset identifier id'>asset</span> <span class='neq op'>!=</span> <span class='nil nil kw'>nil</span>
+    <span class='has_image identifier id'>has_image</span><span class='assign token'>=</span><span class='false false kw'>false</span><span class='semicolon token'>;</span>
+    <span class='asset identifier id'>asset</span><span class='dot token'>.</span><span class='attachments identifier id'>attachments</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='a identifier id'>a</span><span class='bitor op'>|</span>
+      <span class='if if kw'>if</span> <span class='a identifier id'>a</span> <span class='neq op'>!=</span> <span class='nil nil kw'>nil</span> <span class='andop op'>&amp;&amp;</span> <span class='a identifier id'>a</span><span class='dot token'>.</span><span class='image? fid id'>image?</span> <span class='andop op'>&amp;&amp;</span> <span class='notop op'>!</span><span class='a identifier id'>a</span><span class='dot token'>.</span><span class='is_private identifier id'>is_private</span>
+        <span class='send_file identifier id'>send_file</span> <span class='a identifier id'>a</span><span class='dot token'>.</span><span class='diskfile identifier id'>diskfile</span><span class='comma token'>,</span> <span class='symbol val'>:filename</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='filename_for_content_disposition identifier id'>filename_for_content_disposition</span><span class='lparen token'>(</span><span class='a identifier id'>a</span><span class='dot token'>.</span><span class='filename identifier id'>filename</span><span class='rparen token'>)</span><span class='comma token'>,</span>
+                                        <span class='symbol val'>:type</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='detect_content_type identifier id'>detect_content_type</span><span class='lparen token'>(</span><span class='a identifier id'>a</span><span class='rparen token'>)</span><span class='comma token'>,</span>
+                                        <span class='symbol val'>:disposition</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lparen token'>(</span><span class='a identifier id'>a</span><span class='dot token'>.</span><span class='image? fid id'>image?</span> <span class='integer val'>? </span><span class='string val'>'inline'</span> <span class='colon op'>:</span> <span class='string val'>'attachment'</span><span class='rparen token'>)</span>
+        <span class='has_image identifier id'>has_image</span> <span class='assign token'>=</span> <span class='true true kw'>true</span>
+        <span class='return return kw'>return</span>
+      <span class='end end kw'>end</span>
+    <span class='end end kw'>end</span>
+    <span class='if if kw'>if</span> <span class='notop op'>!</span><span class='has_image identifier id'>has_image</span>
+        <span class='redirect_to identifier id'>redirect_to</span> <span class='string val'>&quot;/plugin_assets/redmine_asset_tracker/images/add_photo.gif&quot;</span>
+    <span class='end end kw'>end</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="update-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Saves an Asset to the DB.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Nothing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+69
+70
+71
+72
+73
+74
+75</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/assets_controller.rb', line 69</span>
+
+<span class='def def kw'>def</span> <span class='update identifier id'>update</span>
+  <span class='@asset ivar id'>@asset</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='find identifier id'>find</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+  <span class='@asset ivar id'>@asset</span><span class='dot token'>.</span><span class='update_attributes identifier id'>update_attributes</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:asset</span><span class='rbrack token'>]</span>
+  <span class='flash identifier id'>flash</span><span class='lbrack token'>[</span><span class='symbol val'>:notice</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='string val'>'Your changes have been saved.'</span>
+  <span class='redirect_to identifier id'>redirect_to</span> <span class='symbol val'>:action</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;edit&quot;</span><span class='comma token'>,</span> <span class='symbol val'>:id</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='@asset ivar id'>@asset</span>
+
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Jul 29 01:34:31 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
+  0.5.8 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

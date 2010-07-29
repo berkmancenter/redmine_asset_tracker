@@ -1,9 +1,18 @@
+# @author Emmanuel Pastor
 class AssetGroupsController < ApplicationController
   unloadable
   before_filter :require_admin, :except => [:index, :show, :show_attachment, :show_image]
+
+  # Lists all the [AssetGroup] from the Database.
+  #
+  # @return [AssetGroup] Array. 
   def index
     @asset_groups = AssetGroup.all
   end
+
+  # Prepares a new [AssetGroup] object instance ready to be written into the Database.
+  #
+  # @return Nothing.
   def new
     @asset_group = AssetGroup.new
     @asset_id =  params[:asset_id]
@@ -11,6 +20,9 @@ class AssetGroupsController < ApplicationController
     render 'new', :layout=>false        
   end
 
+  # Creates a new [AssetGroup] in the Database.
+  #
+  # @return Nothing.
   def create
     asset_group = AssetGroup.create params[:asset_group]
     if params[:asset_id] != nil && params[:asset_id] != ''
@@ -26,6 +38,9 @@ class AssetGroupsController < ApplicationController
     end    
   end
 
+  # Deletes an [AssetGroup] from the Database.
+  #
+  # @return Nothing.
   def delete
     asset_group = AssetGroup.find_by_id params[:id]
     assets = Asset.find_all_by_asset_group_id asset_group.id
@@ -37,15 +52,24 @@ class AssetGroupsController < ApplicationController
     #render :partial => 'asset_types/assets_list', :layout => false, :locals => { :asset_types => AssetType.all, :user => User.current }
   end
 
+  # Gets an [AssetGroup] from the Database, and displays it so the user can edit it.
+  #
+  # @return [AssetGroup].
   def edit
     @asset_group = AssetGroup.find_by_id params[:id]
   end
 
-   def show
+  # Retrieves an [AssetGroup] from the Database and displays its data.
+  #
+  # @return [AssetGroup].
+  def show
     @asset_group = AssetGroup.find_by_id params[:id]
     @user = User.find_by_id session[:user_id]
   end
 
+  # Saves the changes of an [AssetGroup] to the Database.
+  #
+  # @return Nothing.
   def update
     @asset_group = AssetGroup.find params[:id]
     @asset_group.update_attributes params[:asset_group]
@@ -53,6 +77,9 @@ class AssetGroupsController < ApplicationController
     redirect_to :action => "index", :id => @asset_group
   end
 
+  # Adds an [Asset] to an [AssetGroup].
+  #
+  # @return Nothing.
   def add_asset
     asset_group = AssetGroup.find params[:asset_group_id]
     asset = Asset.find params[:asset_id]
@@ -61,6 +88,9 @@ class AssetGroupsController < ApplicationController
     @open_group = params[:asset_group_id]
   end
 
+  # Displays an [Attachment] of an [AssetGroup].
+  #
+  # @return [Attachment].
   def show_attachment
     @attachment = Attachment.find_by_id params[:id]
     if @attachment != nil && (!@attachment.is_private || (@attachment.is_private && User.current.admin))
@@ -72,6 +102,9 @@ class AssetGroupsController < ApplicationController
     end
   end
 
+  # Saves changes to an [Attachment] of an [AssetGroup].
+  #
+  # @return Nothing.
    def edit_attachments
     @asset_group = AssetGroup.find_by_id params[:id]
     if request.post?
@@ -82,6 +115,9 @@ class AssetGroupsController < ApplicationController
     end
    end
 
+  # Adds a new [Attachment] to an [AssetGroup].
+  #
+  # @return Nothing.
   def add_attachment
     @asset_group = AssetGroup.find_by_id params[:id]
 
@@ -92,6 +128,9 @@ class AssetGroupsController < ApplicationController
     end
   end
 
+  # Removes an [Attachment] from an [AssetGroup].
+  #
+  # @return Nothing.
   def remove_attachment
     attachment = Attachment.find_by_id params[:attachment_id]
     attachment.destroy
@@ -100,6 +139,9 @@ class AssetGroupsController < ApplicationController
     redirect_to :controller => 'asset_groups', :action => 'edit_attachments', :id => @asset_group
   end
 
+  # Removes an [Asset] from an [AssetGroup].
+  #
+  # @return Nothing.
   def remove_asset
     asset = Asset.find_by_id params[:asset_id]
     asset.asset_group_id = nil
@@ -109,6 +151,9 @@ class AssetGroupsController < ApplicationController
     #render :partial => 'group_contents', :layout => false, :locals => { :asset_group => asset_group }
   end
 
+  # Updates the Privacy of an [Attachment].
+  #
+  # @return Nothing.
   def change_attachment_privacy
     attachment = Attachment.find_by_id params[:attachment_id]
     if attachment.is_private
@@ -122,6 +167,9 @@ class AssetGroupsController < ApplicationController
     redirect_to :controller => 'asset_groups', :action => 'edit_attachments', :id => @asset_group
   end
 
+  # Displays an Image in case the [Attachment] is one.
+  #
+  # @return A valid bin Image bitstream.
   def show_image
     asset_group = AssetGroup.find_by_id params[:id]
     if asset_group != nil
@@ -143,6 +191,9 @@ class AssetGroupsController < ApplicationController
 
 
   private
+    # Detects the content_type header of an [Attachment].
+    #
+    # @return a valid content_type header.
     def detect_content_type(attachment)
       content_type = attachment.content_type
       if content_type.blank?

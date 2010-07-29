@@ -1,10 +1,12 @@
+# @author Emmanuel Pastor
 class ReservationsController < ApplicationController
   unloadable
   #before_filter :require_admin, :except => [:index, :show, :show_attachment, :show_image]
 
+  # Lists all the Reservations from the DB.
+  #
+  # @return [Reservation] array.
   def index
-    #@bookable = find_bookable
-    #@reservations = @bookable.reservations
     fifteen_days_ago = DateTime.now - 15
     next_fifteen_days = DateTime.now + 15
     @reservations = Reservation.find :all, :conditions => ["status <> '" + Reservation::STATUS_CHECKED_IN + "' AND (check_in_date BETWEEN ? AND ? OR check_out_date BETWEEN ? AND ?)", fifteen_days_ago, next_fifteen_days, fifteen_days_ago, next_fifteen_days]
@@ -20,6 +22,9 @@ class ReservationsController < ApplicationController
     @reservations = @reservations.sort_by {|r| r.bookable.name }
   end
 
+  # Creates a new Reservation instance, ready to be written to the DB.
+  #
+  # @return [Reservation].
   def new
     @reservation = Reservation.new
     @object_type = params[:object_type]
@@ -32,6 +37,10 @@ class ReservationsController < ApplicationController
     render 'new', :layout=>false
   end
 
+
+  # Creates a Reservation in the DB.
+  #
+  # @return Nothing.
   def create
 
     if params[:checkin] == nil || params[:checkout] == nil
@@ -76,6 +85,9 @@ class ReservationsController < ApplicationController
     end
   end
 
+  # Search reservations by the polymorphic bookable class.
+  #
+  # @return [Reservation].
   def show_by_bookable
     @reservations = Reservation.find :all, :conditions => "bookable_id = '" + params[:bookable_id] + "' AND bookable_type = '" + params[:bookable_type] + "' AND status <> '" + Reservation::STATUS_CHECKED_IN + "'"
     @criteria = 'ASSET_NAME'
@@ -83,6 +95,9 @@ class ReservationsController < ApplicationController
     render 'show_by_bookable', :layout => false
   end
 
+  # Sorts a resultset of reservations.
+  #
+  # @return [Reservation] array.
   def sort
     resultset = params[:resultset]
     criteria = params[:criteria]
@@ -107,6 +122,9 @@ class ReservationsController < ApplicationController
     
   end
 
+  # Changes the status of a reservation.
+  #
+  # @return Nothing.
   def change_status
     reservation = Reservation.find_by_id params[:id]
     reservation.status = params[:status]
@@ -120,6 +138,9 @@ class ReservationsController < ApplicationController
     self.sort
   end
 
+  # Deletes a Reservation from the DB.
+  #
+  # @return Nothing.
   def delete
     reservation = Reservation.find_by_id params[:id]
     reservation.delete
@@ -127,6 +148,9 @@ class ReservationsController < ApplicationController
     self.sort
   end
 
+  # Searches reservations via ajax.
+  #
+  # @return [Reservation] array.
   def live_search
 
     if !request.env['HTTP_REFERER'].upcase.include? "history".upcase
@@ -160,6 +184,9 @@ class ReservationsController < ApplicationController
     self.sort
   end
 
+  # Displays old reservations.
+  #
+  # @return [Reservation] array.
   def history
     #@bookable = find_bookable
     #@reservations = @bookable.reservations
@@ -167,17 +194,26 @@ class ReservationsController < ApplicationController
     @reservations = @reservations.sort_by {|r| r.bookable.name }
   end
 
+  # Displays any notes added to a given reservation.
+  #
+  # @return [Reservation].
   def show_notes
     reservation = Reservation.find params[:id]
     render :partial => 'show_notes', :layout => false, :locals => { :reservation => reservation }
   end
 
+  # Updates any notes added to a given Reservation.
+  #
+  # @return Nothing.
   def update_notes
     reservation = Reservation.find params[:id]
     reservation.notes = params[:notes]
     reservation.save
   end
 
+  # Checks for all the requisites of a reservation before creating one in the DB.
+  #
+  # @return An error message if any of the requisites is not met, or nothing if all the requisites are fulfilled.
   def check_new_form
 
     if params[:checkin] == nil || params[:checkout] == nil
@@ -207,9 +243,11 @@ class ReservationsController < ApplicationController
       @error_message = "This Asset has already been reserved for those dates"
       return
     end
-
   end
 
+  # Finds out what type of class a bookable (polymorphic class) is
+  #
+  # @return A string representing the bookable type.
   def find_bookable
     params.each do |name, value|
       if name =~ /(.+)_id$/

@@ -1,0 +1,1546 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: ReservationsController</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (R)</a> &raquo; 
+    
+    
+    <span class="title">ReservationsController</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: ReservationsController
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ApplicationController</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ApplicationController</li>
+          
+            <li class="next">ReservationsController</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/controllers/reservations_controller.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Author:</h3>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Emmanuel Pastor
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+
+  
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#change_status-instance_method" title="#change_status (instance method)">- (Object) <strong>change_status</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Changes the status of a reservation.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#check_new_form-instance_method" title="#check_new_form (instance method)">- (Object) <strong>check_new_form</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Checks for all the requisites of a reservation before creating one in the
+DB.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create-instance_method" title="#create (instance method)">- (Object) <strong>create</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates a Reservation in the DB.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete-instance_method" title="#delete (instance method)">- (Object) <strong>delete</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Deletes a Reservation from the DB.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#find_bookable-instance_method" title="#find_bookable (instance method)">- (Object) <strong>find_bookable</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Finds out what type of class a bookable (polymorphic class) is.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#history-instance_method" title="#history (instance method)">- (Reservation) <strong>history</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Displays old reservations.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#index-instance_method" title="#index (instance method)">- (Reservation) <strong>index</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Lists all the Reservations from the DB.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#live_search-instance_method" title="#live_search (instance method)">- (Reservation) <strong>live_search</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Searches reservations via ajax.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">- (Reservation) <strong>new</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Creates a new Reservation instance, ready to be written to the DB.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_by_bookable-instance_method" title="#show_by_bookable (instance method)">- (Reservation) <strong>show_by_bookable</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Search reservations by the polymorphic bookable class.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_notes-instance_method" title="#show_notes (instance method)">- (Reservation) <strong>show_notes</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Displays any notes added to a given reservation.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sort-instance_method" title="#sort (instance method)">- (Reservation) <strong>sort</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Sorts a resultset of reservations.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_notes-instance_method" title="#update_notes (instance method)">- (Object) <strong>update_notes</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Updates any notes added to a given Reservation.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="change_status-instance_method">
+  
+    - (<tt>Object</tt>) <strong>change_status</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Changes the status of a reservation.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Nothing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/reservations_controller.rb', line 128</span>
+
+<span class='def def kw'>def</span> <span class='change_status identifier id'>change_status</span>
+  <span class='reservation identifier id'>reservation</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+  <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='status identifier id'>status</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:status</span><span class='rbrack token'>]</span>
+  <span class='if if kw'>if</span> <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='status identifier id'>status</span> <span class='eq op'>==</span> <span class='Reservation constant id'>Reservation</span><span class='colon2 op'>::</span><span class='STATUS_CHECKED_IN constant id'>STATUS_CHECKED_IN</span>
+    <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='check_in_date identifier id'>check_in_date</span> <span class='assign token'>=</span> <span class='DateTime constant id'>DateTime</span><span class='dot token'>.</span><span class='now identifier id'>now</span>
+    <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='delete_if identifier id'>delete_if</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='x identifier id'>x</span><span class='bitor op'>|</span> <span class='x identifier id'>x</span> <span class='eq op'>==</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span> <span class='rbrace token'>}</span>
+  <span class='elsif elsif kw'>elsif</span> <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='status identifier id'>status</span> <span class='eq op'>==</span> <span class='Reservation constant id'>Reservation</span><span class='colon2 op'>::</span><span class='STATUS_CHECKED_OUT constant id'>STATUS_CHECKED_OUT</span>
+    <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='check_out_date identifier id'>check_out_date</span> <span class='assign token'>=</span> <span class='DateTime constant id'>DateTime</span><span class='dot token'>.</span><span class='now identifier id'>now</span>
+  <span class='end end kw'>end</span>
+  <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='save identifier id'>save</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='sort identifier id'>sort</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="check_new_form-instance_method">
+  
+    - (<tt>Object</tt>) <strong>check_new_form</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Checks for all the requisites of a reservation before creating one in the
+DB.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+An error message if any of the requisites is not met, or nothing if all the
+requisites are fulfilled.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/reservations_controller.rb', line 217</span>
+
+<span class='def def kw'>def</span> <span class='check_new_form identifier id'>check_new_form</span>
+
+  <span class='if if kw'>if</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkin</span><span class='rbrack token'>]</span> <span class='eq op'>==</span> <span class='nil nil kw'>nil</span> <span class='orop op'>||</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkout</span><span class='rbrack token'>]</span> <span class='eq op'>==</span> <span class='nil nil kw'>nil</span>
+    <span class='@error_message ivar id'>@error_message</span> <span class='assign token'>=</span> <span class='string val'>&quot;Dates can't be empty&quot;</span>
+    <span class='return return kw'>return</span>
+  <span class='end end kw'>end</span>
+
+  <span class='in_date identifier id'>in_date</span> <span class='assign token'>=</span> <span class='DateTime constant id'>DateTime</span><span class='dot token'>.</span><span class='strptime identifier id'>strptime</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkin</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='string val'>&quot;%Y-%m-%d %H:%M&quot;</span>
+  <span class='out_date identifier id'>out_date</span> <span class='assign token'>=</span> <span class='DateTime constant id'>DateTime</span><span class='dot token'>.</span><span class='strptime identifier id'>strptime</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkout</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='string val'>&quot;%Y-%m-%d %H:%M&quot;</span>
+
+  <span class='comment val'>#Make sure that check-in happens after check-out</span>
+  <span class='if if kw'>if</span> <span class='out_date identifier id'>out_date</span> <span class='gt op'>&gt;</span> <span class='in_date identifier id'>in_date</span>
+    <span class='@error_message ivar id'>@error_message</span> <span class='assign token'>=</span> <span class='string val'>&quot;Checkout date can't happen after Checkin&quot;</span>
+    <span class='return return kw'>return</span>
+  <span class='end end kw'>end</span>
+
+  <span class='comment val'>#Make sure both are in the future</span>
+  <span class='if if kw'>if</span> <span class='in_date identifier id'>in_date</span> <span class='leq op'>&lt;=</span> <span class='DateTime constant id'>DateTime</span><span class='dot token'>.</span><span class='now identifier id'>now</span> <span class='orop op'>||</span> <span class='out_date identifier id'>out_date</span> <span class='leq op'>&lt;=</span> <span class='DateTime constant id'>DateTime</span><span class='dot token'>.</span><span class='now identifier id'>now</span>
+    <span class='@error_message ivar id'>@error_message</span> <span class='assign token'>=</span> <span class='string val'>&quot;Dates can't be in the past&quot;</span>
+    <span class='return return kw'>return</span>
+  <span class='end end kw'>end</span>
+
+  <span class='comment val'>#Finally check for possible collisions with existing reservations</span>
+  <span class='comment val'>#reservations = Reservation.find :all, :conditions =&gt; [&quot;bookable_id = ? AND bookable_type = ? AND status &lt;&gt; ? AND ((check_out_date BETWEEN ? AND ? OR check_in_date BETWEEN ? AND ?) OR (? BETWEEN check))&quot;, params[:bookable_id], params[:bookable_type], Reservation::STATUS_CHECKED_IN, params[:checkout], params[:checkin], params[:checkout], params[:checkin]]</span>
+  <span class='reservations identifier id'>reservations</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='dot token'>.</span><span class='find identifier id'>find</span> <span class='symbol val'>:all</span><span class='comma token'>,</span> <span class='symbol val'>:conditions</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;bookable_id = ? AND bookable_type = ? AND status &lt;&gt; ? AND ((? &gt;= check_out_date AND ? &lt;= check_in_date) OR (? &lt;= check_in_date AND ? &gt;= check_out_date))&quot;</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:bookable_id</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:bookable_type</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='Reservation constant id'>Reservation</span><span class='colon2 op'>::</span><span class='STATUS_CHECKED_IN constant id'>STATUS_CHECKED_IN</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkout</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkout</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkin</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkin</span><span class='rbrack token'>]</span><span class='rbrack token'>]</span>
+  <span class='if if kw'>if</span> <span class='notop op'>!</span><span class='reservations identifier id'>reservations</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+    <span class='@error_message ivar id'>@error_message</span> <span class='assign token'>=</span> <span class='string val'>&quot;This Asset has already been reserved for those dates&quot;</span>
+    <span class='return return kw'>return</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates a Reservation in the DB.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Nothing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/reservations_controller.rb', line 44</span>
+
+<span class='def def kw'>def</span> <span class='create identifier id'>create</span>
+
+  <span class='if if kw'>if</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkin</span><span class='rbrack token'>]</span> <span class='eq op'>==</span> <span class='nil nil kw'>nil</span> <span class='orop op'>||</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkout</span><span class='rbrack token'>]</span> <span class='eq op'>==</span> <span class='nil nil kw'>nil</span>
+    <span class='@error_message ivar id'>@error_message</span> <span class='assign token'>=</span> <span class='string val'>&quot;Dates can't be empty&quot;</span>
+    <span class='return return kw'>return</span>
+  <span class='end end kw'>end</span>
+
+  <span class='in_date identifier id'>in_date</span> <span class='assign token'>=</span> <span class='DateTime constant id'>DateTime</span><span class='dot token'>.</span><span class='strptime identifier id'>strptime</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkin</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='string val'>&quot;%Y-%m-%d %H:%M&quot;</span>
+  <span class='out_date identifier id'>out_date</span> <span class='assign token'>=</span> <span class='DateTime constant id'>DateTime</span><span class='dot token'>.</span><span class='strptime identifier id'>strptime</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkout</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='string val'>&quot;%Y-%m-%d %H:%M&quot;</span>
+
+  <span class='comment val'>#Make sure that check-in happens after check-out</span>
+  <span class='if if kw'>if</span> <span class='out_date identifier id'>out_date</span> <span class='gt op'>&gt;</span> <span class='in_date identifier id'>in_date</span>
+    <span class='@error_message ivar id'>@error_message</span> <span class='assign token'>=</span> <span class='string val'>&quot;Checkout date can't happen after Checkin&quot;</span>
+    <span class='return return kw'>return</span>
+  <span class='end end kw'>end</span>
+
+  <span class='comment val'>#Make sure both are in the future</span>
+  <span class='if if kw'>if</span> <span class='in_date identifier id'>in_date</span> <span class='lt op'>&lt;</span> <span class='DateTime constant id'>DateTime</span><span class='dot token'>.</span><span class='now identifier id'>now</span> <span class='orop op'>||</span> <span class='out_date identifier id'>out_date</span> <span class='lt op'>&lt;</span> <span class='DateTime constant id'>DateTime</span><span class='dot token'>.</span><span class='now identifier id'>now</span>
+    <span class='@error_message ivar id'>@error_message</span> <span class='assign token'>=</span> <span class='string val'>&quot;Dates can't be in the past&quot;</span>
+    <span class='return return kw'>return</span>
+  <span class='end end kw'>end</span>
+
+  <span class='comment val'>#Finally check for possible collisions with existing reservations</span>
+  <span class='reservations identifier id'>reservations</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='dot token'>.</span><span class='find identifier id'>find</span> <span class='symbol val'>:all</span><span class='comma token'>,</span> <span class='symbol val'>:conditions</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;bookable_id = ? AND bookable_type = ? AND status &lt;&gt; ? AND ((? &gt;= check_out_date AND ? &lt;= check_in_date) OR (? &lt;= check_in_date AND ? &gt;= check_out_date))&quot;</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:bookable_id</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:bookable_type</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='Reservation constant id'>Reservation</span><span class='colon2 op'>::</span><span class='STATUS_CHECKED_IN constant id'>STATUS_CHECKED_IN</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkout</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkout</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkin</span><span class='rbrack token'>]</span><span class='comma token'>,</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkin</span><span class='rbrack token'>]</span><span class='rbrack token'>]</span>
+  <span class='if if kw'>if</span> <span class='notop op'>!</span><span class='reservations identifier id'>reservations</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+    <span class='@error_message ivar id'>@error_message</span> <span class='assign token'>=</span> <span class='string val'>&quot;This Asset has already been reserved for those dates&quot;</span>
+    <span class='return return kw'>return</span>
+  <span class='end end kw'>end</span>
+
+  <span class='reservation identifier id'>reservation</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='bookable_type identifier id'>bookable_type</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:bookable_type</span><span class='rbrack token'>]</span>
+  <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='bookable_id identifier id'>bookable_id</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:bookable_id</span><span class='rbrack token'>]</span>
+  <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='user identifier id'>user</span> <span class='assign token'>=</span> <span class='User constant id'>User</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:user_id</span><span class='rbrack token'>]</span>
+  <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='check_in_date identifier id'>check_in_date</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkin</span><span class='rbrack token'>]</span>
+  <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='check_out_date identifier id'>check_out_date</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:checkout</span><span class='rbrack token'>]</span>
+  <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='status identifier id'>status</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='colon2 op'>::</span><span class='STATUS_READY constant id'>STATUS_READY</span>
+  <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='notes identifier id'>notes</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:notes</span><span class='rbrack token'>]</span>
+  <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='save identifier id'>save</span>
+  <span class='respond_to identifier id'>respond_to</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='format identifier id'>format</span><span class='bitor op'>|</span>
+    <span class='format identifier id'>format</span><span class='dot token'>.</span><span class='html identifier id'>html</span>
+    <span class='format identifier id'>format</span><span class='dot token'>.</span><span class='js identifier id'>js</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="delete-instance_method">
+  
+    - (<tt>Object</tt>) <strong>delete</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Deletes a Reservation from the DB.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Nothing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+144
+145
+146
+147
+148
+149</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/reservations_controller.rb', line 144</span>
+
+<span class='def def kw'>def</span> <span class='delete identifier id'>delete</span>
+  <span class='reservation identifier id'>reservation</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+  <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='delete identifier id'>delete</span>
+  <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='delete_if identifier id'>delete_if</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='x identifier id'>x</span><span class='bitor op'>|</span> <span class='x identifier id'>x</span> <span class='eq op'>==</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span> <span class='rbrace token'>}</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='sort identifier id'>sort</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="find_bookable-instance_method">
+  
+    - (<tt>Object</tt>) <strong>find_bookable</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Finds out what type of class a bookable (polymorphic class) is
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+A string representing the bookable type.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+251
+252
+253
+254
+255
+256
+257</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/reservations_controller.rb', line 251</span>
+
+<span class='def def kw'>def</span> <span class='find_bookable identifier id'>find_bookable</span>
+  <span class='params identifier id'>params</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='name identifier id'>name</span><span class='comma token'>,</span> <span class='value identifier id'>value</span><span class='bitor op'>|</span>
+    <span class='if if kw'>if</span> <span class='name identifier id'>name</span> <span class='match op'>=~</span> <span class='regexp val'>/(.+)_id$/</span>
+      <span class='return return kw'>return</span> <span class='$1 nth_ref id'>$1</span><span class='dot token'>.</span><span class='classify identifier id'>classify</span><span class='dot token'>.</span><span class='constantize identifier id'>constantize</span><span class='dot token'>.</span><span class='find identifier id'>find</span><span class='lparen token'>(</span><span class='value identifier id'>value</span><span class='rparen token'>)</span>
+    <span class='end end kw'>end</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="history-instance_method">
+  
+    - (<tt><a href="Reservation.html" title="Reservation (class)">Reservation</a></tt>) <strong>history</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Displays old reservations.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Reservation.html" title="Reservation (class)">Reservation</a></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+array.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+190
+191
+192
+193
+194
+195</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/reservations_controller.rb', line 190</span>
+
+<span class='def def kw'>def</span> <span class='history identifier id'>history</span>
+  <span class='comment val'>#@bookable = find_bookable</span>
+  <span class='comment val'>#@reservations = @bookable.reservations</span>
+  <span class='@reservations ivar id'>@reservations</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='dot token'>.</span><span class='find identifier id'>find</span> <span class='symbol val'>:all</span><span class='comma token'>,</span> <span class='symbol val'>:conditions</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;status = '&quot;</span> <span class='plus op'>+</span> <span class='Reservation constant id'>Reservation</span><span class='colon2 op'>::</span><span class='STATUS_CHECKED_IN constant id'>STATUS_CHECKED_IN</span> <span class='plus op'>+</span> <span class='string val'>&quot;'&quot;</span>
+  <span class='@reservations ivar id'>@reservations</span> <span class='assign token'>=</span> <span class='@reservations ivar id'>@reservations</span><span class='dot token'>.</span><span class='sort_by identifier id'>sort_by</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span> <span class='r identifier id'>r</span><span class='dot token'>.</span><span class='bookable identifier id'>bookable</span><span class='dot token'>.</span><span class='name identifier id'>name</span> <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="index-instance_method">
+  
+    - (<tt><a href="Reservation.html" title="Reservation (class)">Reservation</a></tt>) <strong>index</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Lists all the Reservations from the DB.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Reservation.html" title="Reservation (class)">Reservation</a></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+array.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/reservations_controller.rb', line 9</span>
+
+<span class='def def kw'>def</span> <span class='index identifier id'>index</span>
+  <span class='fifteen_days_ago identifier id'>fifteen_days_ago</span> <span class='assign token'>=</span> <span class='DateTime constant id'>DateTime</span><span class='dot token'>.</span><span class='now identifier id'>now</span> <span class='minus op'>-</span> <span class='integer val'>15</span>
+  <span class='next_fifteen_days identifier id'>next_fifteen_days</span> <span class='assign token'>=</span> <span class='DateTime constant id'>DateTime</span><span class='dot token'>.</span><span class='now identifier id'>now</span> <span class='plus op'>+</span> <span class='integer val'>15</span>
+  <span class='@reservations ivar id'>@reservations</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='dot token'>.</span><span class='find identifier id'>find</span> <span class='symbol val'>:all</span><span class='comma token'>,</span> <span class='symbol val'>:conditions</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;status &lt;&gt; '&quot;</span> <span class='plus op'>+</span> <span class='Reservation constant id'>Reservation</span><span class='colon2 op'>::</span><span class='STATUS_CHECKED_IN constant id'>STATUS_CHECKED_IN</span> <span class='plus op'>+</span> <span class='string val'>&quot;' AND (check_in_date BETWEEN ? AND ? OR check_out_date BETWEEN ? AND ?)&quot;</span><span class='comma token'>,</span> <span class='fifteen_days_ago identifier id'>fifteen_days_ago</span><span class='comma token'>,</span> <span class='next_fifteen_days identifier id'>next_fifteen_days</span><span class='comma token'>,</span> <span class='fifteen_days_ago identifier id'>fifteen_days_ago</span><span class='comma token'>,</span> <span class='next_fifteen_days identifier id'>next_fifteen_days</span><span class='rbrack token'>]</span>
+  <span class='@reservations ivar id'>@reservations</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span>
+    <span class='if if kw'>if</span> <span class='lparen token'>(</span><span class='Time constant id'>Time</span><span class='dot token'>.</span><span class='now identifier id'>now</span> <span class='gt op'>&gt;</span> <span class='r identifier id'>r</span><span class='dot token'>.</span><span class='check_out_date identifier id'>check_out_date</span>  <span class='andop op'>&amp;&amp;</span> <span class='r identifier id'>r</span><span class='dot token'>.</span><span class='status identifier id'>status</span> <span class='neq op'>!=</span> <span class='Reservation constant id'>Reservation</span><span class='colon2 op'>::</span><span class='STATUS_CHECKED_OUT constant id'>STATUS_CHECKED_OUT</span><span class='rparen token'>)</span>
+      <span class='r identifier id'>r</span><span class='dot token'>.</span><span class='status identifier id'>status</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='colon2 op'>::</span><span class='STATUS_MISSING_PICKUP_DATE constant id'>STATUS_MISSING_PICKUP_DATE</span>
+    <span class='end end kw'>end</span>
+    <span class='if if kw'>if</span> <span class='Time constant id'>Time</span><span class='dot token'>.</span><span class='now identifier id'>now</span> <span class='gt op'>&gt;</span> <span class='r identifier id'>r</span><span class='dot token'>.</span><span class='check_in_date identifier id'>check_in_date</span>
+      <span class='r identifier id'>r</span><span class='dot token'>.</span><span class='status identifier id'>status</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='colon2 op'>::</span><span class='STATUS_MISSING_RETURN_DATE constant id'>STATUS_MISSING_RETURN_DATE</span>
+    <span class='end end kw'>end</span>
+    <span class='r identifier id'>r</span><span class='dot token'>.</span><span class='save identifier id'>save</span>
+  <span class='end end kw'>end</span>
+  <span class='@reservations ivar id'>@reservations</span> <span class='assign token'>=</span> <span class='@reservations ivar id'>@reservations</span><span class='dot token'>.</span><span class='sort_by identifier id'>sort_by</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span> <span class='r identifier id'>r</span><span class='dot token'>.</span><span class='bookable identifier id'>bookable</span><span class='dot token'>.</span><span class='name identifier id'>name</span> <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="live_search-instance_method">
+  
+    - (<tt><a href="Reservation.html" title="Reservation (class)">Reservation</a></tt>) <strong>live_search</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Searches reservations via ajax.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Reservation.html" title="Reservation (class)">Reservation</a></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+array.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/reservations_controller.rb', line 154</span>
+
+<span class='def def kw'>def</span> <span class='live_search identifier id'>live_search</span>
+
+  <span class='if if kw'>if</span> <span class='notop op'>!</span><span class='request identifier id'>request</span><span class='dot token'>.</span><span class='env identifier id'>env</span><span class='lbrack token'>[</span><span class='string val'>'HTTP_REFERER'</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='upcase identifier id'>upcase</span><span class='dot token'>.</span><span class='include? fid id'>include?</span> <span class='string val'>&quot;history&quot;</span><span class='dot token'>.</span><span class='upcase identifier id'>upcase</span>
+    <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='dot token'>.</span><span class='find identifier id'>find</span> <span class='symbol val'>:all</span><span class='comma token'>,</span> <span class='symbol val'>:conditions</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;status &lt;&gt; '&quot;</span> <span class='plus op'>+</span> <span class='Reservation constant id'>Reservation</span><span class='colon2 op'>::</span><span class='STATUS_CHECKED_IN constant id'>STATUS_CHECKED_IN</span> <span class='plus op'>+</span> <span class='string val'>&quot;'&quot;</span>
+  <span class='else else kw'>else</span>
+    <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='dot token'>.</span><span class='find identifier id'>find</span> <span class='symbol val'>:all</span><span class='comma token'>,</span> <span class='symbol val'>:conditions</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;status = '&quot;</span> <span class='plus op'>+</span> <span class='Reservation constant id'>Reservation</span><span class='colon2 op'>::</span><span class='STATUS_CHECKED_IN constant id'>STATUS_CHECKED_IN</span> <span class='plus op'>+</span> <span class='string val'>&quot;'&quot;</span>      
+  <span class='end end kw'>end</span>
+  <span class='if if kw'>if</span> <span class='notop op'>!</span><span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:asset_name</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+    <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='delete_if identifier id'>delete_if</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='x identifier id'>x</span><span class='bitor op'>|</span> <span class='notop op'>!</span><span class='x identifier id'>x</span><span class='dot token'>.</span><span class='bookable identifier id'>bookable</span><span class='dot token'>.</span><span class='name identifier id'>name</span><span class='dot token'>.</span><span class='upcase identifier id'>upcase</span><span class='dot token'>.</span><span class='include? fid id'>include?</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:asset_name</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='upcase identifier id'>upcase</span> <span class='rbrace token'>}</span>
+  <span class='end end kw'>end</span>
+  <span class='if if kw'>if</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:own</span><span class='rbrack token'>]</span> <span class='neq op'>!=</span> <span class='nil nil kw'>nil</span>
+    <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='delete_if identifier id'>delete_if</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='x identifier id'>x</span><span class='bitor op'>|</span> <span class='x identifier id'>x</span><span class='dot token'>.</span><span class='user identifier id'>user</span><span class='dot token'>.</span><span class='id identifier id'>id</span> <span class='neq op'>!=</span> <span class='User constant id'>User</span><span class='dot token'>.</span><span class='current identifier id'>current</span><span class='dot token'>.</span><span class='id identifier id'>id</span> <span class='rbrace token'>}</span>     
+  <span class='else else kw'>else</span>
+    <span class='if if kw'>if</span> <span class='notop op'>!</span><span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:user_firstname</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+      <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='delete_if identifier id'>delete_if</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='x identifier id'>x</span><span class='bitor op'>|</span> <span class='notop op'>!</span><span class='x identifier id'>x</span><span class='dot token'>.</span><span class='user identifier id'>user</span><span class='dot token'>.</span><span class='firstname identifier id'>firstname</span><span class='dot token'>.</span><span class='upcase identifier id'>upcase</span><span class='dot token'>.</span><span class='include? fid id'>include?</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:user_firstname</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='upcase identifier id'>upcase</span> <span class='rbrace token'>}</span>
+    <span class='end end kw'>end</span>
+    <span class='if if kw'>if</span> <span class='notop op'>!</span><span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:user_lastname</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+      <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='delete_if identifier id'>delete_if</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='x identifier id'>x</span><span class='bitor op'>|</span> <span class='notop op'>!</span><span class='x identifier id'>x</span><span class='dot token'>.</span><span class='user identifier id'>user</span><span class='dot token'>.</span><span class='lastname identifier id'>lastname</span><span class='dot token'>.</span><span class='upcase identifier id'>upcase</span><span class='dot token'>.</span><span class='include? fid id'>include?</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:user_lastname</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='upcase identifier id'>upcase</span> <span class='rbrace token'>}</span>
+    <span class='end end kw'>end</span>
+  <span class='end end kw'>end</span>
+  <span class='if if kw'>if</span> <span class='notop op'>!</span><span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:user_email</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+    <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='delete_if identifier id'>delete_if</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='x identifier id'>x</span><span class='bitor op'>|</span> <span class='notop op'>!</span><span class='x identifier id'>x</span><span class='dot token'>.</span><span class='user identifier id'>user</span><span class='dot token'>.</span><span class='mail identifier id'>mail</span><span class='dot token'>.</span><span class='upcase identifier id'>upcase</span><span class='dot token'>.</span><span class='include? fid id'>include?</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:user_email</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='upcase identifier id'>upcase</span> <span class='rbrace token'>}</span>
+  <span class='end end kw'>end</span>
+  <span class='if if kw'>if</span> <span class='notop op'>!</span><span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:days</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='empty? fid id'>empty?</span>
+    <span class='days_ago identifier id'>days_ago</span> <span class='assign token'>=</span> <span class='lparen token'>(</span><span class='DateTime constant id'>DateTime</span><span class='dot token'>.</span><span class='now identifier id'>now</span> <span class='minus op'>-</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:days</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='to_i identifier id'>to_i</span><span class='rparen token'>)</span>
+    <span class='days_from_now identifier id'>days_from_now</span> <span class='assign token'>=</span> <span class='lparen token'>(</span><span class='DateTime constant id'>DateTime</span><span class='dot token'>.</span><span class='now identifier id'>now</span> <span class='plus op'>+</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:days</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='to_i identifier id'>to_i</span><span class='rparen token'>)</span>
+    <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='delete_if identifier id'>delete_if</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='x identifier id'>x</span><span class='bitor op'>|</span> <span class='lparen token'>(</span><span class='x identifier id'>x</span><span class='dot token'>.</span><span class='check_out_date identifier id'>check_out_date</span> <span class='lt op'>&lt;</span> <span class='days_ago identifier id'>days_ago</span> <span class='orop op'>||</span> <span class='x identifier id'>x</span><span class='dot token'>.</span><span class='check_out_date identifier id'>check_out_date</span> <span class='gt op'>&gt;</span> <span class='days_from_now identifier id'>days_from_now</span><span class='rparen token'>)</span> <span class='andop op'>&amp;&amp;</span> <span class='lparen token'>(</span><span class='x identifier id'>x</span><span class='dot token'>.</span><span class='check_in_date identifier id'>check_in_date</span> <span class='lt op'>&lt;</span> <span class='days_ago identifier id'>days_ago</span> <span class='orop op'>||</span> <span class='x identifier id'>x</span><span class='dot token'>.</span><span class='check_in_date identifier id'>check_in_date</span> <span class='gt op'>&gt;</span> <span class='days_from_now identifier id'>days_from_now</span><span class='rparen token'>)</span> <span class='rbrace token'>}</span>
+  <span class='end end kw'>end</span>
+  <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:criteria</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='string val'>&quot;ASSET_NAME&quot;</span>
+  <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:direction</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='string val'>&quot;DESC&quot;</span>
+  <span class='self self kw'>self</span><span class='dot token'>.</span><span class='sort identifier id'>sort</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="new-instance_method">
+  
+    - (<tt><a href="Reservation.html" title="Reservation (class)">Reservation</a></tt>) <strong>new</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Creates a new Reservation instance, ready to be written to the DB.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Reservation.html" title="Reservation (class)">Reservation</a></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/reservations_controller.rb', line 28</span>
+
+<span class='def def kw'>def</span> <span class='new identifier id'>new</span>
+  <span class='@reservation ivar id'>@reservation</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='@object_type ivar id'>@object_type</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:object_type</span><span class='rbrack token'>]</span>
+  <span class='if if kw'>if</span> <span class='@object_type ivar id'>@object_type</span> <span class='eq op'>==</span> <span class='string val'>&quot;Asset&quot;</span>
+    <span class='@object ivar id'>@object</span> <span class='assign token'>=</span> <span class='Asset constant id'>Asset</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+  <span class='else else kw'>else</span>
+    <span class='@object ivar id'>@object</span> <span class='assign token'>=</span> <span class='AssetGroup constant id'>AssetGroup</span><span class='dot token'>.</span><span class='find_by_id identifier id'>find_by_id</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+  <span class='end end kw'>end</span>
+  <span class='@users ivar id'>@users</span> <span class='assign token'>=</span> <span class='User constant id'>User</span><span class='dot token'>.</span><span class='find identifier id'>find</span><span class='lparen token'>(</span><span class='symbol val'>:all</span><span class='rparen token'>)</span>
+  <span class='render identifier id'>render</span> <span class='string val'>'new'</span><span class='comma token'>,</span> <span class='symbol val'>:layout=</span><span class='gt op'>&gt;</span><span class='false false kw'>false</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="show_by_bookable-instance_method">
+  
+    - (<tt><a href="Reservation.html" title="Reservation (class)">Reservation</a></tt>) <strong>show_by_bookable</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Search reservations by the polymorphic bookable class.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Reservation.html" title="Reservation (class)">Reservation</a></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+91
+92
+93
+94
+95
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/reservations_controller.rb', line 91</span>
+
+<span class='def def kw'>def</span> <span class='show_by_bookable identifier id'>show_by_bookable</span>
+  <span class='@reservations ivar id'>@reservations</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='dot token'>.</span><span class='find identifier id'>find</span> <span class='symbol val'>:all</span><span class='comma token'>,</span> <span class='symbol val'>:conditions</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>&quot;bookable_id = '&quot;</span> <span class='plus op'>+</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:bookable_id</span><span class='rbrack token'>]</span> <span class='plus op'>+</span> <span class='string val'>&quot;' AND bookable_type = '&quot;</span> <span class='plus op'>+</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:bookable_type</span><span class='rbrack token'>]</span> <span class='plus op'>+</span> <span class='string val'>&quot;' AND status &lt;&gt; '&quot;</span> <span class='plus op'>+</span> <span class='Reservation constant id'>Reservation</span><span class='colon2 op'>::</span><span class='STATUS_CHECKED_IN constant id'>STATUS_CHECKED_IN</span> <span class='plus op'>+</span> <span class='string val'>&quot;'&quot;</span>
+  <span class='@criteria ivar id'>@criteria</span> <span class='assign token'>=</span> <span class='string val'>'ASSET_NAME'</span>
+  <span class='@direction ivar id'>@direction</span> <span class='assign token'>=</span> <span class='string val'>'DESC'</span>
+  <span class='render identifier id'>render</span> <span class='string val'>'show_by_bookable'</span><span class='comma token'>,</span> <span class='symbol val'>:layout</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='false false kw'>false</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="show_notes-instance_method">
+  
+    - (<tt><a href="Reservation.html" title="Reservation (class)">Reservation</a></tt>) <strong>show_notes</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Displays any notes added to a given reservation.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Reservation.html" title="Reservation (class)">Reservation</a></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+200
+201
+202
+203</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/reservations_controller.rb', line 200</span>
+
+<span class='def def kw'>def</span> <span class='show_notes identifier id'>show_notes</span>
+  <span class='reservation identifier id'>reservation</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='dot token'>.</span><span class='find identifier id'>find</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+  <span class='render identifier id'>render</span> <span class='symbol val'>:partial</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'show_notes'</span><span class='comma token'>,</span> <span class='symbol val'>:layout</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='false false kw'>false</span><span class='comma token'>,</span> <span class='symbol val'>:locals</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrace token'>{</span> <span class='symbol val'>:reservation</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='reservation identifier id'>reservation</span> <span class='rbrace token'>}</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="sort-instance_method">
+  
+    - (<tt><a href="Reservation.html" title="Reservation (class)">Reservation</a></tt>) <strong>sort</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Sorts a resultset of reservations.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><a href="Reservation.html" title="Reservation (class)">Reservation</a></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+array.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/reservations_controller.rb', line 101</span>
+
+<span class='def def kw'>def</span> <span class='sort identifier id'>sort</span>
+  <span class='resultset identifier id'>resultset</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:resultset</span><span class='rbrack token'>]</span>
+  <span class='criteria identifier id'>criteria</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:criteria</span><span class='rbrack token'>]</span>
+  <span class='direction identifier id'>direction</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:direction</span><span class='rbrack token'>]</span>
+  <span class='reservations identifier id'>reservations</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='dot token'>.</span><span class='find identifier id'>find</span><span class='lparen token'>(</span><span class='resultset identifier id'>resultset</span><span class='rparen token'>)</span>
+  <span class='if if kw'>if</span> <span class='criteria identifier id'>criteria</span> <span class='eq op'>==</span> <span class='string val'>'ASSET_NAME'</span>
+    <span class='reservations identifier id'>reservations</span> <span class='assign token'>=</span> <span class='reservations identifier id'>reservations</span><span class='dot token'>.</span><span class='sort_by identifier id'>sort_by</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span> <span class='r identifier id'>r</span><span class='dot token'>.</span><span class='bookable identifier id'>bookable</span><span class='dot token'>.</span><span class='name identifier id'>name</span> <span class='rbrace token'>}</span>
+  <span class='elsif elsif kw'>elsif</span> <span class='criteria identifier id'>criteria</span> <span class='eq op'>==</span> <span class='string val'>'USER_NAME'</span>
+    <span class='reservations identifier id'>reservations</span> <span class='assign token'>=</span> <span class='reservations identifier id'>reservations</span><span class='dot token'>.</span><span class='sort_by identifier id'>sort_by</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span> <span class='r identifier id'>r</span><span class='dot token'>.</span><span class='user identifier id'>user</span><span class='dot token'>.</span><span class='firstname identifier id'>firstname</span> <span class='rbrace token'>}</span>
+  <span class='elsif elsif kw'>elsif</span> <span class='criteria identifier id'>criteria</span> <span class='eq op'>==</span> <span class='string val'>'CHECK_OUT_DATE'</span>
+    <span class='reservations identifier id'>reservations</span> <span class='assign token'>=</span> <span class='reservations identifier id'>reservations</span><span class='dot token'>.</span><span class='sort_by identifier id'>sort_by</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span> <span class='r identifier id'>r</span><span class='dot token'>.</span><span class='check_out_date identifier id'>check_out_date</span> <span class='rbrace token'>}</span>
+  <span class='elsif elsif kw'>elsif</span> <span class='criteria identifier id'>criteria</span> <span class='eq op'>==</span> <span class='string val'>'CHECK_IN_DATE'</span>
+    <span class='reservations identifier id'>reservations</span> <span class='assign token'>=</span> <span class='reservations identifier id'>reservations</span><span class='dot token'>.</span><span class='sort_by identifier id'>sort_by</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span> <span class='r identifier id'>r</span><span class='dot token'>.</span><span class='check_in_date identifier id'>check_in_date</span> <span class='rbrace token'>}</span>
+  <span class='elsif elsif kw'>elsif</span> <span class='criteria identifier id'>criteria</span> <span class='eq op'>==</span> <span class='string val'>'STATUS'</span>
+    <span class='reservations identifier id'>reservations</span> <span class='assign token'>=</span> <span class='reservations identifier id'>reservations</span><span class='dot token'>.</span><span class='sort_by identifier id'>sort_by</span> <span class='lbrace token'>{</span><span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span> <span class='r identifier id'>r</span><span class='dot token'>.</span><span class='status identifier id'>status</span> <span class='rbrace token'>}</span>
+  <span class='end end kw'>end</span>
+
+  <span class='if if kw'>if</span> <span class='direction identifier id'>direction</span> <span class='eq op'>==</span> <span class='string val'>'ASC'</span>
+    <span class='reservations identifier id'>reservations</span> <span class='assign token'>=</span> <span class='reservations identifier id'>reservations</span><span class='dot token'>.</span><span class='reverse identifier id'>reverse</span>
+  <span class='end end kw'>end</span>
+  <span class='render identifier id'>render</span> <span class='symbol val'>:partial</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='string val'>'sorted_list_of_reservations'</span><span class='comma token'>,</span> <span class='symbol val'>:layout</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='false false kw'>false</span><span class='comma token'>,</span> <span class='symbol val'>:locals</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrace token'>{</span> <span class='symbol val'>:reservations</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='reservations identifier id'>reservations</span><span class='comma token'>,</span> <span class='symbol val'>:criteria</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='criteria identifier id'>criteria</span><span class='comma token'>,</span> <span class='symbol val'>:direction</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='direction identifier id'>direction</span> <span class='rbrace token'>}</span>
+  
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="update_notes-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_notes</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Updates any notes added to a given Reservation.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Nothing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+208
+209
+210
+211
+212</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/reservations_controller.rb', line 208</span>
+
+<span class='def def kw'>def</span> <span class='update_notes identifier id'>update_notes</span>
+  <span class='reservation identifier id'>reservation</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='dot token'>.</span><span class='find identifier id'>find</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:id</span><span class='rbrack token'>]</span>
+  <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='notes identifier id'>notes</span> <span class='assign token'>=</span> <span class='params identifier id'>params</span><span class='lbrack token'>[</span><span class='symbol val'>:notes</span><span class='rbrack token'>]</span>
+  <span class='reservation identifier id'>reservation</span><span class='dot token'>.</span><span class='save identifier id'>save</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Jul 29 01:34:33 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
+  0.5.8 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

@@ -1,27 +1,43 @@
+# @author Emmanuel Pastor
 class AssetsController < ApplicationController
   unloadable
   helper :custom_fields
   include CustomFieldsHelper
   before_filter :require_admin, :except => [:index, :show, :show_attachment, :show_image]
 
+  # Lists all the Assets from the DB.
+  #
+  # @return [Asset] array.
   def index
     @assets = Asset.find:all
   end
 
+  # Displays an Asset from the DB.
+  #
+  # @return [Asset].
   def show
     @asset = Asset.find_by_id params[:id]
     @user = User.find_by_id session[:user_id]
   end
 
+  # Creates a new Asset Instance, ready to be saved to the DB.
+  #
+  # @return [Asset].
   def new
     @asset = Asset.new
   end
 
+  # Saves an Asset to the DB.
+  #
+  # @return Nothing.
   def create
     @asset = Asset.create params[:asset]
     redirect_to :action => "edit", :id => @asset
   end
 
+  # Clones an existing Asset from the DB.
+  #
+  # @return [Asset].
   def clone
     existing_asset = Asset.find_by_id params[:existing_custom_field]
     @asset = Asset.new(existing_asset.attributes.except("id"))
@@ -31,6 +47,9 @@ class AssetsController < ApplicationController
     redirect_to :action => "edit", :id => @asset
   end
 
+  # Gets all the data needed to edit an Asset.
+  #
+  # @return [Asset].
   def edit
     @asset = Asset.find_by_id params[:id]
     @user = User.find_by_id session[:user_id]
@@ -44,6 +63,9 @@ class AssetsController < ApplicationController
     end
   end
 
+  # Saves an Asset to the DB.
+  #
+  # @return Nothing.
   def update
     @asset = Asset.find params[:id]
     @asset.update_attributes params[:asset]
@@ -52,12 +74,18 @@ class AssetsController < ApplicationController
 
   end
 
+  # Deletes an Asset from the DB.
+  #
+  # @return Nothing.
   def delete
     asset = Asset.find params[:id]
     asset.delete
     #render :partial => 'asset_types/assets_list', :layout => false, :locals => { :asset_types => AssetType.all, :user => User.current }
   end
 
+  # Creates an Asset CustomField.
+  #
+  # @return Nothing.
   def create_custom_field
     asset = Asset.find_by_id params[:id]
     if params[:existing_custom_field] != nil
@@ -73,6 +101,9 @@ class AssetsController < ApplicationController
     redirect_to :action => "edit", :id => asset
   end
 
+  # Removes a CustomField from an Asset.
+  #
+  # @return Nothing.
   def remove_custom_field
     asset = Asset.find_by_id params[:id]
     custom_field = AssetCustomField.find_by_id params[:existing_custom_field]
@@ -81,6 +112,9 @@ class AssetsController < ApplicationController
     redirect_to :action => "edit", :id => asset
   end
 
+  # Modifies the collection of attachments of an Asset.
+  #
+  # @return Nothing.
   def edit_attachments
     @asset = Asset.find_by_id params[:id]
     if request.post?
@@ -91,6 +125,9 @@ class AssetsController < ApplicationController
     end
   end
 
+  # Removes an Attachment from an Asset.
+  #
+  # @return Nothing.
   def remove_attachment
     attachment = Attachment.find_by_id params[:attachment_id]
     attachment.destroy
@@ -99,6 +136,9 @@ class AssetsController < ApplicationController
     redirect_to :controller => 'assets', :action => 'edit_attachments', :id => @asset
   end
 
+  # Changes the privacy settings of an Attachment.
+  #
+  # @return Nothing.
   def change_attachment_privacy
     attachment = Attachment.find_by_id params[:attachment_id]
     if attachment.is_private
@@ -112,6 +152,9 @@ class AssetsController < ApplicationController
     redirect_to :controller => 'assets', :action => 'edit_attachments', :id => @asset
   end
 
+  # Displays an Attachment from the DB.
+  #
+  # @return [Attachment].
   def show_attachment
     @attachment = Attachment.find_by_id params[:id]
     if @attachment != nil && (!@attachment.is_private || (@attachment.is_private && User.current.admin))
@@ -123,6 +166,9 @@ class AssetsController < ApplicationController
     end
   end
 
+  # Displays an attached asset image.
+  #
+  # @return a valid image bitstream.
   def show_image
     asset = Asset.find_by_id params[:id]
     if asset != nil
@@ -142,6 +188,9 @@ class AssetsController < ApplicationController
     end
   end
 
+  # Adds a new Attachment to an Asset.
+  #
+  # @return Nothing.
   def add_attachment
     @asset = Asset.find_by_id params[:id]
 
@@ -153,6 +202,9 @@ class AssetsController < ApplicationController
   end
 
   private
+    # Detects the content_type of an attachment.
+    #
+    # @return A valid content_type header.
     def detect_content_type(attachment)
       content_type = attachment.content_type
       if content_type.blank?

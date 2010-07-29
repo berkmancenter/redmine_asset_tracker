@@ -1,5 +1,9 @@
+# @author Emmanuel Pastor
 class Mailman < ActionMailer::Base
 
+  # Sends an Email reminder to all the users who missed a pickup date
+  #
+  # @return Nothing.
   def check_out_reminder(reservation)
     recipients reservation.user.mail
     from       "Berkman Robot<robot@cyber.law.harvard.com>"
@@ -9,6 +13,9 @@ class Mailman < ActionMailer::Base
     body       :reservation => reservation
   end
 
+  # Sends an Email reminder to all the users who missed a return date
+  #
+  # @return Nothing.
   def check_in_reminder(reservation)
     recipients reservation.user.mail
     from       "Berkman Robot<robot@cyber.law.harvard.com>"

@@ -1,3 +1,4 @@
+# @author Emmanuel Pastor
 class Asset < ActiveRecord::Base
   belongs_to :asset_type
   belongs_to :asset_group
@@ -11,6 +12,9 @@ class Asset < ActiveRecord::Base
   acts_as_attachable :view_permission => :view_files,
                      :delete_permission => :manage_files
 
+  # Attaches a File to an Asset.
+  #
+  # @return Nothing.
   def attach_files(attachments)
     attached = []
     unsaved = []

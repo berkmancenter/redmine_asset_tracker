@@ -1,3 +1,4 @@
+# @author Emmanuel Pastor
 class AssetGroup < ActiveRecord::Base
   belongs_to :asset_type
   has_many :assets
@@ -5,6 +6,9 @@ class AssetGroup < ActiveRecord::Base
   acts_as_attachable :view_permission => :view_files,
                      :delete_permission => :manage_files
 
+  # Attaches a File to an AssetGroup.
+  #
+  # @return Nothing.
   def attach_files(attachments)
     attached = []
     unsaved = []

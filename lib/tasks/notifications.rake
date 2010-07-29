@@ -1,3 +1,4 @@
+# @author Emmanuel Pastor
 namespace :notifications do
   namespace :send do
     desc "Send email reminders to those who haven't checked in or out an asset due time"

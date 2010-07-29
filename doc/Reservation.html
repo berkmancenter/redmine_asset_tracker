@@ -1,0 +1,444 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: Reservation</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (R)</a> &raquo; 
+    
+    
+    <span class="title">Reservation</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Reservation
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ActiveRecord::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next">Reservation</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/models/reservation.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Author:</h3>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Emmanuel Pastor
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="STATUS_READY-constant" class="">STATUS_READY =
+          
+        </dt>
+        <dd><pre class="code"><span class='string val'>'Ready'</span>
+</pre></dd>
+      
+        <dt id="STATUS_CHECKED_OUT-constant" class="">STATUS_CHECKED_OUT =
+          
+        </dt>
+        <dd><pre class="code"><span class='string val'>'Checked Out'</span>
+</pre></dd>
+      
+        <dt id="STATUS_CHECKED_IN-constant" class="">STATUS_CHECKED_IN =
+          
+        </dt>
+        <dd><pre class="code"><span class='string val'>'Checked In'</span>
+</pre></dd>
+      
+        <dt id="STATUS_MISSING_PICKUP_DATE-constant" class="">STATUS_MISSING_PICKUP_DATE =
+          
+        </dt>
+        <dd><pre class="code"><span class='string val'>'Missing Pick-up date'</span>
+</pre></dd>
+      
+        <dt id="STATUS_MISSING_RETURN_DATE-constant" class="">STATUS_MISSING_RETURN_DATE =
+          
+        </dt>
+        <dd><pre class="code"><span class='string val'>'Missing Return date'</span>
+</pre></dd>
+      
+    </dl>
+  
+
+
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send_check_in_reminder-class_method" title="send_check_in_reminder (class method)">+ (Object) <strong>send_check_in_reminder</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Sends an Email reminder to all the users who missed a return date.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send_check_out_reminder-class_method" title="send_check_out_reminder (class method)">+ (Object) <strong>send_check_out_reminder</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Sends an Email reminder to all the users who missed a pickup date.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#send_reminders-class_method" title="send_reminders (class method)">+ (Object) <strong>send_reminders</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Sends an Email reminder to all the users who missed a pickup or a return
+date.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="send_check_in_reminder-class_method">
+  
+    + (<tt>Object</tt>) <strong>send_check_in_reminder</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Sends an Email reminder to all the users who missed a return date
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Nothing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/reservation.rb', line 33</span>
+
+<span class='def def kw'>def</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send_check_in_reminder identifier id'>send_check_in_reminder</span>
+  <span class='missed_reservations identifier id'>missed_reservations</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='dot token'>.</span><span class='find identifier id'>find</span> <span class='symbol val'>:all</span><span class='comma token'>,</span> <span class='symbol val'>:conditions</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;status = ? AND check_in_date &gt; ?&quot;</span><span class='comma token'>,</span> <span class='STATUS_CHECKED_OUT constant id'>STATUS_CHECKED_OUT</span><span class='comma token'>,</span> <span class='DateTime constant id'>DateTime</span><span class='dot token'>.</span><span class='now identifier id'>now</span><span class='rbrack token'>]</span>
+  <span class='missed_reservations identifier id'>missed_reservations</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span>
+    <span class='Mailman constant id'>Mailman</span><span class='dot token'>.</span><span class='deliver_check_in_reminder identifier id'>deliver_check_in_reminder</span> <span class='r identifier id'>r</span>
+  <span class='end end kw'>end</span> 
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="send_check_out_reminder-class_method">
+  
+    + (<tt>Object</tt>) <strong>send_check_out_reminder</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Sends an Email reminder to all the users who missed a pickup date
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Nothing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/reservation.rb', line 23</span>
+
+<span class='def def kw'>def</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send_check_out_reminder identifier id'>send_check_out_reminder</span>
+  <span class='missed_reservations identifier id'>missed_reservations</span> <span class='assign token'>=</span> <span class='Reservation constant id'>Reservation</span><span class='dot token'>.</span><span class='find identifier id'>find</span> <span class='symbol val'>:all</span><span class='comma token'>,</span> <span class='symbol val'>:conditions</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='lbrack token'>[</span><span class='string val'>&quot;status &lt;&gt; ? AND status &lt;&gt; ? AND check_out_date &gt; ?&quot;</span><span class='comma token'>,</span> <span class='STATUS_CHECKED_OUT constant id'>STATUS_CHECKED_OUT</span><span class='comma token'>,</span> <span class='STATUS_CHECKED_IN constant id'>STATUS_CHECKED_IN</span><span class='comma token'>,</span> <span class='DateTime constant id'>DateTime</span><span class='dot token'>.</span><span class='now identifier id'>now</span><span class='rbrack token'>]</span>
+  <span class='missed_reservations identifier id'>missed_reservations</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='r identifier id'>r</span><span class='bitor op'>|</span>
+    <span class='Mailman constant id'>Mailman</span><span class='dot token'>.</span><span class='deliver_check_out_reminder identifier id'>deliver_check_out_reminder</span> <span class='r identifier id'>r</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="send_reminders-class_method">
+  
+    + (<tt>Object</tt>) <strong>send_reminders</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Sends an Email reminder to all the users who missed a pickup or a return
+date
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'><p>
+Nothing.
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/reservation.rb', line 15</span>
+
+<span class='def def kw'>def</span> <span class='self self kw'>self</span><span class='dot token'>.</span><span class='send_reminders identifier id'>send_reminders</span>
+  <span class='send_check_out_reminder identifier id'>send_check_out_reminder</span>
+  <span class='send_check_in_reminder identifier id'>send_check_in_reminder</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Jul 29 01:34:32 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool">yard</a>
+  0.5.8 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

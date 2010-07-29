@@ -1,14 +1,21 @@
+# @author Emmanuel Pastor
 class AssetTypesController < ApplicationController
   unloadable
   helper :custom_fields
   include CustomFieldsHelper
   before_filter :require_admin, :except => :index
 
+  # Lists all the Asset Types from the Database.
+  #
+  # @return [AssetType] Array.
   def index
     @asset_types = AssetType.find :all
     @user = User.find_by_id session[:user_id]    
   end
 
+  # Creates a new AssetType instance, ready to be written in the DB.
+  #
+  # @return [AssetType].
   def new
     @asset_type = AssetType.new
     @asset_id =  params[:asset_id]
@@ -16,6 +23,9 @@ class AssetTypesController < ApplicationController
     render 'new', :layout=>false
   end
 
+  # Creates a new AssetType in the DB.
+  #
+  # @return Nothing.
   def create
     @asset_type = AssetType.create params[:asset_type]
     @referer = params[:referer]
@@ -32,6 +42,9 @@ class AssetTypesController < ApplicationController
     end
   end
 
+  # Deletes an AssetType from the DB.
+  #
+  # @return Nothing.
   def delete
     asset_type = AssetType.find_by_id params[:id]
     assets = Asset.find_all_by_asset_type_id asset_type.id
@@ -44,10 +57,16 @@ class AssetTypesController < ApplicationController
     redirect_to :controller => 'asset_types', :action => 'index'
   end
 
+  # Gets an AssetType from the DB, ready to be edited and later saved back.
+  #
+  # @return [AssetType].
   def edit
     @asset_type = AssetType.find_by_id params[:id]
   end
 
+  # Saves the changes of an AssetType to the DB.
+  #
+  # @return Nothing.
   def update
     @asset_type = AssetType.find params[:id]
     @asset_type.update_attributes params[:asset_type]
