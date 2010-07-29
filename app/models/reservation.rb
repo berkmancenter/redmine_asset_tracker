@@ -6,4 +6,24 @@ class Reservation < ActiveRecord::Base
   STATUS_CHECKED_IN           = 'Checked In'
   STATUS_MISSING_PICKUP_DATE  = 'Missing Pick-up date'
   STATUS_MISSING_RETURN_DATE  = 'Missing Return date'
+
+  def self.send_reminders
+    send_check_out_reminder
+    send_check_in_reminder
+  end
+
+  def self.send_check_out_reminder
+    missed_reservations = Reservation.find :all, :conditions => ["status <> ? AND status <> ? AND check_out_date > ?", STATUS_CHECKED_OUT, STATUS_CHECKED_IN, DateTime.now]
+    missed_reservations.each do |r|
+      Mailman.deliver_check_out_reminder r
+    end
+  end
+
+  def self.send_check_in_reminder
+    missed_reservations = Reservation.find :all, :conditions => ["status = ? AND check_in_date > ?", STATUS_CHECKED_OUT, DateTime.now]
+    missed_reservations.each do |r|
+      Mailman.deliver_check_in_reminder r
+    end 
+  end
+
 end
