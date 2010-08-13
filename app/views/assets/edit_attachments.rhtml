@@ -1,15 +1,15 @@
 <div class="center-main-container" align="center">
     <div class="center-container">
         <div class="center-main-container-title">
-            <h1><%= @asset.name %> attachments:</h1>
+            <h1><%= @asset.name %> <%= l(:attachments) %></h1>
         </div>
         <div class="inner-container">
             <div class="asset-properties">
                 <table id="rounded-corner" summary="Asset Properties">
                     <thead>
                         <tr>
-                            <th scope="col" class="rounded-company"><strong>Asset Files</strong></th>
-                            <th scope="col" class="rounded-q2">Description</th>
+                            <th scope="col" class="rounded-company"><strong><%= l(:asset_files) %></strong></th>
+                            <th scope="col" class="rounded-q2"><%= l(:description) %></th>
                             <th scope="col" class="rounded-q1">&nbsp;</th>
                         </tr>
                     </thead>
@@ -61,7 +61,7 @@
             <%= submit_tag l(:button_add) %>
             <% end %>
     </div>
-    <%= link_to "Back to the asset", :controller => "assets", :action => "edit", :id => @asset %>  
+    <%= link_to l(:back_to_asset), :controller => "assets", :action => "edit", :id => @asset %>  
 </div>
 <% content_for :header_tags do %>
     <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>

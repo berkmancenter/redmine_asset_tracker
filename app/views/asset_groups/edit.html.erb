@@ -1,7 +1,7 @@
 <div class="center-main-container" align="center">
     <div class="center-container">
         <div class="center-main-container-title">
-            <h1>Edit Asset Group</h1>
+            <h1><%= l(:edit_asset_Group) %></h1>
         </div>
         <div class="inner-container">
             <% form_for :asset, @asset_group, :url => { :action => "update", :id => @asset_group } do |f| %>
@@ -10,39 +10,39 @@
                     <table id="rounded-corner" summary="Asset Properties">
                               <thead>
                                   <tr>
-                                      <th scope="col" class="rounded-company">Property</th>
-                                      <th scope="col" class="rounded-q1">Value</th>
+                                      <th scope="col" class="rounded-company"><%= l(:property) %></th>
+                                      <th scope="col" class="rounded-q1"><%= l(:value) %></th>
                                   </tr>
                               </thead>
                                   <tfoot>
                                   <tr>
                                       <td class="rounded-foot-left">&nbsp;</td>
                                       <td class="rounded-foot-right">
-                                        <%= submit_tag 'Save changes' %>
+                                        <%= submit_tag l(:save) %>
                                       </td>
                                   </tr>
                               </tfoot>
                               <tbody>
                                   <tr>
-                                      <td>Name:</td>
+                                      <td><%= l(:name) %></td>
                                       <td><%= f.text_field :name %></td>
 
                                   </tr>
                                   <tr>
-                                      <td>Description:</td>
+                                      <td><%= l(:description) %></td>
                                       <td><%= f.text_field :description %></td>
                                   </tr>
                                   <tr>
                                       <td>
                                         <%= link_to image_tag("/images/changeset.png", :border=>0, :alt=>"manage"), :controller => "asset_types", :action => "index" %>
-                                        Asset type:
+                                        <%= l(:asset_type) %>:
                                       </td>
-                                      <td><%= f.collection_select :asset_type_id, AssetType.all, :id, :name %> or <%=  link_to "Add new.", :controller => "asset_types", :action => "new", :asset_id => @asset_group %></td>
+                                      <td><%= f.collection_select :asset_type_id, AssetType.all, :id, :name %> <%= l(:or) %> <%=  link_to "Add new.", :controller => "asset_types", :action => "new", :asset_id => @asset_group %></td>
                                   </tr>                                 
                                   <tr>
                                       <td>
                                         <%= link_to image_tag("/images/changeset.png", :border=>0, :alt=>"manage"), :controller => "asset_groups", :action => "edit_attachments", :id => @asset_group %>
-                                        Attachments:
+                                        <%= l(:attachments) %>
                                       </td>
                                       <td align='left'>
                                         &nbsp;
@@ -50,7 +50,7 @@
                                   </tr>
                                   <tr>
                                     <td>
-                                      Assets in this group:
+                                      <%= l(:assets_in_this_group) %>
                                     </td>
                                     <td id='assets_in_group'>
                                       <%= render :partial => 'assets_in_group', :locals => { :asset_group => @asset_group } %>

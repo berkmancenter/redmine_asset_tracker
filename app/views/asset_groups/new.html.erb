@@ -14,8 +14,8 @@
       </tr>
       <tr>
         <td>
-            <%= image_tag "/images/sticky.png", :border=>0, :alt=>"manage" %>
-            Asset type:
+            <%= image_tag "/images/sticky.png", :border=>0, :alt=>l(:manage) %>
+            <%= l(:asset_type) %>
         </td>
         <td id='asset_types_td'>
             <%= render :partial => 'asset_types/asset_types_dropdown_for_groups', :locals => { :asset_group => @asset_group } %>
@@ -23,7 +23,7 @@
       </tr>
       <tr>
         <td>
-          Description:
+          <%= l(:description) %>
         </td>
         <td>
           <%= f.text_area :description, :size=>"23x10" %>
@@ -31,7 +31,7 @@
       </tr>
       <tr>
         <td colspan='2' align='right'>
-          <%= f.submit 'Create' %>
+          <%= f.submit l(:create) %>
         </td>
       </tr>
     </table>

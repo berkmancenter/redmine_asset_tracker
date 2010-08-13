@@ -1,4 +1,4 @@
 <% asset_group.assets.each do |g| %>
-    <%= link_to_remote image_tag("/images/delete.png", :border=>0, :alt=>"delete"), :url => {:controller => "asset_groups", :action => "remove_asset", :asset_id => g, :id => asset_group}, :confirm => 'Are you sure?' %>
+    <%= link_to_remote image_tag("/images/delete.png", :border=>0, :alt=>"delete"), :url => {:controller => "asset_groups", :action => "remove_asset", :asset_id => g, :id => asset_group}, :confirm => l(:confirm) %>
     <%= link_to g.name, :controller=> 'assets', :action=>'edit', :id=>g %> <br />
 <% end %>

@@ -9,6 +9,8 @@ class Reservation < ActiveRecord::Base
   STATUS_MISSING_RETURN_DATE  = 'Missing Return date'
 
 
+  validates_presence_of :bookable_id, :bookable_type, :user_id, :check_out_date, :check_in_date, :status
+  
   # Sends an Email reminder to all the users who missed a pickup or a return date
   #
   # @return Nothing.

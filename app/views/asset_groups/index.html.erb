@@ -1,23 +1,23 @@
 <div class="center-main-container" align="center">
     <div class="center-container">
         <div class="center-main-container-title">
-            <h1>List of Asset Groups</h1>
+            <h1><%= l(:list_of_asset_groups) %></h1>
         </div>
         <div class="inner-container">
             <table id="rounded-corner-index" summary="Asset Properties">
                 <thead>
                     <tr>
-                        <th scope="col" class="rounded-company">Name</th>
-                        <th scope="col" class="rounded-q2">Description</th>
-                        <th scope="col" class="rounded-q1">Options</th>
+                        <th scope="col" class="rounded-company"><%= l(:name) %></th>
+                        <th scope="col" class="rounded-q2"><%= l(:description) %></th>
+                        <th scope="col" class="rounded-q1"><%= l(:options) %></th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         <td class="rounded-foot-left">&nbsp;</td>
                         <td class="rounded-foot-right">
-                            <%= image_tag "/images/add.png", :alt => "Add a new group" %>
-                            <%= link_to "Add New Group.", :controller => "asset_groups", :action => "new" %>
+                            <%= image_tag "/images/add.png", :alt => l(:add_new_group) %>
+                            <%= link_to l(:add_new_group), :controller => "asset_groups", :action => "new" %>
                         </td>
                     </tr>
                 </tfoot>
@@ -28,7 +28,7 @@
                             <td><%= asset_group.description %></td>
                             <td>
                                 <%= link_to image_tag("/images/edit.png", :border=>0, :alt=>"edit"), :controller => "asset_groups", :action => "edit", :id => asset_group %>
-                                <%= link_to_remote image_tag("/images/delete.png", :border=>0, :alt=>"delete"), :controller => "asset_groups", :action => "delete", :confirm => 'Are you sure?', :id => asset_group %>
+                                <%= link_to_remote image_tag("/images/delete.png", :border=>0, :alt=>"delete"), :controller => "asset_groups", :action => "delete", :confirm => l(:confirm), :id => asset_group %>
                             </td>
                         </tr>
                     <% end %>

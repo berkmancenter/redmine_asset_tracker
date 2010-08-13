@@ -1,5 +1,5 @@
 <h1 style="color:#507AAA">
-  New Reservation:
+  <%= l(:new_reservation) %>
 </h1>
 
 <%= form_remote_tag(
@@ -14,7 +14,7 @@
     <table>
       <tr>
         <td>
-          Reserving:
+          <%= l(:reserving) %>
         </td>
         <td>
           <strong><%= @object.name %></strong>
@@ -23,7 +23,7 @@
       <tr>
         <td>
             <%= image_tag "/images/calendar.png", :border=>0, :alt=>"manage" %>
-            Check-out date:
+            <%= l(:check_out_date) %>
         </td>
         <td>
             <%= text_field_tag 'checkout', nil, {:class => 'datepicker'}  %>
@@ -32,7 +32,7 @@
       <tr>
         <td>
             <%= image_tag "/images/calendar.png", :border=>0, :alt=>"manage" %>
-            Check-in date:
+            <%= l(:check_in_date) %>
         </td>
         <td>
             <%= text_field_tag 'checkin', nil, {:class => 'datepicker'}  %>
@@ -42,7 +42,7 @@
           <tr>
             <td>
                 <%= image_tag "/images/user.png", :border=>0, :alt=>"manage" %>
-                Assignee:
+                <%= l(:assignee) %>
             </td>
             <td>
                 <%= select_tag(:user_id,
@@ -53,7 +53,7 @@
       <tr>
         <td>
           <%= image_tag "/images/wiki_edit.png", :border=>0, :alt=>"notes" %>
-                Notes:
+                <%= l(:notes) %>
         </td>
         <td>
           <%= text_area_tag 'notes', nil, :size => "18x5" %>          
@@ -61,7 +61,7 @@
       </tr>
       <tr>
         <td colspan='2' align='right' id='next_step' style='color:red;'>
-            <%= submit_tag('Reserve') %>    
+            <%= submit_tag(l(:reserve)) %>    
         </td>
       </tr>
     </table>

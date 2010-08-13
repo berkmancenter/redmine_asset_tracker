@@ -10,32 +10,32 @@
                     <table id="rounded-corner" summary="Asset Properties">
                               <thead>
                                   <tr>
-                                      <th scope="col" class="rounded-company">Property</th>
-                                      <th scope="col" class="rounded-q1">Value</th>
+                                      <th scope="col" class="rounded-company"><%= l(:property) %></th>
+                                      <th scope="col" class="rounded-q1"><%= l(:value) %></th>
                                   </tr>
                               </thead>
                                   <tfoot>
                                   <tr>
                                       <td class="rounded-foot-left">&nbsp;</td>
                                       <td class="rounded-foot-right">
-                                        <%= submit_tag 'Save changes' %>
+                                        <%= submit_tag l(:save) %>
                                       </td>
                                   </tr>
                               </tfoot>
                               <tbody>
                                   <tr>
-                                      <td>Name:</td>
+                                      <td><%= l(:name) %></td>
                                       <td><%= f.text_field :name %></td>
 
                                   </tr>
                                   <tr>
-                                      <td>Description:</td>
+                                      <td><%= l(:description) %></td>
                                       <td><%= f.text_field :description %></td>
                                   </tr>
                                   <tr>
                                       <td>
                                         <%= image_tag "/images/sticky.png", :border=>0, :alt=>"manage" %>
-                                        Asset type:
+                                        <%= l(:asset_type) %>
                                       </td>
                                       <td id='asset_types_td'>
                                         <%= render :partial => 'asset_types/asset_types_dropdown', :locals => { :asset => @asset } %>
@@ -44,7 +44,7 @@
                                   <tr>
                                       <td>
                                         <%= image_tag "/images/folder.png", :border=>0, :alt=>"manage" %>
-                                        Asset group:
+                                        <%= l(:asset_group) %>
                                       </td>
                                       <td id='asset_groups_td'>
                                         <%= render :partial => 'asset_groups/asset_groups_dropdown', :locals => { :asset => @asset } %>
@@ -53,7 +53,7 @@
                                   <tr>
                                       <td>
                                         <%= image_tag "/images/attachment.png", :border=>0, :alt=>"manage" %>
-                                        Attachments:
+                                        <%= l(:attachments) %>
                                       </td>
                                       <td align='left'>
                                         <%= link_to 'view', :controller => "assets", :action => "edit_attachments", :id => @asset %>

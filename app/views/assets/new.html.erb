@@ -1,7 +1,7 @@
 <div class="center-main-container" align="center">
     <div class="center-container">
         <div class="center-main-container-title">
-            <h1>New asset</h1>
+            <h1><%= l(:new_asset) %></h1>
         </div>
             <br />
             <div style="float:left;">
@@ -9,7 +9,7 @@
                   <table id="rounded-corner" summary="Asset Properties">
                       <thead>
                           <tr>
-                              <th scope="col" class="rounded-company" colspan="2">Create from scratch</th>
+                              <th scope="col" class="rounded-company" colspan="2"><%= l(:create_from_scratch) %></th>
                           </tr>
                       </thead>
                       <tfoot>
@@ -22,21 +22,21 @@
                       </tfoot>
                       <tbody>
                           <tr>
-                              <td>Name:</td>
+                              <td><%= l(:name) %></td>
                               <td><%= f.text_field :name %></td>
                           </tr>
                           <tr>
-                              <td>Description:</td>
+                              <td><%= l(:description) %></td>
                               <td><%= f.text_area :description, :size=>"23x10" %></td>
                           </tr>
                           <tr>
-                              <td>Asset type:</td>
+                              <td><%= l(:asset_type) %></td>
                               <td id='asset_types_td'>
                                 <%= render :partial => 'asset_types/asset_types_dropdown', :locals => { :asset => @asset } %>
                               </td>
                           </tr>
                           <tr>
-                              <td>Asset group:</td>
+                              <td><%= l(:asset_group) %></td>
                               <td id='asset_groups_td'>
                                 <%= render :partial => 'asset_groups/asset_groups_dropdown', :locals => { :asset => @asset } %>
                               </td>
@@ -51,14 +51,14 @@
                  <table id="rounded-corner" summary="Asset Properties">
                       <thead>
                           <tr>
-                              <th scope="col" class="rounded-company" colspan="2">Or Clone an existing one:</th>
+                              <th scope="col" class="rounded-company" colspan="2"><%= l(:or_clone_an_existing_one) %></th>
                           </tr>
                       </thead>
                       <tfoot>
                           <tr>
                               <td class="rounded-foot-left">&nbsp;</td>
                               <td class="rounded-foot-right">
-                                  <%= submit_tag 'Clone it' %>
+                                  <%= submit_tag l(:clone_it) %>
                               </td>
                           </tr>
                       </tfoot>
@@ -69,7 +69,7 @@
                               </td>
                           </tr>
                           <tr>
-                              <td>Name:</td>
+                              <td><%= l(:name) %></td>
                               <td><%= text_field_tag :name %></td>
                           </tr>
                       </tbody>

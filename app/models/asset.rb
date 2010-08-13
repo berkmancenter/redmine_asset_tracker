@@ -12,6 +12,12 @@ class Asset < ActiveRecord::Base
   acts_as_attachable :view_permission => :view_files,
                      :delete_permission => :manage_files
 
+  validates_presence_of :name
+  validates_numericality_of :asset_type_id
+  validates_length_of :name, :maximum=>30
+  validates_format_of :name, :with => /^[\w\s\.\'\-]*$/i
+
+
   # Attaches a File to an Asset.
   #
   # @return Nothing.

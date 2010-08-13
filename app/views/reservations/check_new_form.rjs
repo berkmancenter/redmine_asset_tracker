@@ -1,7 +1,7 @@
 if @error_message
   page.replace_html 'next_step', @error_message
 else
-  page.replace_html 'next_step', submit_tag('Reserve')
+  page.replace_html 'next_step', submit_tag(l(:reserve))
 end
 
 #page.call "facebox.initialize"

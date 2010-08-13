@@ -1,7 +1,7 @@
 <div class="center-main-container" align="center">
     <div class="center-container">
         <div class="center-main-container-title">
-            <h1>Edit Asset Category:</h1>
+            <h1><%= l(:edit_asset_category) %></h1>
         </div>
         <div class="inner-container">
             <% form_for :asset_type, @asset_type, :url => { :action => "update", :id => @asset_type.id } do |f| %>
@@ -16,17 +16,17 @@
                         <tr>
                             <td class="rounded-foot-left">&nbsp;</td>
                             <td class="rounded-foot-right" align="left">
-                                <%= submit_tag 'Update' %>
+                                <%= submit_tag l(:save) %>
                             </td>
                         </tr>
                     </tfoot>
                     <tbody>
                         <tr>
-                            <td>Name:</td>
+                            <td><%= l(:name) %></td>
                             <td><%= f.text_field :name %></td>
                         </tr>
                         <tr>
-                            <td>Description:</td>
+                            <td><%= l(:description) %>:</td>
                             <td><%= f.text_area :description, :size=>"23x10" %></td>
                         </tr>
                     </tbody>

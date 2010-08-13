@@ -1,16 +1,16 @@
 <div class="new-custom-property">
-    <h3>Add new custom property:</h3>
+    <h3><%= l(:add_new_custom_property) %></h3>
     <% labelled_tabular_form_for :custom_field, custom_field, :url => { :action => "create_custom_field", :id => asset } do |f| %>
     <%= render :partial => 'new_custom_field_form', :locals => { :f => f } %>
         <%= hidden_field_tag 'custom_field[type]', custom_field.type %>
         <div class="submit-new-field">
-            <%= submit_tag 'Add' %>
+            <%= submit_tag l(:add) %>
         </div>
     <% end %>
 </div>
 <div class="spacer">&nbsp;</div>
 <div class="add-existing-custom-property">
-    <h3>Add existing custom property:</h3>
+    <h3><%= l(:add_existing_custom_property) %></h3>
     <% form_tag :action => "create_custom_field", :id => asset do %>
         <%= select_tag :existing_custom_field, options_from_collection_for_select(available_custom_fields, :id, :name), :size => 18, :multiple => true, :class => "available-fields" %>
         <div class="submit-new-field">

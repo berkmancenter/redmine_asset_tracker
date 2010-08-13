@@ -9,37 +9,37 @@
             <br class="clear-both" />
         </div>
             <div class="asset-properties">
-              <table id="rounded-corner" summary="Asset Properties">
+              <table id="rounded-corner" summary="<%= l(:asset_properties) %>">
                   <thead>
                       <tr>
-                          <th scope="col" class="rounded-company">Property</th>
-                          <th scope="col" class="rounded-q1">Value</th>
+                          <th scope="col" class="rounded-company"><%= l(:property) %></th>
+                          <th scope="col" class="rounded-q1"><%= l(:value) %></th>
                       </tr>
                   </thead>
                   <tfoot>
                       <tr>
                           <td class="rounded-foot-left">&nbsp;</td>
                           <td class="rounded-foot-right">
-                            <% if @user.admin %>
+                            <% if @user && @user.admin %>
                                 <%= image_tag "/images/edit.png" %>
-                                <%= link_to "edit asset group", :controller => "assets", :action => "edit", :id => @asset_group %>
+                                <%= link_to l(:edit_asset_group), :controller => "assets", :action => "edit", :id => @asset_group %>
                             <% end %>
                           </td>
                       </tr>
                   </tfoot>
                   <tbody>
                       <tr>
-                          <td>Name:</td>
+                          <td><%= l(:name) %></td>
                           <td><%= @asset_group.name %></td>
                       </tr>
                       <tr>
-                          <td>Description:</td>
+                          <td><%= l(:description) %></td>
                           <td><%= @asset_group.description %></td>
 
                       </tr>
                       <tr>
                         <td>
-                            Assets in this group:
+                            <%= l(:assets_in_this_group) %>
                         </td>
                         <td>
                             <% @asset_group.assets.each do |g| %>
@@ -55,7 +55,7 @@
         </div>
     </div>
   <br />
-  <%= link_to "Back to the list of assets", :controller => "asset_types", :action => "index" %>  
+  <%= link_to l(:back_to_assets_list), :controller => "asset_types", :action => "index" %>  
 </div>
 <% content_for :header_tags do %>
     <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
