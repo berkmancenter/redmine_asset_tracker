@@ -1,3 +1,11 @@
 = asset_tracker
 
 Description goes here
+
+= License
+
+This plugin is open source and released under the terms of the GNU General Public License v2 (GPL) - the same terms as Redmine itself.
+
+= Copyright
+
+2010 The President and Fellows of Harvard College
