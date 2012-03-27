@@ -1,7 +1,7 @@
 <div class="new-custom-property">
     <h3><%= l(:add_new_custom_property) %></h3>
     <% labelled_tabular_form_for :custom_field, custom_field, :url => { :action => "create_custom_field", :id => asset } do |f| %>
-    <%= render :partial => 'new_custom_field_form', :locals => { :f => f } %>
+    <%= render :partial => 'new_custom_field_form', :locals => { :f => f , :custom_field => custom_field } %>
         <%= hidden_field_tag 'custom_field[type]', custom_field.type %>
         <div class="submit-new-field">
             <%= submit_tag l(:add) %>
