@@ -1,14 +1,14 @@
 <div class="center-main-container" align="center">
     <div class="center-container">
         <div class="center-main-container-title">
-            <h1><%= @asset_group.name %> <%= l(:attachments) %></h1>
+            <h1><%= "'"+@asset.name+"'" %> <%= l(:attachments) %></h1>
         </div>
         <div class="inner-container">
             <div class="asset-properties">
-                <table id="rounded-corner" summary="<%= l(:asset_properties) %>">
+                <table id="rounded-corner" summary="Asset Properties">
                     <thead>
                         <tr>
-                            <th scope="col" class="rounded-company"><strong><%= l(:file) %></strong></th>
+                            <th scope="col" class="rounded-company"><strong><%= l(:asset_files) %></strong></th>
                             <th scope="col" class="rounded-q2"><%= l(:description) %></th>
                             <th scope="col" class="rounded-q1">&nbsp;</th>
                         </tr>
@@ -20,8 +20,8 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <% @asset_group.attachments.each do |a| %>
-                            <% form_for :attachment, a do |f| %>
+                        <% @asset.attachments.each do |a| %>
+                            <%= form_for :attachment, a do |f| %>
                                 <tr>
                                     <td>
                                       <%= image_tag "/images/attachment.png" %>
@@ -35,11 +35,11 @@
                                         <%= image_submit_tag('/images/save.png', :class => 'save-button') %>
                             <% end %>
                                       <% if a.is_private %>
-                                        <%= link_to image_tag('/images/locked.png', :border=>0), :controller => "asset_groups", :action => "change_attachment_privacy", :asset_group_id => @asset_group, :attachment_id => a %>
+                                        <%= link_to image_tag('/images/locked.png', :border=>0), :controller => "assets", :action => "change_attachment_privacy", :asset_id => @asset, :attachment_id => a %>
                                       <% else %>
-                                        <%= link_to image_tag('/images/unlock.png', :border=>0), :controller => "asset_groups", :action => "change_attachment_privacy", :asset_group_id => @asset_group, :attachment_id => a %>
+                                        <%= link_to image_tag('/images/unlock.png', :border=>0), :controller => "assets", :action => "change_attachment_privacy", :asset_id => @asset, :attachment_id => a %>
                                       <% end %>
-                                      <%= link_to image_tag('/images/delete.png', :border=>0), :controller => "asset_groups", :action => "remove_attachment", :asset_group_id => @asset_group, :attachment_id => a %>
+                                      <%= link_to image_tag('/images/delete.png', :border=>0), :controller => "assets", :action => "remove_attachment", :asset_id => @asset, :attachment_id => a %>
 
                                     </td>
                                 </tr>
@@ -53,7 +53,7 @@
         </div>
         <%= error_messages_for 'attachment' %>
         <div class="box">
-            <% form_tag({ :action => 'add_attachment', :id => @asset_group }, :multipart => true, :class => "tabular") do %>
+            <%= form_tag({ :action => 'add_attachment', :id => @asset }, :multipart => true, :class => "tabular") do %>
                 <p>
                   <label><%=l(:label_attachment_plural)%></label><%= render :partial => 'file_form' %>
                 </p>
@@ -61,7 +61,7 @@
             <%= submit_tag l(:button_add) %>
             <% end %>
     </div>
-    <%= link_to l(:back_to_asset_group), :controller => "asset_groups", :action => "edit", :id => @asset_group %>  
+    <%= link_to l(:back_to_asset), :controller => "assets", :action => "edit", :id => @asset %>  
 </div>
 <% content_for :header_tags do %>
     <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>

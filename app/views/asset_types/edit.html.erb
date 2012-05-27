@@ -4,7 +4,7 @@
             <h1><%= l(:edit_asset_category) %></h1>
         </div>
         <div class="inner-container">
-            <% form_for :asset_type, @asset_type, :url => { :action => "update", :id => @asset_type.id } do |f| %>
+            <%= form_for @asset_type, :url => { :action => "update", :id => @asset_type.id } do |f| %>
                 <table id="rounded-corner-index" summary="Asset Properties">
                     <thead>
                         <tr>

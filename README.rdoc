@@ -1,6 +1,6 @@
 = asset_tracker
 
-Description goes here
+'AssetTrackerPlugin' for the Redmine project helps to accomplish building a digital store of assets, providing tracking and reservation facilities for the inventory, auditing, user control and other miscellaneous functionalities.
 
 = License
 

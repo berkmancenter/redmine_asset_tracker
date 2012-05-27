@@ -1,4 +1,4 @@
-<% if !asset.asset_custom_fields.empty? %>
+<% unless asset.asset_custom_fields.empty? %>
         <% asset.custom_field_values.each do |value| %>
             <% if asset.asset_custom_fields.include? value.custom_field %>
                 <p>
@@ -6,9 +6,10 @@
                     <tr>
                           <td>
                             <%= link_to image_tag("/images/delete.png", :border=>0), :controller => "assets", :action => "remove_custom_field", :id => asset, :existing_custom_field => value.custom_field.id %>
-                            <%= @html[0] + '>' %>
+                            <%= @html[0].html_safe + '>' %>
                           </td>
-                          <td><%= '<' + @html[1] %></td>
+                          <% tag='<'+@html[1] %>
+                          <td><%= tag.html_safe  %></td>
                     </tr>
                 </p>
             <% end %>

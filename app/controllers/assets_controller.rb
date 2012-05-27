@@ -1,4 +1,4 @@
-# @author Emmanuel Pastor
+# @author Emmanuel Pastor/Nitish Upreti
 class AssetsController < ApplicationController
   unloadable
   helper :custom_fields

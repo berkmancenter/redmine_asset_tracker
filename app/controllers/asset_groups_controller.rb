@@ -1,4 +1,4 @@
-# @author Emmanuel Pastor
+# @author Emmanuel Pastor/Nitish Upreti
 class AssetGroupsController < ApplicationController
   unloadable
   before_filter :require_admin, :except => [:index, :show, :show_attachment, :show_image]

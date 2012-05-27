@@ -1,4 +1,4 @@
-# @author Emmanuel Pastor
+# @author Emmanuel Pastor/Nitish Upreti
 class ReservationsController < ApplicationController
   unloadable
   #before_filter :require_admin, :except => [:index, :show, :show_attachment, :show_image]
@@ -191,7 +191,7 @@ class ReservationsController < ApplicationController
     #@bookable = find_bookable
     #@reservations = @bookable.reservations
     @reservations = Reservation.find :all, :conditions => "status = '" + Reservation::STATUS_CHECKED_IN + "'"
-    @reservations = @reservations.sort_by {|r| r.bookable.name }
+    #@reservations = @reservations.sort_by {|r| r.bookable.name } 
   end
 
   # Displays any notes added to a given reservation.

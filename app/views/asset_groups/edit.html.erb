@@ -1,10 +1,10 @@
 <div class="center-main-container" align="center">
     <div class="center-container">
         <div class="center-main-container-title">
-            <h1><%= l(:edit_asset_Group) %></h1>
+            <h1><%= l(:edit_asset_group) %></h1>
         </div>
         <div class="inner-container">
-            <% form_for :asset, @asset_group, :url => { :action => "update", :id => @asset_group } do |f| %>
+            <%= form_for @asset_group, :url => { :action => "update", :id => @asset_group } do |f| %>
                 <%= render :partial => 'edit_asset_group_image', :locals => { :asset_group => @asset_group, :user => @user, :edit_enabled => true } %>
                 <div class="asset-properties">
                     <table id="rounded-corner" summary="Asset Properties">
