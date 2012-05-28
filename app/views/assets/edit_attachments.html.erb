@@ -21,7 +21,7 @@
                     </tfoot>
                     <tbody>
                         <% @asset.attachments.each do |a| %>
-                            <%= form_for :attachment, a do |f| %>
+                            <%= form_for a do |f| %>
                                 <tr>
                                     <td>
                                       <%= image_tag "/images/attachment.png" %>

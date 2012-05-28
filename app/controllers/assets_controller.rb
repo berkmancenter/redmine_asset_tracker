@@ -94,7 +94,7 @@ class AssetsController < ApplicationController
         asset.asset_custom_fields << custom_field
       end
     else
-      custom_field = AssetCustomField.create!(params[:custom_field])
+      custom_field = AssetCustomField.create!(params[:asset_custom_field])
       asset.asset_custom_fields << custom_field
     end
     asset.save

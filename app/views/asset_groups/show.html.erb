@@ -22,7 +22,7 @@
                           <td class="rounded-foot-right">
                             <% if @user && @user.admin %>
                                 <%= image_tag "/images/edit.png" %>
-                                <%= link_to l(:edit_asset_group), :controller => "assets", :action => "edit", :id => @asset_group %>
+                                <%= link_to l(:edit_asset_group), :controller => "asset_groups", :action => "edit", :id => @asset_group %>
                             <% end %>
                           </td>
                       </tr>
