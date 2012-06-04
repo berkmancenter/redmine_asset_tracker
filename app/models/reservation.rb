@@ -1,4 +1,4 @@
-# @author Emmanuel Pastor
+# @author Emmanuel Pastor/Nitish Upreti
 class Reservation < ActiveRecord::Base
   belongs_to :bookable, :polymorphic => true
   belongs_to :user

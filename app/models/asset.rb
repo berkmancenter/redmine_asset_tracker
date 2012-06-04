@@ -1,4 +1,4 @@
-# @author Emmanuel Pastor
+ # @author Emmanuel Pastor
 class Asset < ActiveRecord::Base
   belongs_to :asset_type
   belongs_to :asset_group
@@ -7,7 +7,7 @@ class Asset < ActiveRecord::Base
                           :order => "#{CustomField.table_name}.position",
                           :join_table => "#{table_name_prefix}custom_fields_assets#{table_name_suffix}",
                           :association_foreign_key => 'custom_field_id'
-  has_many :reservations, :as => :commentable
+  has_many :reservations, :as => :bookable 
   acts_as_customizable
   acts_as_attachable :view_permission => :view_files,
                      :delete_permission => :manage_files

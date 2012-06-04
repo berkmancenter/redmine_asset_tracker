@@ -2,7 +2,7 @@
 class AssetGroup < ActiveRecord::Base
   belongs_to :asset_type
   has_many :assets
-  has_many :reservations, :as => :commentable
+  has_many :reservations, :as => :bookable 
   acts_as_attachable :view_permission => :view_files,
                      :delete_permission => :manage_files
 

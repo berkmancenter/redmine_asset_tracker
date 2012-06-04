@@ -43,7 +43,7 @@
                 <% reservations.each do |r| %>
                     <tr>
                         <td>
-                          <%= r.bookable.name %>
+                            <%= r.bookable.name %>
                         </td>
                         <td>
                           <%= r.user.firstname + ' ' + r.user.lastname %>
@@ -57,11 +57,11 @@
                         <td>
                           <%=
                               if r.status == Reservation::STATUS_MISSING_RETURN_DATE
-                                '<label style="color:red">' + r.status + '</label>'
+                                ('<label style="color:red">' + r.status + '</label>').html_safe                     
                               elsif r.status == Reservation::STATUS_MISSING_PICKUP_DATE
-                                '<label style="color:orange">' + r.status + '</label>'
+                                ('<label style="color:orange">' + r.status + '</label>').html_safe
                               elsif r.status == Reservation::STATUS_READY
-                                '<label style="color:green">' + r.status + '</label>'
+                                ('<label style="color:green">' + r.status + '</label>').html_safe                
                               else
                                 r.status
                               end

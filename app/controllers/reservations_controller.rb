@@ -191,8 +191,8 @@ class ReservationsController < ApplicationController
     #@bookable = find_bookable
     #@reservations = @bookable.reservations
     @reservations = Reservation.find :all, :conditions => "status = '" + Reservation::STATUS_CHECKED_IN + "'"
-    #@reservations = @reservations.sort_by {|r| r.bookable.name } 
-  end
+    @reservations = @reservations.sort_by { |r| r.bookable.name }
+  end 
 
   # Displays any notes added to a given reservation.
   #
