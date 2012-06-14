@@ -54,9 +54,30 @@
           <br class="clear-both" />
         </div>
     </div>
-  <br />
-  <%= link_to l(:back_to_assets_list), :controller => "asset_types", :action => "index" %>  
+  <br /> 
 </div>
+
+<% unless @reservations.empty? %>
+  <div class="center-main-container" align="center">
+    <div class="center-container">
+        <div class="center-main-container-title">
+            <h1><%= l(:list_of_active_reservations) %></h1>
+        </div>
+        <div class="inner-container" id="inner_container">
+          <div id="result">
+            <%= render :partial => 'reservations/sorted_list_of_reservations', :locals => { :reservations => @reservations, :criteria => 'ASSET_NAME', :direction => 'DESC', :user => User.current } %>
+          </div>
+        </div>
+    </div>
+  </div>
+</br>
+<% end %>
+
+<div align="center">
+   <%= link_to l(:back_to_assets_list), :controller => "asset_types", :action => "index" %>  
+</div>
+
+
 <% content_for :header_tags do %>
     <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
 <% end %>

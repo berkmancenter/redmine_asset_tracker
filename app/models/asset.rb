@@ -1,4 +1,4 @@
- # @author Emmanuel Pastor
+ # @author Emmanuel Pastor/Nitish Upreti
 class Asset < ActiveRecord::Base
   belongs_to :asset_type
   belongs_to :asset_group

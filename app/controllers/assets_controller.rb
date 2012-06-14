@@ -18,6 +18,7 @@ class AssetsController < ApplicationController
   def show
     @asset = Asset.find_by_id params[:id]
     @user = User.find_by_id session[:user_id]
+    @reservations=Reservation.where(:bookable_id => params[:id], :bookable_type =>'Asset')
   end
 
   # Creates a new Asset Instance, ready to be saved to the DB.

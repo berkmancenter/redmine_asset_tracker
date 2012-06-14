@@ -65,6 +65,7 @@ class AssetGroupsController < ApplicationController
   def show
     @asset_group = AssetGroup.find_by_id params[:id]
     @user = User.find_by_id session[:user_id]
+    @reservations=Reservation.where(:bookable_id => params[:id], :bookable_type =>'AssetGroup')
   end
 
   # Saves the changes of an [AssetGroup] to the Database.

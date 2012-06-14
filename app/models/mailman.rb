@@ -1,4 +1,4 @@
-# @author Emmanuel Pastor
+# @author Emmanuel Pastor/Nitish Upreti
 class Mailman < ActionMailer::Base
 
   # Sends an Email reminder to all the users who missed a pickup date
