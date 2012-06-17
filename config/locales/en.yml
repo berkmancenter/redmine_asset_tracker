@@ -61,3 +61,7 @@ en:
   or_clone_an_existing_one:     "or Clone an Existing one."
   clone_it:                     "Clone it."
   history:                      "History"
+  is_recurring:                 "Is Recurring?"
+  recurring_weeks:              "Recurring Weeks:"
+  recent_list:                  "Recent Assets: "
+  favourite_list:                "List of Favourites"

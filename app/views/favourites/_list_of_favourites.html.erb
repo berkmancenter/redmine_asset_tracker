@@ -1,35 +1,18 @@
-<% asset_types.each do |asset_type| %>
-    <p class="asset-type-title">
-        <%= asset_type.name %>
-        <%= link_to image_tag("/images/edit.png", :border=>0, :alt=>"edit"), :controller => "asset_types", :action => "edit", :id => asset_type %>
-        <%= link_to image_tag("/images/delete.png", :border=>0, :alt=>"delete"), :controller => "asset_types", :action => "delete", :id => asset_type %>
-    </p>
+</br>
+<table id="rounded-corner-index" summary="Asset Properties">
+    <thead>
+        <tr>
+            <th scope="col" class="rounded-company"><%= l(:name) %></th>
+            <th scope="col" class="rounded-q2"><%= l(:description) %></th>
+            <th scope="col" class="rounded-q1"><%= l(:options) %></th>
+        </tr>
+    </thead>
 
-    <table id="rounded-corner-index" summary="Asset Properties">
-        <thead>
-            <tr>
-                <th scope="col" class="rounded-company"><%= l(:name) %></th>
-                <th scope="col" class="rounded-q2"><%= l(:description) %></th>
-                <th scope="col" class="rounded-q1"><%= l(:options) %></th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <td class="rounded-foot-left">&nbsp;</td>
-                <td class="rounded-foot-right">
-                    <% if user.admin %>
-                        <%= image_tag "/images/add.png", :alt => l(:add_new) %>
-                        <%= link_to l(:new_asset), {:controller => "assets", :action => "new"} %>
-                        &nbsp;&nbsp; | &nbsp;&nbsp;
-                        <%= image_tag "/images/add.png", :alt => l(:add_new) %>
-                        <%= link_to l(:new_group), {:controller => "asset_groups", :action => "new"}, :rel => 'facebox' %>
-                    <% end %>
-                </td>
-            </tr>
-        </tfoot>
-        <tbody>
-            <% asset_type.asset_groups.each do |asset_group| %>
-                <tr id='assetgroup_<%=asset_group.id.to_s %>'>
+    <tbody>
+            
+        <% asset_groups.each do |asset_group| %>
+            <tr id='assetgroup_<%=asset_group.id.to_s %>'>
+                    
                     <td>
                       <%= link_to_function(image_tag '/images/folder.png', :id => 'assetgroup_' + asset_group.id.to_s + '_folder') do |page|
                             page.visual_effect(:toggle_blind, 'assetgroup_' + asset_group.id.to_s + '_contents')
@@ -52,7 +35,9 @@
                         <% end %>
                       </div>
                     </td>
+
                     <td><%= asset_group.description %></td>
+                    
                     <td>
                         <%= link_to image_tag("/plugin_assets/redmine_asset_tracker/images/show.png", :border=>0, :alt=>l(:show)), :controller => "asset_groups", :action => "show", :id => asset_group %>
                         <%= link_to image_tag("/images/time_add.png", :border=>0, :alt=>l(:reserve)), {:controller => "reservations", :action => "new", :id => asset_group, :object_type => "AssetGroup"}, :rel => "facebox" %>
@@ -62,22 +47,14 @@
                           <%= link_to_remote image_tag("/images/delete.png", :border=>0, :alt=>l(:delete)), :url => {:controller => "asset_groups", :action => "delete", :id => asset_group},
                                                                                                                 :confirm => l(:confirm) %>
                         <% end %>
-                        <% if @user %>
-
-                            <% if favourites_asset_group.include?(asset_group.id) then %>
-                                
-                                <%= link_to image_tag("/images/fav.png", :border=>0, :alt=>"mark favourite"), { :controller =>"favourites", :action => "mark_as_favourite", :id=> asset_group, :type=> 'AssetGroup' }, :remote=> true %>
-                            <% else %>
-
-                                <%= link_to image_tag("/images/fav_off.png", :border=>0, :alt=>"mark favourite"), { :controller =>"favourites", :action => "mark_as_favourite", :id=> asset_group, :type=> 'AssetGroup' }, :remote=> true %>
-                            <% end %>
-                        <% end %>
                     </td>
-                </tr>
-            <% end %>
-            <% asset_type.assets.each do |asset| %>
-                <% if asset.asset_group_id == nil %>
-                    <tr>
+            </tr>
+        <% end %>
+
+        <% assets.each do |asset| %>
+                
+            <% if asset.asset_group_id == nil %>
+                <tr>
                         <td>
                           <%= image_tag '/images/package.png' %> &nbsp; <label style='cursor: -moz-grab;' id='asset_<%= asset.id.to_s %>' name='<%= asset.id.to_s %>'><%= asset.name %></label>
                           <% if user.admin %>
@@ -94,26 +71,10 @@
                               <%= link_to_remote image_tag("/images/delete.png", :border=>0, :alt=>l(:delete)), :url => {:controller => "assets", :action => "delete", :id => asset},
                                                                                                                  :confirm => l(:confirm) %>
                             <% end %>
-                            <% if @user %>
-
-                                <% if favourites_asset.include?(asset.id) then %>
-                                
-                                    <%= link_to image_tag("/images/fav.png", :border=>0, :alt=>"mark favourite"), { :controller =>"favourites", :action => "mark_as_favourite", :id=> asset, :type=> 'Asset' }, :remote=> true %>
-                                <% else %>
-
-                                    <%= link_to image_tag("/images/fav_off.png", :border=>0, :alt=>"mark favourite"), { :controller =>"favourites", :action => "mark_as_favourite", :id=> asset, :type=> 'Asset' }, :remote=> true %>
-                                <% end %>
-                            <% end %>
                         </td>
-                    </tr>
+                </tr>
 
-                <% end %>
             <% end %>
-        </tbody>
-    </table>
-<% end %>
-<p class="asset-type-title">
-    <%= link_to l(:add_new_category), {:controller => :asset_types, :action => :new}, :rel => 'facebox'  %>
-</p>
-<br /><br />
-
+        <% end %>
+    </tbody>
+</table>
