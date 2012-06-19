@@ -66,10 +66,10 @@
 
                             <% if favourites_asset_group.include?(asset_group.id) then %>
                                 
-                                <%= link_to image_tag("/images/fav.png", :border=>0, :alt=>"mark favourite"), { :controller =>"favourites", :action => "mark_as_favourite", :id=> asset_group, :type=> 'AssetGroup' }, :remote=> true %>
+                                <%= link_to image_tag("/images/fav.png", :border=>0, :alt=>"mark favourite", :id=>'mark_group_'+asset_group.id.to_s), { :controller =>"favourites", :action => "mark_as_favourite", :id => asset_group, :type=> 'AssetGroup' } , :remote=> true %>
                             <% else %>
 
-                                <%= link_to image_tag("/images/fav_off.png", :border=>0, :alt=>"mark favourite"), { :controller =>"favourites", :action => "mark_as_favourite", :id=> asset_group, :type=> 'AssetGroup' }, :remote=> true %>
+                                <%= link_to image_tag("/images/fav_off.png", :border=>0, :alt=>"mark favourite",  :id=>'mark_group_'+asset_group.id.to_s), { :controller =>"favourites", :action => "mark_as_favourite", :id => asset_group, :type=> 'AssetGroup' }, :remote=> true %>
                             <% end %>
                         <% end %>
                     </td>
@@ -98,10 +98,10 @@
 
                                 <% if favourites_asset.include?(asset.id) then %>
                                 
-                                    <%= link_to image_tag("/images/fav.png", :border=>0, :alt=>"mark favourite"), { :controller =>"favourites", :action => "mark_as_favourite", :id=> asset, :type=> 'Asset' }, :remote=> true %>
+                                    <%= link_to image_tag("/images/fav.png", :border=>0, :alt=>"mark favourite", :id=>'mark_'+asset.id.to_s), { :controller =>"favourites", :action => "mark_as_favourite", :id=> asset, :type=> 'Asset' }, :remote=> true %>
                                 <% else %>
 
-                                    <%= link_to image_tag("/images/fav_off.png", :border=>0, :alt=>"mark favourite"), { :controller =>"favourites", :action => "mark_as_favourite", :id=> asset, :type=> 'Asset' }, :remote=> true %>
+                                    <%= link_to image_tag("/images/fav_off.png", :border=>0, :alt=>"mark favourite", :id=>'mark_'+asset.id.to_s), { :controller =>"favourites", :action => "mark_as_favourite", :id=> asset, :type=> 'Asset' }, :remote=> true %>
                                 <% end %>
                             <% end %>
                         </td>
