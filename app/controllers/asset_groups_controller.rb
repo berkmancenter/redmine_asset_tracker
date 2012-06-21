@@ -48,7 +48,7 @@ class AssetGroupsController < ApplicationController
       a.asset_group_id = nil
       a.save
     end
-    asset_group.delete
+    asset_group.destroy
     #render :partial => 'asset_types/assets_list', :layout => false, :locals => { :asset_types => AssetType.all, :user => User.current }
   end
 

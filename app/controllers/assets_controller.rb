@@ -80,7 +80,7 @@ class AssetsController < ApplicationController
   # @return Nothing.
   def delete
     asset = Asset.find params[:id]
-    asset.delete
+    asset.destroy
     #render :partial => 'asset_types/assets_list', :layout => false, :locals => { :asset_types => AssetType.all, :user => User.current }
   end
 

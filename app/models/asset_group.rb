@@ -2,7 +2,7 @@
 class AssetGroup < ActiveRecord::Base
   belongs_to :asset_type
   has_many :assets
-  has_many :reservations, :as => :bookable 
+  has_many :reservations, :as => :bookable , :dependent => :destroy
   acts_as_attachable :view_permission => :view_files,
                      :delete_permission => :manage_files
 
@@ -11,6 +11,17 @@ class AssetGroup < ActiveRecord::Base
   validates_length_of :name, :maximum => 30
   validates_format_of :name, :with => /^[\w\s\.\'\-]*$/i
   validates_numericality_of :asset_type_id
+
+  before_destroy :remove_as_favorite
+
+  def remove_as_favorite
+    fav=Favourite.where(:item_id => self.id, :item_type => 'AssetGroup')   
+
+    fav.each do |f|
+      logger.info(f)
+      f.destroy
+    end
+  end
 
   # Attaches a File to an AssetGroup.
   #
