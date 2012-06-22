@@ -1,7 +1,8 @@
 # @author Emmanuel Pastor/Nitish Upreti
-class ReservationsController < ApplicationController
+class ReservationsController < PluginController
   unloadable
-  #before_filter :require_admin, :except => [:index, :show, :show_attachment, :show_image]
+  before_filter :require_login, :only => [:new,:create]
+  before_filter :require_admin, :only => [:delete,:change_status]
 
   # Lists all the Reservations from the DB.
   #
@@ -63,7 +64,7 @@ class ReservationsController < ApplicationController
       return
     end
 
-    #Finally check for possible collisions with existing reservations
+    #Check for possible collisions with reservations
     reservations = Reservation.find :all, :conditions => ["bookable_id = ? AND bookable_type = ? AND status <> ? AND ((? >= check_out_date AND ? <= check_in_date) OR (? <= check_in_date AND ? >= check_out_date))", params[:bookable_id], params[:bookable_type], Reservation::STATUS_CHECKED_IN, params[:checkout], params[:checkout], params[:checkin], params[:checkin]]
     if !reservations.empty?
       @error_message = "This Asset has already been reserved for those dates"
