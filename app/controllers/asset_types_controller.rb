@@ -1,6 +1,6 @@
 # @author Emmanuel Pastor/Nitish Upreti
 
-class AssetTypesController < ApplicationController
+class AssetTypesController < PluginController
   unloadable
   helper :custom_fields
   include CustomFieldsHelper
@@ -13,21 +13,7 @@ class AssetTypesController < ApplicationController
     @asset_types = AssetType.find :all
     @user = User.find_by_id session[:user_id]   
 
-    if @user then
-        @favourites_asset_group=Array.new
-        @favourites_asset=Array.new
-    
-        @user.favourites.each do |f|
-          
-            if f.item_type=='AssetGroup' then
-                asset_group=AssetGroup.find_by_id(f.item_id)
-                @favourites_asset_group.push(asset_group.id)
-            else
-                asset=Asset.find_by_id(f.item_id)
-                @favourites_asset.push(asset.id)
-            end
-        end
-    end
+    @favourites_asset, @favourites_asset_group = populate_favourite_list if @user 
   end  
 
   # Creates a new AssetType instance, ready to be written in the DB.

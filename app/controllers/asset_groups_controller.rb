@@ -1,5 +1,5 @@
 # @author Emmanuel Pastor/Nitish Upreti
-class AssetGroupsController < ApplicationController
+class AssetGroupsController < PluginController
   unloadable
   before_filter :require_admin, :except => [:index, :show, :show_attachment, :show_image]
 
@@ -49,6 +49,10 @@ class AssetGroupsController < ApplicationController
       a.save
     end
     asset_group.destroy
+
+    #Populating the lists again so as the UI can be updated accordingly
+    @favourites_asset, @favourites_asset_group = populate_favourite_list
+    @assets, @asset_groups = populate_asset_list
     #render :partial => 'asset_types/assets_list', :layout => false, :locals => { :asset_types => AssetType.all, :user => User.current }
   end
 

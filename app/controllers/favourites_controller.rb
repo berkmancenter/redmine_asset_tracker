@@ -1,4 +1,4 @@
-class FavouritesController < ApplicationController
+class FavouritesController < PluginController
   unloadable
 
   def index 
@@ -10,19 +10,8 @@ class FavouritesController < ApplicationController
         return
     end
 
-    @assets=Array.new
-    @asset_groups=Array.new
+    @assets, @asset_groups = populate_asset_list
 
-  	#For all the favourite enteries get the name of corresponding Assets
-  	@user.favourites.each do |f|
-  		if f.item_type=='AssetGroup'
-  			asset_group=AssetGroup.find_by_id(f.item_id)
-  			@asset_groups.push(asset_group)
-  		else
-  			asset=Asset.find_by_id(f.item_id)
-  			@assets.push(asset)
-  		end
-  	end
   end
 
   def mark_as_favourite

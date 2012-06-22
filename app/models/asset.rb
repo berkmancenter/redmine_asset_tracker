@@ -24,7 +24,6 @@ class Asset < ActiveRecord::Base
     fav=Favourite.where(:item_id => self.id, :item_type => 'Asset')   
 
     fav.each do |f|
-      logger.info(f)
       f.destroy
     end
   end
