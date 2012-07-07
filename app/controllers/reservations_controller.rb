@@ -106,7 +106,7 @@ class ReservationsController < PluginController
         logger.info(schedule.first(r.repeat_count))
 
         if schedule.conflicts_with?(current_schedule) then
-          @error_message ="This Reservation conflicts with another recurring reservation,Contact the Administrator."
+          @error_message ="This Reservation conflicts with another recurring reservation,Contact the Administrator"
           return
         end
       end
@@ -127,7 +127,7 @@ class ReservationsController < PluginController
       logger.info(repeat_count)
 
       if repeat_count > 52 then
-        @error_message = "Cannot create a Recurring Reservation which spans for more than a year."
+        @error_message = "Cannot create a Recurring Reservation which spans for more than a year"
         return
       end
 
@@ -170,7 +170,7 @@ class ReservationsController < PluginController
         schedule.add_recurrence_rule Rule.weekly
 
         if schedule.conflicts_with?(current_schedule) then
-          @error_message ="This Recurring Reservation conflicts with another recurring reservation,Contact the Administrator."
+          @error_message ="This Recurring Reservation conflicts with another recurring reservation,Contact the Administrator"
           return
         end
       end

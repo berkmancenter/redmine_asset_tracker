@@ -1,0 +1,35 @@
+Non-recurring1:
+ id: 1
+ bookable_id : 11
+ bookable_type : Asset
+ user_id : 1
+ check_out_date: <%= Time.now.utc %>
+ check_in_date: <%= Time.now.utc + 2.hours %>
+ notes : lol
+ status : Ready
+ is_recurring : 0
+ repeat_count : 0
+
+Non-recurring2:
+ id: 2
+ bookable_id : 11
+ bookable_type : Asset
+ user_id : 1
+ check_out_date: <%= Time.now.utc + 8.days %>
+ check_in_date: <%= Time.now.utc  + 9.days %>
+ notes : lol
+ status : Ready
+ is_recurring : 0
+ repeat_count : 0
+
+Recurring1:
+ id: 3
+ bookable_id : 11
+ bookable_type : Asset
+ user_id : 1
+ check_out_date: <%= Time.now.utc + 5.hours %>
+ check_in_date: <%= Time.now.utc + 7.hours %>
+ notes : lol
+ status : Ready
+ is_recurring : 1
+ repeat_count : 5
