@@ -11,7 +11,8 @@ class ReservationsController < PluginController
   def index
     fifteen_days_ago = DateTime.now - 15
     next_fifteen_days = DateTime.now + 15
-    @reservations = Reservation.find :all, :conditions => ["status <> '" + Reservation::STATUS_CHECKED_IN + "' AND (check_in_date BETWEEN ? AND ? OR check_out_date BETWEEN ? AND ?)", fifteen_days_ago, next_fifteen_days, fifteen_days_ago, next_fifteen_days]
+    @reservations = Reservation.find :all, :conditions => ["status <> '" + Reservation::STATUS_CHECKED_IN + "' AND (check_in_date BETWEEN ? AND ? OR check_out_date BETWEEN ? AND ?) AND is_recurring = ?", fifteen_days_ago, next_fifteen_days, fifteen_days_ago, next_fifteen_days,false]
+    @recurring_reservations = Reservation.find :all, :conditions => ["status <> ? AND is_recurring = ?",Reservation::STATUS_CHECKED_IN,true]
     @reservations.each do |r|
       if (Time.now > r.check_out_date  && r.status != Reservation::STATUS_CHECKED_OUT)
         r.status = Reservation::STATUS_MISSING_PICKUP_DATE
@@ -22,6 +23,7 @@ class ReservationsController < PluginController
       r.save
     end
     @reservations = @reservations.sort_by {|r| r.bookable.name }
+    @recurring_reservations = @recurring_reservations.sort_by {|r| r.bookable.name}
   end
 
   # Creates a new Reservation instance, ready to be written to the DB.
@@ -300,8 +302,9 @@ class ReservationsController < PluginController
   def history
     #@bookable = find_bookable
     #@reservations = @bookable.reservations
-    @reservations = Reservation.find :all, :conditions => "status = '" + Reservation::STATUS_CHECKED_IN + "'"
+    @reservations = Reservation.where("status = ? AND is_recurring = ?",Reservation::STATUS_CHECKED_IN,false)
     @reservations = @reservations.sort_by { |r| r.bookable.name }
+    @recurring_reservations = Reservation.where("status = ? AND is_recurring = ?",Reservation::STATUS_CHECKED_IN,true)
   end 
 
   # Displays any notes added to a given reservation.

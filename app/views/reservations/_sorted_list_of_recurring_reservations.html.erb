@@ -1,0 +1,96 @@
+ <table id="rounded-corner-index" summary="Asset Properties">
+            <thead>
+                <tr>
+                    <th scope="col" class="rounded-company">
+                      <%= link_to_remote image_tag("/images/1uparrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "ASSET_NAME", :direction => "ASC", :resultset => reservations}, :update => 'result' %>
+                      <%= link_to_remote image_tag("/images/1downarrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "ASSET_NAME", :direction => "DESC", :resultset => reservations}, :update => 'result' %>
+                      Asset:
+                    </th>
+                    <th scope="col" class="rounded-q2">
+                      <%= link_to_remote image_tag("/images/1uparrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "USER_NAME", :direction => "ASC", :resultset => reservations}, :update => 'result' %>
+                      <%= link_to_remote image_tag("/images/1downarrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "USER_NAME", :direction => "DESC", :resultset => reservations}, :update => 'result' %>
+                      User:
+                    </th>
+                    <th scope="col" class="rounded-q2">
+                      <%= link_to_remote image_tag("/images/1uparrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "CHECK_OUT_DATE", :direction => "ASC", :resultset => reservations}, :update => 'result' %>
+                      <%= link_to_remote image_tag("/images/1downarrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "CHECK_OUT_DATE", :direction => "DESC", :resultset => reservations}, :update => 'result' %>
+                      C.O. date:
+                    </th>
+                    <th scope="col" class="rounded-q2">
+                      <%= link_to_remote image_tag("/images/1uparrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "CHECK_IN_DATE", :direction => "ASC", :resultset => reservations}, :update => 'result' %>
+                      <%= link_to_remote image_tag("/images/1downarrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "CHECK_IN_DATE", :direction => "DESC", :resultset => reservations}, :update => 'result' %>
+                      C.I. date:
+                    </th>
+                    <th scope="col" class="rounded-q2">
+                      <%= link_to_remote image_tag("/images/1uparrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "STATUS", :direction => "ASC", :resultset => reservations}, :update => 'result' %>
+                      <%= link_to_remote image_tag("/images/1downarrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "STATUS", :direction => "DESC", :resultset => reservations}, :update => 'result' %>
+                      Status:
+                    </th>
+                    <th scope="col" class="rounded-q2">
+                      Options
+                    </th>
+                    <th scope="col" class="rounded-q2">
+                      Recurring?
+                    </th>
+                    <th scope="col" class="rounded-q1">
+                      Weeks
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td class="rounded-foot-left">&nbsp;</td>
+                    <td class="rounded-foot-right" colspan='4'>
+                        
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <% reservations.each do |r| %>
+                    <tr>
+                        <td>
+                            <%= r.bookable.name %>
+                        </td>
+                        <td>
+                          <%= r.user.firstname + ' ' + r.user.lastname %>
+                        </td>
+                        <td>
+                          <%= r.check_out_date.strftime("%m/%d/%y %H:%M") %>
+                        </td>
+                        <td>
+                          <%= r.check_in_date.strftime("%m/%d/%y %H:%M") %>
+                        </td>
+                        <td>
+                          <%=
+                              if r.status == Reservation::STATUS_MISSING_RETURN_DATE
+                                ('<label style="color:red">' + r.status + '</label>').html_safe                     
+                              elsif r.status == Reservation::STATUS_MISSING_PICKUP_DATE
+                                ('<label style="color:orange">' + r.status + '</label>').html_safe
+                              elsif r.status == Reservation::STATUS_READY
+                                ('<label style="color:green">' + r.status + '</label>').html_safe                
+                              else
+                                r.status
+                              end
+                          %>
+                        </td>
+                        <td>
+                          <% if (User.current.admin && (!request.env['HTTP_REFERER'].upcase.include? "history".upcase)) %>
+                            <%= link_to (image_tag '/images/wiki_edit.png'), {:controller => "reservations", :action => "show_notes", :id => r}, :rel => 'facebox', :id => 'notes_link' %>
+                              <% if r.status == Reservation::STATUS_READY || r.status == Reservation::STATUS_MISSING_PICKUP_DATE %>
+                                <%= link_to_remote image_tag("/images/2uparrow.png", :border=>0, :alt=>"Check out"), :url => {:controller => "reservations", :action => "change_status", :id => r, :status => Reservation::STATUS_CHECKED_OUT, :criteria => criteria, :direction => direction, :resultset => reservations}, :update => 'result' %>
+                              <% elsif r.status == Reservation::STATUS_CHECKED_OUT  || r.status == Reservation::STATUS_MISSING_RETURN_DATE %>
+                                <%= link_to_remote image_tag("/images/2downarrow.png", :border=>0, :alt=>"Check out"), :url => {:controller => "reservations", :action => "change_status", :id => r, :status => Reservation::STATUS_CHECKED_IN, :criteria => criteria, :direction => direction, :resultset => reservations}, :update => 'result' %>
+                              <% end %>
+                              <%= link_to_remote image_tag("/images/delete.png", :border=>0, :alt=>"Check out"), :url => {:controller => "reservations", :action => "delete", :id => r, :criteria => criteria, :direction => direction, :resultset => reservations}, :update => 'result' %>
+                          <% end %>
+                        </td>
+                        <td>
+                            <%= r.is_recurring %>
+                        </td>
+                        <td>
+                            <%= r.repeat_count %>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>

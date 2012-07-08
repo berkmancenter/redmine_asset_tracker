@@ -84,7 +84,20 @@
         </div>
     </div>
   </div>
-</br>
+<% end %>
+</br></br>
+
+<% unless @recurring_reservations.empty? %>
+  <div class="center-main-container" align="center">
+    <div class="center-container">
+      <div class="center-main-container-title">
+            <h1><%= l(:list_of_active_recurring_reservations) %></h1>
+        </div>
+        <div class="inner-container" id="inner_container">
+          <div id="result">
+            <%= render :partial => 'reservations/sorted_list_of_recurring_reservations', :locals => { :reservations => @recurring_reservations, :criteria => 'ASSET_NAME', :direction => 'DESC', :user => User.current } %>
+          </div>
+        </div>
 <% end %>
 
 <div align="center">

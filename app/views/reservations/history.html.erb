@@ -11,6 +11,20 @@
           </div>
         </div>
     </div>
+    </br></br>
+    <div class="center-container">
+        <div class="center-main-container-title">
+            <h1><%= l(:history_of_recurring_reservations) %></h1>
+        </div>
+        <div class="inner-container" id="inner_container">
+          <%= render :partial => 'quick_search' %>
+          <br/><br/>
+          <div id="result">
+            <%= render :partial => 'sorted_list_of_recurring_reservations', :locals => { :reservations => @recurring_reservations, :criteria => 'ASSET_NAME', :direction => 'DESC', :user => User.current } %>
+          </div>
+        </div>
+    </div>
+
 </div>
 
 

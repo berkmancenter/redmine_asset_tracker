@@ -18,7 +18,8 @@ class AssetsController < PluginController
   def show
     @asset = Asset.find_by_id params[:id]
     @user = User.find_by_id session[:user_id]
-    @reservations=Reservation.where(:bookable_id => params[:id], :bookable_type =>'Asset')
+    @reservations=Reservation.where("bookable_id = ? AND bookable_type = ? AND status <> ? AND is_recurring = ?",params[:id],'Asset',Reservation::STATUS_CHECKED_IN,false)
+    @recurring_reservations=Reservation.where("bookable_id = ? AND bookable_type = ? AND status <> ? AND is_recurring = ?",params[:id],'Asset',Reservation::STATUS_CHECKED_IN,true)
   end
 
   # Creates a new Asset Instance, ready to be saved to the DB.

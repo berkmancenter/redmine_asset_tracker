@@ -69,7 +69,8 @@ class AssetGroupsController < PluginController
   def show
     @asset_group = AssetGroup.find_by_id params[:id]
     @user = User.find_by_id session[:user_id]
-    @reservations=Reservation.where(:bookable_id => params[:id], :bookable_type =>'AssetGroup')
+       @reservations=Reservation.where("bookable_id = ? AND bookable_type = ? AND status <> ? AND is_recurring = ?",params[:id],'AssetGroup',Reservation::STATUS_CHECKED_IN,false)
+    @recurring_reservations=Reservation.where("bookable_id = ? AND bookable_type = ? AND status <> ? AND is_recurring = ?",params[:id],'AssetGroup',Reservation::STATUS_CHECKED_IN,true)
   end
 
   # Saves the changes of an [AssetGroup] to the Database.
