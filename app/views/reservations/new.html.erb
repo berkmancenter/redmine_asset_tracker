@@ -53,7 +53,7 @@
           <%= l(:recurring_weeks) %>
         </td>
         <td>
-          <%= text_field_tag :repeat_count %>
+          <%= text_field_tag  :repeat_count,nil,{:disabled => true} %>
         </td>
       </tr>
       <% if User.current.admin %>
@@ -87,5 +87,8 @@
     <script>
       facebox.initialize();
       createPickers();
+      toggle_text_field();
     </script>
+
+    
 
