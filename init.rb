@@ -12,6 +12,7 @@ Redmine::Plugin.register :redmine_asset_tracker do
   menu :application_menu, :reservations, { :controller => 'reservations', :action => 'index' }, :caption => 'Reservations'
   menu :application_menu, :history, { :controller => 'reservations', :action => 'history' }, :caption => 'History'
   menu :application_menu, :favourites_assets, {:controller => 'favourites', :action => 'index'} , :caption => 'Favourite List'
+  menu :application_menu, :query_assets, { :controller =>'query', :action => 'index'} , :caption => 'Search'
 
   raise 'ice_cube gem not installed, Find it at: https://github.com/seejohnrun/ice_cube' unless defined?(IceCube)
 end

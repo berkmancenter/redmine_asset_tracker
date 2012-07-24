@@ -57,8 +57,6 @@ class ReservationsController < PluginController
     in_date = Time.zone.parse(params[:checkin]).to_time
     out_date = Time.zone.parse(params[:checkout]).to_time
 
-    logger.info(in_date)
-    logger.info(out_date)
 
     #Make sure that check-in happens after check-out
     if out_date > in_date
@@ -85,27 +83,15 @@ class ReservationsController < PluginController
 
       #Check collisions with recurring reservations which were started prior to this reservation
       reservations = Reservation.find :all, :conditions => ["bookable_id = ? AND bookable_type = ? AND check_out_date <= ? AND status <> ? AND is_recurring = ?",params[:bookable_id],params[:bookable_type],in_date,Reservation::STATUS_CHECKED_IN,true]
-      logger.info(reservations)
 
       current_schedule=Schedule.new(out_date, {:duration => in_date - out_date})
       #A serious bug in ice_cube forces us to add a recurrence rule if we want conflict_with to work, so adding one
       current_schedule.add_recurrence_rule Rule.yearly(5) #repear every 5 years which is pointless
-      logger.info("Current:")
-      logger.info(current_schedule)
-      logger.info(current_schedule.end_time)
-      logger.info(current_schedule.duration)
 
 
       reservations.each do |r|
         schedule=Schedule.new(r.check_out_date,{ :duration =>r.check_in_date - r.check_out_date, :end_time => r.check_in_date + r.repeat_count*IceCube::ONE_WEEK })
         schedule.add_recurrence_rule Rule.weekly
-
-        logger.info("Db:")
-        logger.info(schedule)
-        logger.info(schedule.duration)
-        logger.info(schedule.end_time)
-        logger.info(schedule.conflicts_with?(current_schedule))
-        logger.info(schedule.first(r.repeat_count))
 
         if schedule.conflicts_with?(current_schedule) then
           @error_message ="This Reservation conflicts with another recurring reservation,Contact the Administrator"
@@ -126,7 +112,6 @@ class ReservationsController < PluginController
       reservation.save
     else
 
-      logger.info(repeat_count)
 
       if repeat_count > 52 then
         @error_message = "Cannot create a Recurring Reservation which spans for more than a year"
@@ -141,19 +126,11 @@ class ReservationsController < PluginController
       current_schedule=Schedule.new(out_date, { :duration => in_date - out_date, :end_time => in_date + repeat_count*IceCube::ONE_WEEK })
       current_schedule.add_recurrence_rule Rule.weekly
 
-      logger.info("Current:")
-      logger.info(current_schedule)
-      logger.info(current_schedule.duration)
-      logger.info(current_schedule.end_time)
-
       #Check for any possible collisions with non-recurring reservations
       conflicting_instances=current_schedule.first(repeat_count)
-      logger.info(conflicting_instances)
 
       conflicting_instances.each do |ct|
 
-        logger.info(ct)
-        logger.info(ct + current_schedule.duration)
         reservations = Reservation.where("bookable_id = :bookable_id AND bookable_type = :bookable_type AND status <> :status AND ((:out_date >= check_out_date AND  :out_date <= check_in_date) OR (:in_date <= check_in_date AND :in_date >= check_out_date) OR (:out_date <= check_in_date AND :in_date >= check_in_date)) AND is_recurring= :is_recurring", :bookable_id => params[:bookable_id], :bookable_type => params[:bookable_type], :status => Reservation::STATUS_CHECKED_IN, :out_date => ct, :in_date => ct + current_schedule.duration , :is_recurring => false) 
 
         if !reservations.empty?

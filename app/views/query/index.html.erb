@@ -1,0 +1,56 @@
+<div class="center-main-container" align="center">
+    <div class="center-container">
+        <div class="center-main-container-title">
+            <h1>Search Asset/AssetGroup </h1>
+        </div>
+        </br>
+        <div>
+        	<%= form_tag '/search', :method => :post do %>
+        		 <div class="asset-search">
+                    <table id="rounded-corner-index" summary="Asset Search" class="search-table">
+                    	<thead>
+                                <tr>
+                                      <th scope="col" class="rounded-company"><%= l(:property) %></th>
+                                      <th scope="col" class="rounded-q1"><%= l(:value) %></th>
+                                </tr>
+                        </thead>
+                        <tfoot>
+                                <tr>
+                                      <td class="rounded-foot-left">&nbsp;</td>
+                                      <td class="rounded-foot-right">
+                                        <%= submit_tag l(:quick_search) %>
+                                      </td>
+                                </tr>
+                        </tfoot>
+                        <tbody id='table_body'>
+                        	    <tr>
+                                    <td><%= l(:name) %></td>
+                                    <td><%= text_field_tag :name %></td>
+                                </tr>
+                                <tr>
+                                	<td><%= l(:description) %></td>
+                                    <td><%= text_area_tag :description %></td>
+                                </tr>
+                                <tr>
+                                	<td><%= l(:nature) %></td>
+                                    <td><%=  select_tag "nature" ,"<option>Asset</option><option>AssetGroup</option>".html_safe %></td>
+                                </tr>
+                                <tr>
+                                    <td><%= l(:asset_type) %></td>
+                                    <td><%= text_field_tag :asset_type %></td>
+                                </tr>
+                       	</tbody>
+                    </table>
+             	</div>
+        	<% end %>
+            <%= render :partial => 'add_existing_custom_property', :locals => { :available_custom_fields => @available_custom_fields } %>
+        </div>
+    </div>
+   
+</div>
+
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
+    <%= javascript_include_tag 'prototype-base-extensions', :plugin => 'redmine_asset_tracker' %>
+    <%= javascript_include_tag 'custom-attribute-search', :plugin => 'redmine_asset_tracker' %>
+<% end %>

@@ -5,4 +5,5 @@ RedmineApp::Application.routes.draw do
 	match 'assets(/:action(/:id))', :controller => 'assets'
 	match 'reservations(/:action(/:id))', :controller => 'reservations'
 	match 'favourites(/:action(/:id))', :controller => 'favourites'
+	match 'query(/:action(/:id))', :controller => 'query'
 end
