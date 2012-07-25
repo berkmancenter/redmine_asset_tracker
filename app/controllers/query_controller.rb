@@ -48,7 +48,7 @@ class QueryController < ApplicationController
         end
 
         #Check for custom_attributes, this way gets a little ineffecient if we need to scale for thousands of assets
-        Asset.all.each do |asset|
+        Asset.find_each do |asset|
           
           is_result = true
 
