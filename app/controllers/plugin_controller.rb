@@ -1,3 +1,4 @@
+# @author Nitish Upreti
 class PluginController < ApplicationController
 
 	#shared methods to be put in PluginController
