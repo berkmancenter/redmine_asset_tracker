@@ -31,11 +31,6 @@ class QueryController < ApplicationController
         value[:description] = "%#{params[:description]}%"
     end
 
-    unless params[:asset_type].blank?
-        conditions << "asset_type LIKE :asset_type"
-        value[:asset_type] = "%#{params[:asset_type]}%"
-    end
-
     conditions = conditions.join(" AND ")
 
     if params[:nature] == 'Asset' then
@@ -88,7 +83,15 @@ class QueryController < ApplicationController
         logger.info(@result_assets)
     else
          #Get results from Asset Table for normal parameters
-        @result_groups = AssetGroup.all(:conditions => [conditions, value])
+        result = AssetGroup.all(:conditions => [conditions, value])
+
+        result.each do |r|
+
+            if params[:asset_type].blank? || /[[:alnum:]]*#{params[:asset_type].downcase}[[:alnum:]]*/.match(r.asset_type.name.downcase)
+              @result_groups.push(r)
+            end
+        end
+
     end
   end 
 end
