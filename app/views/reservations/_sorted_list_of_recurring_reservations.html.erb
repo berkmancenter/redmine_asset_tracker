@@ -29,11 +29,8 @@
                     <th scope="col" class="rounded-q2">
                       Options
                     </th>
-                    <th scope="col" class="rounded-q2">
-                      Recurring?
-                    </th>
                     <th scope="col" class="rounded-q1">
-                      Weeks
+                      Recurring Weeks
                     </th>
                 </tr>
             </thead>
@@ -83,9 +80,6 @@
                               <% end %>
                               <%= link_to_remote image_tag("/images/delete.png", :border=>0, :alt=>"Check out"), :url => {:controller => "reservations", :action => "delete", :id => r, :criteria => criteria, :direction => direction, :resultset => reservations}, :update => 'result' %>
                           <% end %>
-                        </td>
-                        <td>
-                            <%= r.is_recurring %>
                         </td>
                         <td>
                             <%= r.repeat_count %>

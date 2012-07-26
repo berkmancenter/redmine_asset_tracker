@@ -81,7 +81,7 @@ class QueryController < ApplicationController
 
         #check for fixed attributes
         result.each do |r|
-          if (params[:name].blank? ||  /[[:alnum:]]*#{params[:name].downcase}[[:alnum:]]/.match(r.name.downcase) ) && (params[:description].blank? ||  /[[:alnum:]]*#{params[:description].downcase}[[:alnum:]]/.match(r.description.downcase) ) && (params[:asset_type].blank? ||  /[[:alnum:]]*#{params[:asset_type].downcase}[[:alnum:]]/.match(r.asset_type.name.downcase) ) then
+          if (params[:name].blank? ||  /[[:alnum:]]*#{params[:name].downcase}[[:alnum:]]*/.match(r.name.downcase) ) && (params[:description].blank? ||  /[[:alnum:]]*#{params[:description].downcase}[[:alnum:]]*/.match(r.description.downcase) ) && (params[:asset_type].blank? ||  /[[:alnum:]]*#{params[:asset_type].downcase}[[:alnum:]]*/.match(r.asset_type.name.downcase) ) then
             @result_assets.push(r)
           end
         end
