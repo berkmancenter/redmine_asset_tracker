@@ -78,4 +78,12 @@ class AssetTest < ActiveSupport::TestCase
     reservation.check_in_date = DateTime.now + 30
     assert !reservation.save
   end
+
+  #Tests for ActionMailer mailing feature
+
+  def test_check_out_reminders
+
+
+  end 
+
 end

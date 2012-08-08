@@ -19,7 +19,7 @@
         <div class="inner-container" id="inner_container">
           <%= render :partial => 'quick_search' %>
           <br/><br/>
-          <div id="result">
+          <div id="recurring_result">
             <%= render :partial => 'sorted_list_of_recurring_reservations', :locals => { :reservations => @recurring_reservations, :criteria => 'ASSET_NAME', :direction => 'DESC', :user => User.current } %>
           </div>
         </div>

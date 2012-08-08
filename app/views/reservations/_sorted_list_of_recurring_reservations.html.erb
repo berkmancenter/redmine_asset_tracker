@@ -2,28 +2,28 @@
             <thead>
                 <tr>
                     <th scope="col" class="rounded-company">
-                      <%= link_to_remote image_tag("/images/1uparrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "ASSET_NAME", :direction => "ASC", :resultset => reservations}, :update => 'result' %>
-                      <%= link_to_remote image_tag("/images/1downarrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "ASSET_NAME", :direction => "DESC", :resultset => reservations}, :update => 'result' %>
+                      <%= link_to_remote image_tag("/images/1uparrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "ASSET_NAME", :direction => "ASC", :resultset => reservations}, :update => 'recurring_result' %>
+                      <%= link_to_remote image_tag("/images/1downarrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "ASSET_NAME", :direction => "DESC", :resultset => reservations}, :update => 'recurring_result' %>
                       Asset:
                     </th>
                     <th scope="col" class="rounded-q2">
-                      <%= link_to_remote image_tag("/images/1uparrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "USER_NAME", :direction => "ASC", :resultset => reservations}, :update => 'result' %>
-                      <%= link_to_remote image_tag("/images/1downarrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "USER_NAME", :direction => "DESC", :resultset => reservations}, :update => 'result' %>
+                      <%= link_to_remote image_tag("/images/1uparrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "USER_NAME", :direction => "ASC", :resultset => reservations}, :update => 'recurring_result' %>
+                      <%= link_to_remote image_tag("/images/1downarrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "USER_NAME", :direction => "DESC", :resultset => reservations}, :update => 'recurring_result' %>
                       User:
                     </th>
                     <th scope="col" class="rounded-q2">
-                      <%= link_to_remote image_tag("/images/1uparrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "CHECK_OUT_DATE", :direction => "ASC", :resultset => reservations}, :update => 'result' %>
-                      <%= link_to_remote image_tag("/images/1downarrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "CHECK_OUT_DATE", :direction => "DESC", :resultset => reservations}, :update => 'result' %>
+                      <%= link_to_remote image_tag("/images/1uparrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "CHECK_OUT_DATE", :direction => "ASC", :resultset => reservations}, :update => 'recurring_result' %>
+                      <%= link_to_remote image_tag("/images/1downarrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "CHECK_OUT_DATE", :direction => "DESC", :resultset => reservations}, :update => 'recurring_result' %>
                       C.O. date:
                     </th>
                     <th scope="col" class="rounded-q2">
-                      <%= link_to_remote image_tag("/images/1uparrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "CHECK_IN_DATE", :direction => "ASC", :resultset => reservations}, :update => 'result' %>
-                      <%= link_to_remote image_tag("/images/1downarrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "CHECK_IN_DATE", :direction => "DESC", :resultset => reservations}, :update => 'result' %>
+                      <%= link_to_remote image_tag("/images/1uparrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "CHECK_IN_DATE", :direction => "ASC", :resultset => reservations}, :update => 'recurring_result' %>
+                      <%= link_to_remote image_tag("/images/1downarrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "CHECK_IN_DATE", :direction => "DESC", :resultset => reservations}, :update => 'recurring_result' %>
                       C.I. date:
                     </th>
                     <th scope="col" class="rounded-q2">
-                      <%= link_to_remote image_tag("/images/1uparrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "STATUS", :direction => "ASC", :resultset => reservations}, :update => 'result' %>
-                      <%= link_to_remote image_tag("/images/1downarrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "STATUS", :direction => "DESC", :resultset => reservations}, :update => 'result' %>
+                      <%= link_to_remote image_tag("/images/1uparrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "STATUS", :direction => "ASC", :resultset => reservations}, :update => 'recurring_result' %>
+                      <%= link_to_remote image_tag("/images/1downarrow.png", :border=>0, :alt=>"delete"), :url => {:controller => "reservations", :action => "sort", :criteria => "STATUS", :direction => "DESC", :resultset => reservations}, :update => 'recurring_result' %>
                       Status:
                     </th>
                     <th scope="col" class="rounded-q2">
