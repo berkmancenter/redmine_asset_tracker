@@ -76,9 +76,9 @@
                               <% if r.status == Reservation::STATUS_READY || r.status == Reservation::STATUS_MISSING_PICKUP_DATE %>
                                 <%= link_to_remote image_tag("/images/2uparrow.png", :border=>0, :alt=>"Check out"), :url => {:controller => "reservations", :action => "change_status", :id => r, :status => Reservation::STATUS_CHECKED_OUT, :criteria => criteria, :direction => direction, :resultset => reservations}, :update => 'result' %>
                               <% elsif r.status == Reservation::STATUS_CHECKED_OUT  || r.status == Reservation::STATUS_MISSING_RETURN_DATE %>
-                                <%= link_to_remote image_tag("/images/2downarrow.png", :border=>0, :alt=>"Check out"), :url => {:controller => "reservations", :action => "change_status", :id => r, :status => Reservation::STATUS_CHECKED_IN, :criteria => criteria, :direction => direction, :resultset => reservations}, :update => 'result' %>
+                                <%= link_to_remote image_tag("/images/2downarrow.png", :border=>0, :alt=>"Check out"), :url => {:controller => "reservations", :action => "change_status", :id => r, :status => Reservation::STATUS_CHECKED_IN, :criteria => criteria, :direction => direction, :resultset => reservations}, :update => 'recurring_result' %>
                               <% end %>
-                              <%= link_to_remote image_tag("/images/delete.png", :border=>0, :alt=>"Check out"), :url => {:controller => "reservations", :action => "delete", :id => r, :criteria => criteria, :direction => direction, :resultset => reservations}, :update => 'result' %>
+                              <%= link_to_remote image_tag("/images/delete.png", :border=>0, :alt=>"Check out"), :url => {:controller => "reservations", :action => "delete", :id => r, :criteria => criteria, :direction => direction, :resultset => reservations}, :update => 'recurring_result' %>
                           <% end %>
                         </td>
                         <td>
