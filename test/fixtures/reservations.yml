@@ -1,9 +1,10 @@
+# Enteries particularly to test the Recurring-Non Recurring Reservation conflicts with each other
 Non-recurring1:
  id: 1
  bookable_id : 11
  bookable_type : Asset
  user_id : 1
- check_out_date: <%= Time.now.utc %>
+ check_out_date: <%= Time.now.utc + 5.minutes %>
  check_in_date: <%= Time.now.utc + 2.hours %>
  notes : lol
  status : Ready
@@ -33,3 +34,65 @@ Recurring1:
  status : Ready
  is_recurring : 1
  repeat_count : 5
+
+# Enteries particularly to test the Reminder Mailing Feature
+Non-recurring3:
+ id: 4
+ bookable_id : 17
+ bookable_type : Asset
+ user_id : 1
+ check_out_date: <%= DateTime.now.utc + 1.hours %>
+ check_in_date: <%= DateTime.now.utc + 4.hours %>
+ notes : lol
+ status : Ready
+ is_recurring : 0
+ repeat_count : 0
+
+
+Non-recurring4:
+ id: 5
+ bookable_id : 31
+ bookable_type : Asset
+ user_id : 1
+ check_out_date: <%= DateTime.now.utc %>
+ check_in_date: <%= DateTime.now.utc + 1.hours %>
+ notes : lol
+ status : Checked Out
+ is_recurring : 0
+ repeat_count : 0
+
+Recurring2:
+ id: 6
+ bookable_id : 666
+ bookable_type : Asset
+ user_id : 1
+ check_out_date: <%= DateTime.now.utc - 7.days %>
+ check_in_date: <%= DateTime.now.utc - 7.days + 3.hours %>
+ notes : lol
+ status : Ready
+ is_recurring : 1
+ repeat_count : 3 
+
+Recurring3:
+ id: 7
+ bookable_id : 14
+ bookable_type : Asset
+ user_id : 1
+ check_out_date: <%= DateTime.now.utc - 7.days %>
+ check_in_date: <%= DateTime.now.utc - 7.days + 3.hours %>
+ notes : lol
+ status : Checked Out
+ is_recurring : 1
+ repeat_count : 3 
+
+Recurring4:
+ id: 8
+ bookable_id : 5
+ bookable_type : Asset
+ user_id : 1
+ check_out_date: <%= DateTime.now.utc - 1.days %>
+ check_in_date: <%= DateTime.now.utc + 2.hours %>
+ notes : lol
+ status : Checked Out
+ is_recurring : 1
+ repeat_count : 3 
