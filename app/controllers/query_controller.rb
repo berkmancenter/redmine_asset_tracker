@@ -1,4 +1,6 @@
 # @author Nitish Upreti
+
+#Adding a Custom method to String class
 class String
   def is_number?
     true if Float(self) rescue false
@@ -8,10 +10,15 @@ end
 class QueryController < ApplicationController
   unloadable
 
+  # Lists all the [AssetCutomField] from the Database.
+  #
+  # @return [AssetCustomField] Array. 
   def index
   	@available_custom_fields = AssetCustomField.all
   end
 
+
+  # Search all the [Asset] or [AssetGroup] from the Database based on any availaible Attributes.
   def search
     #Get all the params in place, no field is mandatory
 

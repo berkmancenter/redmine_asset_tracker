@@ -1,6 +1,8 @@
+# @author Nitish Upreti
 class FavouritesController < PluginController
   unloadable
 
+  # Lists all the [Favourite] from the Database
   def index 
   	@user = User.find_by_id session[:user_id]
 
@@ -14,6 +16,7 @@ class FavouritesController < PluginController
 
   end
 
+  #Mark an [Asset] or [AssetGroup] as favourite
   def mark_as_favourite
 
   	@user = User.find_by_id session[:user_id]

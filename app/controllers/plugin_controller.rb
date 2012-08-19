@@ -1,7 +1,7 @@
 # @author Nitish Upreti
 class PluginController < ApplicationController
 
-	#shared methods to be put in PluginController
+	#Shared methods to be put in PluginController
 
 	def populate_asset_list
     	
@@ -10,7 +10,7 @@ class PluginController < ApplicationController
 
       @user= User.find_by_id session[:user_id]
 
-      	#For all the favourite enteries get the name of corresponding Assets
+      #For all the favourite enteries get the name of corresponding Assets
      	 @user.favourites.each do |f|
         	if f.item_type=='AssetGroup'
           		asset_group=AssetGroup.find_by_id(f.item_id)

@@ -1,3 +1,4 @@
+# @author Nitish Upreti
 class Favourite < ActiveRecord::Base
   unloadable
 
