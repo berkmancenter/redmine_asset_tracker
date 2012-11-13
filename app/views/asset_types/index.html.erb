@@ -4,7 +4,7 @@
             <h1><%= l(:assets_list) %></h1>
         </div>
         <div class="inner-container" id="inner_container">
-            <%= render :partial => 'assets_list', :locals => { :asset_types => @asset_types, :user => User.current, :open_group => 0 } %>
+            <%= render :partial => 'assets_list', :locals => { :asset_types => @asset_types, :user => User.current, :open_group => 0, :favourites_asset => @favourites_asset, :favourites_asset_group => @favourites_asset_group } %>
         </div>
     </div>
 </div>
@@ -20,5 +20,6 @@
     <%= javascript_include_tag 'prototype-base-extensions', :plugin => 'redmine_asset_tracker' %>
     <%= javascript_include_tag 'prototype-date-extensions', :plugin => 'redmine_asset_tracker' %>
     <%= javascript_include_tag 'datepicker', :plugin => 'redmine_asset_tracker' %>
-    <%= javascript_include_tag 'asset_tracker', :plugin => 'redmine_asset_tracker' %>    
+    <%= javascript_include_tag 'asset_tracker', :plugin => 'redmine_asset_tracker' %>   
+    <%= javascript_include_tag 'toggler', :plugin => 'redmine_asset_tracker' %>  
 <% end %>

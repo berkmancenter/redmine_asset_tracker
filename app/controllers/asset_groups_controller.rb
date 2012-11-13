@@ -1,5 +1,5 @@
-# @author Emmanuel Pastor
-class AssetGroupsController < ApplicationController
+# @author Emmanuel Pastor/Nitish Upreti
+class AssetGroupsController < PluginController
   unloadable
   before_filter :require_admin, :except => [:index, :show, :show_attachment, :show_image]
 
@@ -48,7 +48,11 @@ class AssetGroupsController < ApplicationController
       a.asset_group_id = nil
       a.save
     end
-    asset_group.delete
+    asset_group.destroy
+
+    #Populating the lists again so as the UI can be updated accordingly
+    @favourites_asset, @favourites_asset_group = populate_favourite_list
+    @assets, @asset_groups = populate_asset_list
     #render :partial => 'asset_types/assets_list', :layout => false, :locals => { :asset_types => AssetType.all, :user => User.current }
   end
 
@@ -65,6 +69,8 @@ class AssetGroupsController < ApplicationController
   def show
     @asset_group = AssetGroup.find_by_id params[:id]
     @user = User.find_by_id session[:user_id]
+       @reservations=Reservation.where("bookable_id = ? AND bookable_type = ? AND status <> ? AND is_recurring = ?",params[:id],'AssetGroup',Reservation::STATUS_CHECKED_IN,false)
+    @recurring_reservations=Reservation.where("bookable_id = ? AND bookable_type = ? AND status <> ? AND is_recurring = ?",params[:id],'AssetGroup',Reservation::STATUS_CHECKED_IN,true)
   end
 
   # Saves the changes of an [AssetGroup] to the Database.

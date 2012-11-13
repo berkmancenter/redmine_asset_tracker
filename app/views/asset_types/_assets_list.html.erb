@@ -55,12 +55,24 @@
                     <td><%= asset_group.description %></td>
                     <td>
                         <%= link_to image_tag("/plugin_assets/redmine_asset_tracker/images/show.png", :border=>0, :alt=>l(:show)), :controller => "asset_groups", :action => "show", :id => asset_group %>
-                        <%= link_to image_tag("/images/time_add.png", :border=>0, :alt=>l(:reserve)), {:controller => "reservations", :action => "new", :id => asset_group, :object_type => "AssetGroup"}, :rel => "facebox" %>
+                        <% if @user then %>
+                            <%= link_to image_tag("/images/time_add.png", :border=>0, :alt=>l(:reserve)), {:controller => "reservations", :action => "new", :id => asset_group, :object_type => "AssetGroup"}, :rel => "facebox" %>
+                        <% end %>
                         <%= link_to image_tag("/images/calendar.png", :border=>0, :alt=>l(:reservations)), {:controller => "reservations", :action => "show_by_bookable", :bookable_id => asset_group, :bookable_type => "AssetGroup"}, :rel => "facebox" %>
                         <% if user.admin %>
                           <%= link_to image_tag("/images/edit.png", :border=>0, :alt=>l(:edit)), :controller => "asset_groups", :action => "edit", :id => asset_group %>
                           <%= link_to_remote image_tag("/images/delete.png", :border=>0, :alt=>l(:delete)), :url => {:controller => "asset_groups", :action => "delete", :id => asset_group},
                                                                                                                 :confirm => l(:confirm) %>
+                        <% end %>
+                        <% if @user then %>
+
+                            <% if favourites_asset_group.include?(asset_group.id) then %>
+                                
+                                <%= link_to image_tag("/images/fav.png", :border=>0, :alt=>"mark favourite", :id=>'mark_group_'+asset_group.id.to_s), { :controller =>"favourites", :action => "mark_as_favourite", :id => asset_group, :type=> 'AssetGroup' } , :remote=> true %>
+                            <% else %>
+
+                                <%= link_to image_tag("/images/fav_off.png", :border=>0, :alt=>"mark favourite",  :id=>'mark_group_'+asset_group.id.to_s), { :controller =>"favourites", :action => "mark_as_favourite", :id => asset_group, :type=> 'AssetGroup' }, :remote=> true %>
+                            <% end %>
                         <% end %>
                     </td>
                 </tr>
@@ -77,12 +89,24 @@
                         <td><%= asset.description %></td>
                         <td>
                             <%= link_to image_tag("/plugin_assets/redmine_asset_tracker/images/show.png", :border=>0, :alt=>l(:show)), :controller => "assets", :action => "show", :id => asset %>
-                            <%= link_to image_tag("/images/time_add.png", :border=>0, :alt=>l(:reserve)), {:controller => "reservations", :action => "new", :id => asset, :object_type => "Asset"}, :rel => "facebox" %>
+                            <% if @user then %>
+                                <%= link_to image_tag("/images/time_add.png", :border=>0, :alt=>l(:reserve)), {:controller => "reservations", :action => "new", :id => asset, :object_type => "Asset"}, :rel => "facebox" %>
+                            <% end %>
                             <%= link_to image_tag("/images/calendar.png", :border=>0, :alt=>l(:edit)), {:controller => "reservations", :action => "show_by_bookable", :bookable_id => asset, :bookable_type => "Asset"}, :rel => "facebox" %>
                             <% if user.admin %>
                               <%= link_to image_tag("/images/edit.png", :border=>0, :alt=>l(:edit)), :controller => "assets", :action => "edit", :id => asset %>
                               <%= link_to_remote image_tag("/images/delete.png", :border=>0, :alt=>l(:delete)), :url => {:controller => "assets", :action => "delete", :id => asset},
                                                                                                                  :confirm => l(:confirm) %>
+                            <% end %>
+                            <% if @user then %>
+
+                                <% if favourites_asset.include?(asset.id) then %>
+                                
+                                    <%= link_to image_tag("/images/fav.png", :border=>0, :alt=>"mark favourite", :id=>'mark_'+asset.id.to_s), { :controller =>"favourites", :action => "mark_as_favourite", :id=> asset, :type=> 'Asset' }, :remote=> true %>
+                                <% else %>
+
+                                    <%= link_to image_tag("/images/fav_off.png", :border=>0, :alt=>"mark favourite", :id=>'mark_'+asset.id.to_s), { :controller =>"favourites", :action => "mark_as_favourite", :id=> asset, :type=> 'Asset' }, :remote=> true %>
+                                <% end %>
                             <% end %>
                         </td>
                     </tr>

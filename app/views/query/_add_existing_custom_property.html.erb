@@ -1,0 +1,9 @@
+<div class="search-existing-custom-property" id="attribute_toggler">
+    <h3><%= l(:add_existing_custom_property) %></h3>
+    <div>
+    	<%= select_tag :existing_custom_field, options_from_collection_for_select(available_custom_fields, :id, :name), :size => 18, :multiple => true, :class => "available-fields" %>
+    </div>
+    <div id="add_button_div">
+    	<%= button_tag "Add" , :id=>'add_button' %>
+    </div>
+</div>

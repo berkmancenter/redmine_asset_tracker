@@ -22,20 +22,6 @@ class AssetTest < ActiveSupport::TestCase
     assert !asset_custom_field.save
   end
 
-  def test_asset_custom_field_with_long_name
-    asset_custom_field = AssetCustomField.new
-    asset_custom_field.name = 50.times.to_s
-    asset_custom_field.field_format = 'string'
-    assert !asset_custom_field.save
-  end
-
-  def test_asset_custom_field_with_funny_name
-    asset_custom_field = AssetCustomField.new
-    asset_custom_field.name = '!?=123abc&%$'
-    asset_custom_field.field_format = 'string'
-    assert !asset_custom_field.save
-  end
-
   def test_repeated_asset_custom_field_name
     asset_custom_field = AssetCustomField.new
     asset_custom_field.name = 'foo'

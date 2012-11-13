@@ -1,4 +1,4 @@
-# @author Emmanuel Pastor
+ # @author Emmanuel Pastor/Nitish Upreti
 class Asset < ActiveRecord::Base
   belongs_to :asset_type
   belongs_to :asset_group
@@ -7,7 +7,7 @@ class Asset < ActiveRecord::Base
                           :order => "#{CustomField.table_name}.position",
                           :join_table => "#{table_name_prefix}custom_fields_assets#{table_name_suffix}",
                           :association_foreign_key => 'custom_field_id'
-  has_many :reservations, :as => :commentable
+  has_many :reservations, :as => :bookable , :dependent => :destroy
   acts_as_customizable
   acts_as_attachable :view_permission => :view_files,
                      :delete_permission => :manage_files
@@ -16,6 +16,17 @@ class Asset < ActiveRecord::Base
   validates_numericality_of :asset_type_id
   validates_length_of :name, :maximum=>30
   validates_format_of :name, :with => /^[\w\s\.\'\-]*$/i
+
+  before_destroy :remove_as_favorite
+
+  #When an asset is deleted we need to make sure all enteries in db marking it as fav are cleared as well
+  def remove_as_favorite
+    fav=Favourite.where(:item_id => self.id, :item_type => 'Asset')   
+
+    fav.each do |f|
+      f.destroy
+    end
+  end
 
 
   # Attaches a File to an Asset.

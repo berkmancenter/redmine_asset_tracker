@@ -1,7 +1,9 @@
-# @author Emmanuel Pastor
-class ReservationsController < ApplicationController
+# @author Emmanuel Pastor/Nitish Upreti
+class ReservationsController < PluginController
   unloadable
-  #before_filter :require_admin, :except => [:index, :show, :show_attachment, :show_image]
+  include IceCube
+  before_filter :require_login, :only => [:new,:create]
+  before_filter :require_admin, :only => [:delete,:change_status]
 
   # Lists all the Reservations from the DB.
   #
@@ -9,7 +11,8 @@ class ReservationsController < ApplicationController
   def index
     fifteen_days_ago = DateTime.now - 15
     next_fifteen_days = DateTime.now + 15
-    @reservations = Reservation.find :all, :conditions => ["status <> '" + Reservation::STATUS_CHECKED_IN + "' AND (check_in_date BETWEEN ? AND ? OR check_out_date BETWEEN ? AND ?)", fifteen_days_ago, next_fifteen_days, fifteen_days_ago, next_fifteen_days]
+    @reservations = Reservation.find :all, :conditions => ["status <> '" + Reservation::STATUS_CHECKED_IN + "' AND (check_in_date BETWEEN ? AND ? OR check_out_date BETWEEN ? AND ?) AND is_recurring = ?", fifteen_days_ago, next_fifteen_days, fifteen_days_ago, next_fifteen_days,false]
+    @recurring_reservations = Reservation.find :all, :conditions => ["status <> ? AND is_recurring = ?",Reservation::STATUS_CHECKED_IN,true]
     @reservations.each do |r|
       if (Time.now > r.check_out_date  && r.status != Reservation::STATUS_CHECKED_OUT)
         r.status = Reservation::STATUS_MISSING_PICKUP_DATE
@@ -19,14 +22,25 @@ class ReservationsController < ApplicationController
       end
       r.save
     end
+
+    @recurring_reservations.each do |r|
+      if (Time.now > r.check_out_date  && r.status != Reservation::STATUS_CHECKED_OUT)
+        r.status = Reservation::STATUS_MISSING_PICKUP_DATE
+      end
+      if Time.now > r.check_in_date + r.repeat_count*IceCube::ONE_WEEK
+        r.status = Reservation::STATUS_MISSING_RETURN_DATE
+      end
+      r.save
+    end
+
     @reservations = @reservations.sort_by {|r| r.bookable.name }
+    @recurring_reservations = @recurring_reservations.sort_by {|r| r.bookable.name}
   end
 
   # Creates a new Reservation instance, ready to be written to the DB.
   #
   # @return [Reservation].
   def new
-    @reservation = Reservation.new
     @object_type = params[:object_type]
     if @object_type == "Asset"
       @object = Asset.find_by_id params[:id]
@@ -34,7 +48,7 @@ class ReservationsController < ApplicationController
       @object = AssetGroup.find_by_id params[:id]
     end
     @users = User.find(:all)
-    render 'new', :layout=>false
+    render 'new', :layout=>false  
   end
 
 
@@ -43,46 +57,132 @@ class ReservationsController < ApplicationController
   # @return Nothing.
   def create
 
+    is_recurring=params[:is_recurring]
+    repeat_count=params[:repeat_count].to_i
+      
     if params[:checkin] == nil || params[:checkout] == nil
-      @error_message = "Dates can't be empty"
-      return
+        @error_message = "Dates can't be empty"
+        return
     end
 
-    in_date = DateTime.strptime params[:checkin], "%Y-%m-%d %H:%M"
-    out_date = DateTime.strptime params[:checkout], "%Y-%m-%d %H:%M"
+    in_date = Time.zone.parse(params[:checkin]).to_time
+    out_date = Time.zone.parse(params[:checkout]).to_time
+
 
     #Make sure that check-in happens after check-out
     if out_date > in_date
-      @error_message = "Checkout date can't happen after Checkin"
-      return
+        @error_message = "Checkout date can't happen after Checkin"
+        return
     end
 
     #Make sure both are in the future
-    if in_date < DateTime.now || out_date < DateTime.now
-      @error_message = "Dates can't be in the past"
-      return
+    if in_date < Time.now || out_date < Time.now
+        @error_message = "Dates can't be in the past"
+        return
     end
 
-    #Finally check for possible collisions with existing reservations
-    reservations = Reservation.find :all, :conditions => ["bookable_id = ? AND bookable_type = ? AND status <> ? AND ((? >= check_out_date AND ? <= check_in_date) OR (? <= check_in_date AND ? >= check_out_date))", params[:bookable_id], params[:bookable_type], Reservation::STATUS_CHECKED_IN, params[:checkout], params[:checkout], params[:checkin], params[:checkin]]
-    if !reservations.empty?
-      @error_message = "This Asset has already been reserved for those dates"
-      return
+    #We have a non-recurring reservation request coming up with recurring checkbox unticked
+    if is_recurring == nil then 
+
+      #check collision with non-recurring reservations
+      reservations = Reservation.where("bookable_id = :bookable_id AND bookable_type = :bookable_type AND status <> :status AND ((:out_date >= check_out_date AND  :out_date <= check_in_date) OR (:in_date <= check_in_date AND :in_date >= check_out_date) OR (:out_date <= check_in_date AND :in_date >= check_in_date)) AND is_recurring= :is_recurring", :bookable_id => params[:bookable_id], :bookable_type => params[:bookable_type], :status => Reservation::STATUS_CHECKED_IN, :out_date => out_date, :in_date => in_date, :is_recurring => false)
+      
+      if !reservations.empty?
+        @error_message = "This Asset has already been reserved for those dates"
+        return
+      end
+
+      #Check collisions with recurring reservations which were started prior to this reservation
+      reservations = Reservation.find :all, :conditions => ["bookable_id = ? AND bookable_type = ? AND check_out_date <= ? AND status <> ? AND is_recurring = ?",params[:bookable_id],params[:bookable_type],in_date,Reservation::STATUS_CHECKED_IN,true]
+
+      current_schedule=Schedule.new(out_date, {:duration => in_date - out_date})
+      #A serious bug in ice_cube forces us to add a recurrence rule if we want conflict_with to work, so adding one
+      current_schedule.add_recurrence_rule Rule.yearly(5) #repear every 5 years which is pointless
+
+
+      reservations.each do |r|
+        schedule=Schedule.new(r.check_out_date,{ :duration =>r.check_in_date - r.check_out_date, :end_time => r.check_in_date + r.repeat_count*IceCube::ONE_WEEK })
+        schedule.add_recurrence_rule Rule.weekly
+
+        if schedule.conflicts_with?(current_schedule) then
+          @error_message ="This Reservation conflicts with another recurring reservation,Contact the Administrator"
+          return
+        end
+      end
+
+      reservation = Reservation.new
+      reservation.bookable_type = params[:bookable_type]
+      reservation.bookable_id = params[:bookable_id]
+      reservation.user = User.find_by_id params[:user_id]
+      reservation.check_in_date = in_date
+      reservation.check_out_date = out_date
+      reservation.status = Reservation::STATUS_READY
+      reservation.notes = params[:notes]
+      reservation.is_recurring = false
+      reservation.repeat_count = 0
+      reservation.save
+    else
+
+
+      if repeat_count > 52 then
+        @error_message = "Cannot create a Recurring Reservation which spans for more than a year"
+        return
+      end
+
+      if repeat_count <= 1 then
+        @error_message = "Invalid Repeat Count Value."
+        return
+      end
+
+      current_schedule=Schedule.new(out_date, { :duration => in_date - out_date, :end_time => in_date + repeat_count*IceCube::ONE_WEEK })
+      current_schedule.add_recurrence_rule Rule.weekly
+
+      #Check for any possible collisions with non-recurring reservations
+      conflicting_instances=current_schedule.first(repeat_count)
+
+      conflicting_instances.each do |ct|
+
+        reservations = Reservation.where("bookable_id = :bookable_id AND bookable_type = :bookable_type AND status <> :status AND ((:out_date >= check_out_date AND  :out_date <= check_in_date) OR (:in_date <= check_in_date AND :in_date >= check_out_date) OR (:out_date <= check_in_date AND :in_date >= check_in_date)) AND is_recurring= :is_recurring", :bookable_id => params[:bookable_id], :bookable_type => params[:bookable_type], :status => Reservation::STATUS_CHECKED_IN, :out_date => ct, :in_date => ct + current_schedule.duration , :is_recurring => false) 
+
+        if !reservations.empty?
+          @error_message = "This Recurring Reservation conflicts with another existing Non-Recurring Reservation"
+          return
+        end
+
+      end
+
+      #Check for conflicts with another recurring reservation
+      reservations = Reservation.find :all, :conditions => ["bookable_id = ? AND bookable_type = ? AND check_out_date <= ? AND status <> ? AND is_recurring = ?",params[:bookable_id],params[:bookable_type],current_schedule.end_time,Reservation::STATUS_CHECKED_IN,true]
+
+      reservations.each do |r|
+
+        schedule=Schedule.new(r.check_out_date,{ :duration =>r.check_in_date - r.check_out_date, :end_time => r.check_in_date + r.repeat_count*IceCube::ONE_WEEK })
+        schedule.add_recurrence_rule Rule.weekly
+
+        if schedule.conflicts_with?(current_schedule) then
+          @error_message ="This Recurring Reservation conflicts with another recurring reservation,Contact the Administrator"
+          return
+        end
+      end
+
+      reservation = Reservation.new
+      reservation.bookable_type = params[:bookable_type]
+      reservation.bookable_id = params[:bookable_id]
+      reservation.user = User.find_by_id params[:user_id]
+      reservation.check_in_date = in_date
+      reservation.check_out_date = out_date
+      reservation.status = Reservation::STATUS_READY
+      reservation.notes = params[:notes]
+      reservation.is_recurring = true
+      reservation.repeat_count = repeat_count
+      reservation.save
     end
 
-    reservation = Reservation.new
-    reservation.bookable_type = params[:bookable_type]
-    reservation.bookable_id = params[:bookable_id]
-    reservation.user = User.find_by_id params[:user_id]
-    reservation.check_in_date = params[:checkin]
-    reservation.check_out_date = params[:checkout]
-    reservation.status = Reservation::STATUS_READY
-    reservation.notes = params[:notes]
-    reservation.save
     respond_to do |format|
-      format.html
-      format.js
+        format.html
+        format.js
     end
+
   end
 
   # Search reservations by the polymorphic bookable class.
@@ -118,8 +218,12 @@ class ReservationsController < ApplicationController
     if direction == 'ASC'
       reservations = reservations.reverse
     end
-    render :partial => 'sorted_list_of_reservations', :layout => false, :locals => { :reservations => reservations, :criteria => criteria, :direction => direction }
-    
+
+    if params[:origin]=='NON_RECURRING'
+      render :partial => 'sorted_list_of_reservations', :layout => false, :locals => { :reservations => reservations, :criteria => criteria, :direction => direction }
+    else
+      render :partial => 'sorted_list_of_recurring_reservations', :layout => false, :locals => { :reservations => reservations, :criteria => criteria, :direction => direction }
+    end
   end
 
   # Changes the status of a reservation.
@@ -190,9 +294,10 @@ class ReservationsController < ApplicationController
   def history
     #@bookable = find_bookable
     #@reservations = @bookable.reservations
-    @reservations = Reservation.find :all, :conditions => "status = '" + Reservation::STATUS_CHECKED_IN + "'"
-    @reservations = @reservations.sort_by {|r| r.bookable.name }
-  end
+    @reservations = Reservation.where("status = ? AND is_recurring = ?",Reservation::STATUS_CHECKED_IN,false)
+    @reservations = @reservations.sort_by { |r| r.bookable.name }
+    @recurring_reservations = Reservation.where("status = ? AND is_recurring = ?",Reservation::STATUS_CHECKED_IN,true)
+  end 
 
   # Displays any notes added to a given reservation.
   #
@@ -209,40 +314,6 @@ class ReservationsController < ApplicationController
     reservation = Reservation.find params[:id]
     reservation.notes = params[:notes]
     reservation.save
-  end
-
-  # Checks for all the requisites of a reservation before creating one in the DB.
-  #
-  # @return An error message if any of the requisites is not met, or nothing if all the requisites are fulfilled.
-  def check_new_form
-
-    if params[:checkin] == nil || params[:checkout] == nil
-      @error_message = "Dates can't be empty"
-      return
-    end
-
-    in_date = DateTime.strptime params[:checkin], "%Y-%m-%d %H:%M"
-    out_date = DateTime.strptime params[:checkout], "%Y-%m-%d %H:%M"
-
-    #Make sure that check-in happens after check-out
-    if out_date > in_date
-      @error_message = "Checkout date can't happen after Checkin"
-      return
-    end
-
-    #Make sure both are in the future
-    if in_date <= DateTime.now || out_date <= DateTime.now
-      @error_message = "Dates can't be in the past"
-      return
-    end
-
-    #Finally check for possible collisions with existing reservations
-    #reservations = Reservation.find :all, :conditions => ["bookable_id = ? AND bookable_type = ? AND status <> ? AND ((check_out_date BETWEEN ? AND ? OR check_in_date BETWEEN ? AND ?) OR (? BETWEEN check))", params[:bookable_id], params[:bookable_type], Reservation::STATUS_CHECKED_IN, params[:checkout], params[:checkin], params[:checkout], params[:checkin]]
-    reservations = Reservation.find :all, :conditions => ["bookable_id = ? AND bookable_type = ? AND status <> ? AND ((? >= check_out_date AND ? <= check_in_date) OR (? <= check_in_date AND ? >= check_out_date))", params[:bookable_id], params[:bookable_type], Reservation::STATUS_CHECKED_IN, params[:checkout], params[:checkout], params[:checkin], params[:checkin]]
-    if !reservations.empty?
-      @error_message = "This Asset has already been reserved for those dates"
-      return
-    end
   end
 
   # Finds out what type of class a bookable (polymorphic class) is

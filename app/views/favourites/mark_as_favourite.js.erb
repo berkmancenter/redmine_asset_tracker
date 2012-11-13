@@ -1,0 +1,26 @@
+var id=<%=id %>
+var type='<%= type %>'
+
+if (type=='AssetGroup')
+{
+	id_lookup='mark_group_'+id
+}
+else
+{
+	id_lookup='mark_'+id
+}
+
+element=$(id_lookup);
+img_src=element.readAttribute('src');
+
+index_of=img_src.indexOf('?');
+img_src=img_src.slice(0,index_of);
+
+if (img_src=='/images/fav_off.png')
+{
+	element.writeAttribute('src','/images/fav.png');
+}
+else
+{
+	element.writeAttribute('src','/images/fav_off.png');
+}

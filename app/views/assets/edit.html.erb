@@ -4,7 +4,7 @@
             <h1>Edit Asset</h1>
         </div>
         <div class="inner-container">
-            <% form_for :asset, @asset, :url => { :action => "update", :id => @asset } do |f| %>
+            <%= form_for @asset, :url => { :action => "update", :id => @asset } do |f| %>
                 <%= render :partial => 'edit_asset_image', :locals => { :asset => @asset, :user => @user, :edit_enabled => true } %>
                 <div class="asset-properties">
                     <table id="rounded-corner" summary="Asset Properties">
@@ -33,8 +33,7 @@
                                       <td><%= f.text_field :description %></td>
                                   </tr>
                                   <tr>
-                                      <td>
-                                        <%= image_tag "/images/sticky.png", :border=>0, :alt=>"manage" %>
+                                      <td>                                
                                         <%= l(:asset_type) %>
                                       </td>
                                       <td id='asset_types_td'>
@@ -66,7 +65,7 @@
             <% end %>
             <br class="clear-both" />
             <%= render :partial => 'add_asset_custom_fields', :locals => { :asset => @asset, :custom_field => @custom_field, :available_custom_fields => @available_custom_fields } %>
-            <% content_for :header_tags do %>
+            <%= content_for :header_tags do %>
                 <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
                 <%= stylesheet_link_tag 'facebox', :plugin => 'redmine_asset_tracker' %>
                 <%= javascript_include_tag 'facebox', :plugin => 'redmine_asset_tracker' %>

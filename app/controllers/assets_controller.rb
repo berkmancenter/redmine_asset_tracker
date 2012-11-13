@@ -1,5 +1,5 @@
-# @author Emmanuel Pastor
-class AssetsController < ApplicationController
+# @author Emmanuel Pastor/Nitish Upreti
+class AssetsController < PluginController
   unloadable
   helper :custom_fields
   include CustomFieldsHelper
@@ -18,6 +18,8 @@ class AssetsController < ApplicationController
   def show
     @asset = Asset.find_by_id params[:id]
     @user = User.find_by_id session[:user_id]
+    @reservations=Reservation.where("bookable_id = ? AND bookable_type = ? AND status <> ? AND is_recurring = ?",params[:id],'Asset',Reservation::STATUS_CHECKED_IN,false)
+    @recurring_reservations=Reservation.where("bookable_id = ? AND bookable_type = ? AND status <> ? AND is_recurring = ?",params[:id],'Asset',Reservation::STATUS_CHECKED_IN,true)
   end
 
   # Creates a new Asset Instance, ready to be saved to the DB.
@@ -79,7 +81,11 @@ class AssetsController < ApplicationController
   # @return Nothing.
   def delete
     asset = Asset.find params[:id]
-    asset.delete
+    asset.destroy
+
+    #Populating the lists again so as the UI can be updated accordingly
+    @favourites_asset, @favourites_asset_group = populate_favourite_list
+    @assets, @asset_groups = populate_asset_list
     #render :partial => 'asset_types/assets_list', :layout => false, :locals => { :asset_types => AssetType.all, :user => User.current }
   end
 
@@ -94,7 +100,7 @@ class AssetsController < ApplicationController
         asset.asset_custom_fields << custom_field
       end
     else
-      custom_field = AssetCustomField.create!(params[:custom_field])
+      custom_field = AssetCustomField.create!(params[:asset_custom_field])
       asset.asset_custom_fields << custom_field
     end
     asset.save

@@ -1,7 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class AssetTest < ActiveSupport::TestCase
-  #fixtures :asset_custom_fields
+class ReservationTest < ActiveSupport::TestCase
+  fixtures :reservations
+  fixtures :users
 
   def test_reservation_with_no_data
     reservation = Reservation.new
@@ -78,4 +79,33 @@ class AssetTest < ActiveSupport::TestCase
     reservation.check_in_date = DateTime.now + 30
     assert !reservation.save
   end
+
+    #Tests for the Reminder feature of Reservation model
+  def test_checkout_reminders_list_length_for_day
+    reservation_list = Reservation.send_day_check_out_reminders 
+    assert_equal reservation_list.length,2
+  end
+
+  def test_checkin_reminders_list_length_for_day
+    reservation_list = Reservation.send_day_check_in_reminders 
+    assert_equal reservation_list.length,1
+  end
+
+
+  def test_recurring_checkout_reminders_list_length_for_day
+    reservation_list = Reservation.recurring_checkout_reservation_list
+    assert_equal reservation_list.length,2
+  end
+
+
+  def test_recurring_checkin_remninders_list_length_for_day
+    reservation_list = Reservation.recurring_checkin_reservation_list
+    assert_equal reservation_list.length,2
+  end 
+
+  def test_digest
+    Reservation.send_day_digest
+  end
+
+
 end

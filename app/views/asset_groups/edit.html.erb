@@ -1,10 +1,10 @@
 <div class="center-main-container" align="center">
     <div class="center-container">
         <div class="center-main-container-title">
-            <h1><%= l(:edit_asset_Group) %></h1>
+            <h1><%= l(:edit_asset_group) %></h1>
         </div>
         <div class="inner-container">
-            <% form_for :asset, @asset_group, :url => { :action => "update", :id => @asset_group } do |f| %>
+            <%= form_for @asset_group, :url => { :action => "update", :id => @asset_group } do |f| %>
                 <%= render :partial => 'edit_asset_group_image', :locals => { :asset_group => @asset_group, :user => @user, :edit_enabled => true } %>
                 <div class="asset-properties">
                     <table id="rounded-corner" summary="Asset Properties">
@@ -37,7 +37,7 @@
                                         <%= link_to image_tag("/images/changeset.png", :border=>0, :alt=>"manage"), :controller => "asset_types", :action => "index" %>
                                         <%= l(:asset_type) %>:
                                       </td>
-                                      <td><%= f.collection_select :asset_type_id, AssetType.all, :id, :name %> <%= l(:or) %> <%=  link_to "Add new.", :controller => "asset_types", :action => "new", :asset_id => @asset_group %></td>
+                                      <td><%= f.collection_select :asset_type_id, AssetType.all, :id, :name %> <%= l(:or) %> <%=  link_to "Add new.", { :controller => "asset_types", :action => "new", :asset_id => @asset_group, :referer => @referer }, :rel => 'facebox' %></td>
                                   </tr>                                 
                                   <tr>
                                       <td>
@@ -61,8 +61,10 @@
                 </div>
             <% end %>
             <br class="clear-both" />
-            <% content_for :header_tags do %>
+            <%= content_for :header_tags do %>
                 <%= stylesheet_link_tag 'assets', :plugin => 'redmine_asset_tracker' %>
+                <%= stylesheet_link_tag 'facebox', :plugin => 'redmine_asset_tracker' %>
+                <%= javascript_include_tag 'facebox', :plugin => 'redmine_asset_tracker' %>
             <% end %>
         </div>
     </div>

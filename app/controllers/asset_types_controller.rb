@@ -1,5 +1,6 @@
-# @author Emmanuel Pastor
-class AssetTypesController < ApplicationController
+# @author Emmanuel Pastor/Nitish Upreti
+
+class AssetTypesController < PluginController
   unloadable
   helper :custom_fields
   include CustomFieldsHelper
@@ -10,8 +11,10 @@ class AssetTypesController < ApplicationController
   # @return [AssetType] Array.
   def index
     @asset_types = AssetType.find :all
-    @user = User.find_by_id session[:user_id]    
-  end
+    @user = User.find_by_id session[:user_id]   
+
+    @favourites_asset, @favourites_asset_group = populate_favourite_list if @user 
+  end  
 
   # Creates a new AssetType instance, ready to be written in the DB.
   #

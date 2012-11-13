@@ -1,8 +1,6 @@
-<h1 style="color:#507AAA">
-  New Asset Type:
-</h1>
+<h1 style="color:#507AAA">New Asset Type:</h1>
 
-<% form_remote_for :asset_type, @asset_type, :loading => 'facebox.loading()' , :url => { :action => "create", :id => @asset_type.id, :asset_id => @asset_id, :referer => @referer } do |f| %>
+<%= form_remote_for :asset_type, @asset_type, :loading => 'facebox.loading()' , :url => { :action => "create", :id => @asset_type.id, :asset_id => @asset_id, :referer => @referer } do |f| %>
     <table>
       <tr>
         <td>

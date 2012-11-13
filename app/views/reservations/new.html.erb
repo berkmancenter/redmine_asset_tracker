@@ -38,6 +38,24 @@
             <%= text_field_tag 'checkin', nil, {:class => 'datepicker'}  %>
         </td>
       </tr>
+      <tr>
+        <td>
+           <%= image_tag "/images/reload.png", :border=>0, :alt=>"recurring" %>
+           <%= l(:is_recurring) %>
+        </td>
+        <td>
+          <%= check_box_tag :is_recurring %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= image_tag "/images/edit.png", :border=>0, :alt=>"recurringweeks" %>
+          <%= l(:recurring_weeks) %>
+        </td>
+        <td>
+          <%= text_field_tag  :repeat_count,nil,{:disabled => true} %>
+        </td>
+      </tr>
       <% if User.current.admin %>
           <tr>
             <td>
@@ -65,8 +83,12 @@
         </td>
       </tr>
     </table>
+
     <script>
       facebox.initialize();
       createPickers();
+      toggle_text_field();
     </script>
+
+    
 

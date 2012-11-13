@@ -74,6 +74,14 @@
     float:left;
 }
 
+.search-existing-custom-property {
+    float: left;
+}
+
+#add_button_div {
+    float: right;
+}
+
 .spacer{
     width:50px;
     float:left;

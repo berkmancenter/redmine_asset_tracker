@@ -1,2 +1,7 @@
-page.replace_html 'inner_container', :partial => 'asset_types/assets_list', :layout => false, :locals => { :asset_types => AssetType.all, :user => User.current }
-page.call "facebox.initialize"
+if  request.env['HTTP_REFERER'].include? ('asset_types')
+	page.replace_html 'inner_container', :partial => 'asset_types/assets_list', :layout => false, :locals => { :asset_types => AssetType.all, :user => User.current, :favourites_asset => @favourites_asset, :favourites_asset_group => @favourites_asset_group }
+	page.call "facebox.initialize"
+else
+	page.replace_html 'inner_container', :partial => 'favourites/list_of_favourites', :layout => false, :locals => { :assets => @assets, :asset_groups => @asset_groups, :user => User.current, :open_group => 0 }
+	page.call "facebox.initialize"
+end
